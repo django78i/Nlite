@@ -1,0 +1,66 @@
+<form [formGroup]="dateForm" (ngSubmit)="sendMofication()">
+    <h3>Indiquez votre indisponibilité</h3>
+    <div class="form-group">
+        <!-- Heures RDV -->
+        <div class="haut">
+            <div class="hautGauche">
+                <p>début</p>
+                <div class="debut">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choisissez une date</mat-label>
+                        <input matInput [matDatepicker]="picker" class="form-control" formControlName="jourDebut">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <div class="toggle-example heures">
+                        <input [ngxTimepicker]="toggleTimepicker" class="form-control" formControlName="heureDebut"
+                            [disableClick]="true" readonly [format]="24">
+                        <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="hautDroit">
+                <p>fin</p>
+                <div class="fin">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choisissez une date</mat-label>
+                        <input matInput [matDatepicker]="picker1" class="form-control" formControlName="jourFin">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <div class="toggle-example heures">
+                        <input [ngxTimepicker]="toggleTimepicker1" class="form-control" formControlName="heureFin"
+                            [disableClick]="true" [format]="24" readonly>
+                        <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bas">
+            <mat-form-field class="example-full-width">
+                <mat-label>Votre nom</mat-label>
+                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="nomClient">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Votre prénom</mat-label>
+                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="prenomClient">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Adresse</mat-label>
+                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="adresse">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Ville</mat-label>
+                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="ville">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Code Postale</mat-label>
+                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="codePostal">
+            </mat-form-field>
+        </div>
+    </div>
+    <button type="submit">Envoyez</button>
+</form>
+<button (click)="onNoClick()">Annuler</button>

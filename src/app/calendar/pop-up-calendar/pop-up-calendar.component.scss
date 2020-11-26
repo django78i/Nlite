@@ -1,0 +1,25 @@
+.debut, .fin{
+    display: flex;
+    padding : 0 10px;
+    gap: 10px;
+    
+}
+
+.mat-form-field {
+    flex:1;
+    max-width: 200px;
+}
+
+.heures{
+    flex : 1;
+    max-width: 70px;
+    min-width: 69px;
+}
+
+.haut{
+    display: flex;
+}
+
+.hautDroit, .hautGauche{
+    flex: 1;
+}

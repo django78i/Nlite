@@ -1,0 +1,34 @@
+.photoProfil{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.photo{
+    height: 200px;
+    width : 300px;
+    border: 1px solid black;
+    position: relative;
+}
+
+
+
+img.image{
+    height: 200px;
+    width : 300px;
+}
+
+.spinner{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+}

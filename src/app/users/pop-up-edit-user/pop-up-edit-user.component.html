@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content class="contenu">
+    <div class="photoProfil">
+        <div class="photo">
+            <img *ngIf="this.imageUrl" class="image" [src]="imageUrl| async" alt="">
+            <img *ngIf="!this.imageUrl" class="image" [src]="data.photo" alt="">
+        </div>
+        <input type="file" (change)="uploadFile($event)">
+    </div>
+    <form [formGroup]="freelancerForm" (ngSubmit)="sendMofication()" *ngIf="freelancerForm">
+        <h3>Editer profil</h3>
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-label>Nom</mat-label>
+                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Entrez un titre" class="form-control"
+                    formControlName="description"></textarea>
+            </mat-form-field>
+        </div>
+        <div formArrayName="categories">
+            <div class="form-group" *ngFor="let categCtl of getCategories().controls; let i = index">
+                <input type="text" class="form-control" [formControlName]="i">
+            </div>
+            <button type="button" class="btn btn-success" (click)="onAddCategories()">Ajouter une catégorie</button>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" (click)="sendMofication()" cdkFocusInitial>Ok</button>
+</div>

@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+    <div class="contenu">
+        <div class="photoProfil">
+            <div class="photo">
+                <div class="spinner">
+                    <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode"
+                        [value]="uploadPercent | async">
+                    </mat-progress-spinner>
+                </div>
+                <img class="image" [src]="imageUrl | async" alt="">
+            </div>
+            <input type="file" (change)="uploadFile($event)">
+        </div>
+
+        <form [formGroup]="folioForm" (ngSubmit)="createFolio()" *ngIf="folioForm">
+            <h3>Editer profil</h3>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Titre</mat-label>
+                    <input matInput placeholder="Entrez un titre" class="form-control" formControlName="titre">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput placeholder="Entrez une description" class="form-control"
+                        formControlName="description"></textarea>
+                </mat-form-field>
+
+            </div>
+        </form>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" (click)="createFolio()" cdkFocusInitial>Ok</button>
+</div>

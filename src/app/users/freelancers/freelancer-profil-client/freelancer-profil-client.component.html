@@ -1,0 +1,29 @@
+<section *ngIf="freelancer$ | async as freelancer">
+    <section class="ProfilEntete">
+        <div class="container">
+            <div class="userContent">
+                <div class="photoProfil">
+                    <div class="photo">
+                        <img [src]="freelancer.image" alt="" class="imageInner">
+                    </div>
+                </div>
+                <div class="Info">
+                    <p>{{ freelancer.displayName}}</p>
+                    <p *ngFor="let categorie of freelancer.categories">{{ categorie }}</p>
+                    <p>{{ freelancer.description}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contenu">
+        <div class="container">
+            <mat-tab-group [dynamicHeight] = "true" mat-stretch-tabs [color]="backgroundColorToggle" [backgroundColor]="backgroundColorToggle">
+                <mat-tab label="Portfolios">
+                    <app-calendrier-client [freelancer]="freelancer" [freeUid]="params"></app-calendrier-client>
+                </mat-tab>
+                <mat-tab label="Second"> Content 2 </mat-tab>
+                <mat-tab label="Third"> Content 3 </mat-tab>
+            </mat-tab-group>
+        </div>
+    </section>
+</section>

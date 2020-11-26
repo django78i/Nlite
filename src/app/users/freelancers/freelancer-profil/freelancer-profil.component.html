@@ -1,0 +1,48 @@
+<section class="wrapper" *ngIf="user | async as user">
+    <section class="ProfilEntete">
+        <div class="container">
+            <div class="userContent">
+                <div class="photoProfil">
+                    <div class="photo">
+                        <img [src]="user.image" alt="" class="imageInner">
+                    </div>
+                </div>
+                <div class="Info">
+                    <p>{{ user.displayName}}</p>
+                    <p *ngFor="let categorie of user.categories">{{ categorie }}</p>
+                    <p>{{ user.description}}</p>
+                </div>
+                <span class="material-icons" (click)="openDialog(user)">
+                    create
+                </span>
+            </div>
+        </div>
+    </section>
+    <section class="contenu">
+        <div class="container">
+            <mat-tab-group mat-stretch-tabs [color]="backgroundColorToggle" [backgroundColor]="backgroundColorToggle">
+                <mat-tab label="Portfolios">
+                    <p style="color: black;">Lite des portfolios</p>
+                    <div class="folioList">
+                        <div class="image" *ngFor="let portfolio of portfolioList | async">
+                            <p>contenu</p>
+                            <p>{{portfolio.titre}}</p>
+                            <div class="photoProfil">
+                                <div class="photo">
+                                    <div class="edit">
+                                        <span class="material-icons" (click)="openFolio(user.uid,portfolio.uid )">create</span>
+                                        <span class="material-icons ">delete</span>
+                                    </div>
+                                    <img [src]="portfolio.miniature" alt="" class="image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="material-icons add" (click)="createFolio(user.uid)">add_circle</span>
+                </mat-tab>
+                <mat-tab label="Second"> Content 2 </mat-tab>
+                <mat-tab label="Third"> Content 3 </mat-tab>
+            </mat-tab-group>
+        </div>
+    </section>
+</section>

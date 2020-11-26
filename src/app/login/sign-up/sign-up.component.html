@@ -1,0 +1,24 @@
+<div *ngIf="auth.user | async as user; else showLogin">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button (click)="logout()">Logout</button>
+</div>
+<ng-template #showLogin>
+    <form [formGroup]="firstFormGroup">
+        <p>Pas encore enregistré?</p>
+        <div class="form-group" style="display: flex;flex-direction: column;">
+            <mat-form-field >
+                <mat-label>pseudo</mat-label>
+                <input matInput formControlName="displayName" placeholder="Entrez un secteur" class="form-control" >
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>mail</mat-label>
+                <input matInput formControlName="email" placeholder="Entrez un secteur" class="form-control" >
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>password</mat-label>
+                <input matInput formControlName="password" placeholder="Entrez un secteur" class="form-control">
+            </mat-form-field>
+        </div>
+    </form>
+    <button mat-raised-button type="submit" (click)="createUser()" color="primary">Enregistrer</button>
+</ng-template>

@@ -1,0 +1,18 @@
+<div mat-dialog-content class="contenu">
+    <div class="photoProfil">
+        <div class="photo">
+            <img *ngIf="this.imageUrl" class="image" [src]="imageUrl| async" alt="">
+        </div>
+        <input type="file" (change)="uploadFile($event)">
+    </div>
+
+    <div class="photoList">
+        <div *ngFor = "let photo of photos | async"  [ngStyle]="{'background-image': 'url(' + photo.url + ')'}" class="photoList">
+           <p>titre</p> 
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button> 
+    <button mat-button [mat-dialog-close]="data" (click)="sendModification(imageUrl)" cdkFocusInitial>Ok</button>
+</div>

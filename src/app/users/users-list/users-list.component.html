@@ -1,0 +1,21 @@
+<section class="contenuList">
+    <!-- <div class="container">
+        <h1>Liste des utilisateurs</h1>
+        <div class="listItem" *ngFor="let user of usersList | async">
+            <p>{{user.displayName}}</p>
+            <span class="material-icons" (click)="openRoom(user)">message</span>
+        </div>
+
+    </div> -->
+    <div class="container">
+        <h1>Liste des utilisateurs</h1>
+        <div class="listItem" *ngFor="let freelancer of freelancerList | async">
+            <p>{{freelancer.displayName}}</p>
+            <div class="icones">
+                <span class="material-icons iconImg" (click)="profileNavigate(freelancer)">face</span>
+                <span class="material-icons iconImg" (click)="openRoom(freelancer)">message</span>
+            </div>
+        </div>
+
+    </div>
+</section>

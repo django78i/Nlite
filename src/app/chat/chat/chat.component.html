@@ -1,0 +1,14 @@
+<section class="contenuList">
+    <div class="container">
+        <h1>Liste des communications</h1>
+        <div *ngIf="roomList| async as rooms; else notif">
+            <div class="listItem" *ngFor="let room of rooms">
+                <p>{{room.name}}</p>
+                <span class="material-icons" (click)="discuss(room.uid)">message</span>
+            </div>
+        </div>
+    </div>
+    <ng-template #notif style="background: red;">
+        <p>Il n'y a aucune discussion</p>
+    </ng-template>
+</section>

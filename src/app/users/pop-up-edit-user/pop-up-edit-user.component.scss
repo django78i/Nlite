@@ -1,0 +1,21 @@
+.contenu{
+    display: flex;
+    flex-direction: column;
+}
+
+.photoProfil{
+    display: flex;
+    flex-direction: column;
+}
+
+.photo{
+    height: 200px;
+    width : 300px;
+    border: 1px solid black;
+    
+}
+
+img.image{
+    height: 200px;
+    width : 300px;
+}
