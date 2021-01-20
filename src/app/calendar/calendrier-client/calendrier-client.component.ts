@@ -1,3 +1,4 @@
+import { Calendrier } from './../../models/calendar.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CalendrierService } from '../../services/calendrier.services';
 import { UserService } from 'src/app/services/user.service';
@@ -14,10 +15,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user.model';
 import { differenceInMinutes, startOfDay, startOfHour } from 'date-fns';
 import { PopUpCalenderClientComponent } from '../pop-up-calender-client/pop-up-calender-client.component';
+import { map } from 'rxjs/internal/operators/map';
+import * as _ from 'lodash';
+import { find, tap, filter, switchMap } from 'rxjs/operators';
+
+
 
 export interface DialogData {
-	freeUid : any,
-	event: any
+	freeUid: any,
+	event: any,
+	creneau: any,
+	validationAuto: any,
 }
 
 @Component({
@@ -40,7 +48,7 @@ export interface DialogData {
 		`,
 	],
 })
-export class CalendrierClientComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CalendrierClientComponent implements OnInit, AfterViewInit {
 
 	@ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 	//traduction
@@ -59,7 +67,11 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit, OnDestr
 	clickedColumn: number;
 
 	events: CalendarEvent[] = [];
+	events$: Observable<any[]>;
 
+	contactEvent: any;
+
+	excludeDays: number[] = [];
 
 	refresh: Subject<any> = new Subject();
 	dateForm: any;
@@ -86,32 +98,67 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit, OnDestr
 	rdv: any[] = [];
 	subscription: Subscription
 
-	@Input() freelancer : User; 
-	@Input() freeUid : any; 
+	range: any;
+	eventSort: Observable<any[]>;
+
+	@Input() freelancer: User;
+	@Input() freeUid: any;
 
 
 	constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private cdr: ChangeDetectorRef,
-		private afs: AngularFirestore, public auth: AngularFireAuth, private calendrierService: CalendrierService) { 
-			
-		}
-		
-		ngOnInit(): void {
-			console.log(this.freelancer);
-			this.subscription = this.calendrierService.getRdv(this.freelancer).subscribe((rdv) => {
-				console.log(rdv);
-				this.rdv = rdv;
-				this.events = [];
-				console.log(this.events);
-				this.rdv.forEach((rdv) => {
-					var newDate: CalendarEvent = {
-						...rdv.event,
-						start: rdv.event.start.toDate(),
-						end: rdv.event.end.toDate(),
+		private afs: AngularFirestore, public auth: AngularFireAuth, private calendrierService: CalendrierService) {
+
+	}
+
+	ngOnInit(): void {
+		console.log(this.freelancer);
+		this.freelancer.jourRepos.forEach(jour => {
+			switch (jour) {
+				case 'Lundi':
+					this.excludeDays.push(1)
+					break;
+				case 'Mardi':
+					this.excludeDays.push(2)
+					break;
+				case 'Mercredi':
+					this.excludeDays.push(3)
+					break;
+				case 'Jeudi':
+					this.excludeDays.push(4)
+					break;
+				case 'Vendredi':
+					this.excludeDays.push(5)
+					break;
+				case 'Samedi':
+					this.excludeDays.push(6)
+					break;
+				case 'Dimanche':
+					this.excludeDays.push(0)
+					break;
+			}
+		})
+
+		this.events$ = this.calendrierService.getRdv(this.freelancer).pipe(
+			map(event => {
+				console.log(event);
+				this.range = _.sortBy(event, 'event.start');
+				console.log(this.range);
+				return event.map(event => {
+					return {
+						start: event.event.start.toDate(),
+						end: event.event.end.toDate(),
+						id: event.event.id,
+						color: event.event.color
 					}
-					console.log(newDate);
-					this.events.push(newDate);
 				})
-			});
+			})
+		)
+		const nvelDate = new Date();
+		this.eventSort = this.events$.pipe(
+			map(even => even.filter(ev => moment(ev.start).isAfter(nvelDate))),
+			map(event => _.sortBy(event, 'start')),
+			tap(ev => console.log(ev))
+		)
 	}
 
 	viewChanged() {
@@ -122,13 +169,12 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit, OnDestr
 
 
 	ngAfterViewInit() {
-		this.scrollToCurrentView();
+		if (this.events$) {
+			this.scrollToCurrentView();
+		}
 	}
 
 
-	ngOnDestroy() {
-		this.subscription.unsubscribe();
-	}
 
 	private scrollToCurrentView() {
 		if (this.view === CalendarView.Week || CalendarView.Day) {
@@ -155,19 +201,42 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit, OnDestr
 
 
 	openEdit(event, contact) {
-		console.log('clicker');
-		const dialogRef = this.dialog.open(PopUpCalenderClientComponent, {
-			width: '700px',
-			// height: '600px',
-			data: {
-				freeUid: this.freeUid,
-				event: event
+		const heure = new Date;
+		const delai = this.freelancer.delai.unite == 'minute' ? moment(event.date).subtract(this.freelancer.delai.valeur, 'm').toDate() : moment(event.date).subtract(this.freelancer.delai.valeur, 'h').toDate();
+		const crenau = this.freelancer.creneau.unite == 'minute' ? moment(event.date).add(this.freelancer.creneau.valeur, 'm').toDate() : moment(event.date).add(this.freelancer.creneau.valeur, 'h').toDate();
+		var boul: boolean = false;
+		if (moment(delai).isBefore(heure)) {
+			console.log('trop tard', delai);
+			boul = true;
+		}
+		const ranger = this.eventSort.pipe(
+			map(eventz => eventz.filter(ev => moment(ev.start).isAfter(event.date))),
+			map(rdv => rdv.find(evdv => moment(evdv.start).isBefore(crenau))),
+			tap(ev => {
+				boul = ev != undefined ? true : false;
+				console.log(boul);
+			})
+		);
+		ranger.subscribe(rdv => {
+			if (boul == false) {
+				const dialogRef = this.dialog.open(PopUpCalenderClientComponent, {
+					width: '100%',
+					height: '650px',
+					maxWidth: '100%',
+					data: {
+						freeUid: this.freeUid,
+						event: event,
+						creneau: this.freelancer.creneau,
+						validationAuto: this.freelancer.validationAuto
+					}
+				});
+
+				dialogRef.afterClosed().subscribe(result => {
+					console.log('The dialog was closed');
+				});
 			}
 		});
-
-		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
-		});
+		console.log('clicker');
 
 	}
 

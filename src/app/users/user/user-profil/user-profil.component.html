@@ -1,1 +1,22 @@
-<p>user-profil works!</p>
+<h2>Hello,</h2>
+<h2>{{(user|async)?.displayName}}</h2>
+
+<div *ngIf="rdv |async as rdvs;else noRdv">
+    <div class="rdvCard">
+        <p style="display: flex;justify-content: space-between;color: #A9ACB9;font-size: 10px;"><span>Prochain
+                rendez-vous</span><span>&rarr;</span></p>
+        <h2>{{rdvs.date}}</h2>
+        <p>Avec <span style="color: #3467C9;">{{rdvs.nom}}</span></p>
+    </div>
+</div>
+<ng-template #noRdv>
+    <p>Aucun rdv</p>
+</ng-template>
+<div>
+    <div class="rdvCard">
+        <div class="msg" *ngFor="let list of msgList | async">
+            {{list.name}}
+        </div>
+        <p style="font-size: 10px; justify-content : center; display: flex; margin-top: 10px;"> Voir tous les messages</p>
+    </div>
+</div>

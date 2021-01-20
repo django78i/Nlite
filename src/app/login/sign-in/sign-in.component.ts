@@ -21,7 +21,6 @@ export class SignInComponent implements OnInit {
 
   login() {
     this.signService.login();
-    this.router.navigate(['']);
   }
 
 }

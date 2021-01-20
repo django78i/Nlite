@@ -1,0 +1,8 @@
+.crenaux{
+    display: flex;
+    gap: 10px;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline{
+    height: 0px !important;
+}

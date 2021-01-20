@@ -1,8 +1,8 @@
+import { UserService } from './../services/user.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CalendrierService } from './../services/calendrier.services';
-import { UserService } from 'src/app/services/user.service';
 import { FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
 import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarView, CalendarDateFormatter, DAYS_OF_WEEK, } from 'angular-calendar';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { colors } from './demo-utils/colors';
@@ -16,6 +16,9 @@ import { User } from '../models/user.model';
 import { differenceInMinutes, startOfDay, startOfHour } from 'date-fns';
 import { ReadVarExpr } from '@angular/compiler';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { takeUntil } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 
 export interface DialogData {
@@ -35,6 +38,7 @@ export interface DialogData {
 	templateUrl: './calendar.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styleUrls: ['./calendar.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
 			provide: CalendarDateFormatter,
@@ -50,12 +54,12 @@ export interface DialogData {
 		`,
 	],
 })
-export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CalendarComponent implements OnInit, AfterViewInit {
 	@ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 	//traduction
 	locale: string = 'fr';
 	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-	weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+	weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 	CalendarView = CalendarView;
 
 
@@ -68,23 +72,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 	clickedColumn: number;
 
 	events: CalendarEvent[] = [];
+	events$: Observable<any[]>;
+	contactEvent: any;
 
 
-	refresh: Subject<any> = new Subject();
+	// refresh: Subject<any> = new Subject();
 	dateForm: any;
+	freelancer: Observable<any>;
 
 
-	eventTimesChanged({
-		event,
-		newStart,
-		newEnd,
-	}: CalendarEventTimesChangedEvent): void {
-		event.start = newStart;
-		event.end = newEnd;
-		this.refresh.next();
-		console.log(this.events);
-	}
-
+	excludeDays: number[] =[];
 	//user
 	user$: Observable<User>;
 	user: any;
@@ -95,48 +92,103 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 	rdv: any[] = [];
 	subscription: Subscription
 
-	constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private cdr: ChangeDetectorRef,
-		private afs: AngularFirestore, public auth: AngularFireAuth, private calendrierService: CalendrierService) {
+	//responsive
+	private destroy$ = new Subject();
+	daysInWeek = 7;
+
+	private readonly darkThemeClass = 'dark-theme';
+
+	constructor(private breakpointObserver: BreakpointObserver, private formBuilder: FormBuilder, public dialog: MatDialog, private cdr: ChangeDetectorRef,
+		private afs: AngularFirestore, public auth: AngularFireAuth, private calendrierService: CalendrierService, private cd: ChangeDetectorRef, private userService: UserService,
+		@Inject(DOCUMENT) private document) {
 
 		this.auth.onAuthStateChanged(user => {
 			this.user = user;
-			this.subscription = this.calendrierService.getRdv(user).subscribe((rdv) => {
-				console.log(rdv);
-				this.rdv = rdv;
-				this.events = [];
-				console.log(this.events);
-				this.rdv.forEach((rdv) => {
-					var newDate: CalendarEvent = {
-						...rdv.event,
-						start: rdv.event.start.toDate(),
-						end: rdv.event.end.toDate(),
-						actions: [
-							{
-								label: '<span class="material-icons">delete</span>',
-								onClick: ({ event }: { event: CalendarEvent }): void => {
-									// this.events = this.events.filter((iEvent) => iEvent !== event);
-									this.deleteRdv(event, );
-									console.log('Event deleted', event);
-								},
-							},
-							{
-								label: '<span class="material-icons">create</span>',
-								onClick: ({ event }: { event: CalendarEvent }): void => {
-									this.openEdit(event, rdv.contact);
-									console.log('Edit event', event);
-								},
-							},
-						],
-
+			this.events$ = this.calendrierService.getRdv(user).pipe(
+				map(event => {
+					return event.map(events => {
+						this.contactEvent = events.contact;
+						return {
+							// title: events.event.title,
+							start: events.event.start.toDate(),
+							end: events.event.end.toDate(),
+							id: events.event.id,
+							color: events.event.color,
+						}
 					}
-					console.log(newDate);
-					this.events.push(newDate);
+					)
 				})
-			});
+			)
 		})
 	}
 
 	ngOnInit(): void {
+		this.freelancer = this.userService.getCurrentUSer(this.user);
+		this.freelancer.pipe(
+			tap(freelancer => {
+				console.log(freelancer)
+				freelancer.jourRepos.forEach(jour => {
+					switch (jour) {
+						case 'Lundi':
+							this.excludeDays.push(1)
+							break;
+						case 'Mardi':
+							this.excludeDays.push(2)
+							break;
+						case 'Mercredi':
+							this.excludeDays.push(3)
+							break;
+						case 'Jeudi':
+							this.excludeDays.push(4)
+							break;
+						case 'Vendredi':
+							this.excludeDays.push(5)
+							break;
+						case 'Samedi':
+							this.excludeDays.push(6)
+							break;
+						case 'Dimanche':
+							this.excludeDays.push(0)
+							break;
+					}
+				})
+				console.log(this.excludeDays);
+				// this.excludeDays = freelancer.jourRepos)
+			})).subscribe();
+
+		//responsive
+		const CALENDAR_RESPONSIVE = {
+			small: {
+				breakpoint: '(max-width: 576px)',
+				daysInWeek: 5,
+			},
+			medium: {
+				breakpoint: '(max-width: 768px)',
+				daysInWeek: 3,
+			},
+			large: {
+				breakpoint: '(max-width: 960px)',
+				daysInWeek: 5,
+			},
+		};
+
+		this.breakpointObserver
+			.observe(
+				Object.values(CALENDAR_RESPONSIVE).map(({ breakpoint }) => breakpoint)
+			)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((state: BreakpointState) => {
+				const foundBreakpoint = Object.values(CALENDAR_RESPONSIVE).find(
+					({ breakpoint }) => !!state.breakpoints[breakpoint]
+				);
+				if (foundBreakpoint) {
+					this.daysInWeek = foundBreakpoint.daysInWeek;
+				} else {
+					this.daysInWeek = 7;
+				}
+				this.cd.markForCheck();
+			});
+		this.document.body.classList.add(this.darkThemeClass);
 		this.initForm();
 	}
 
@@ -149,6 +201,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.cdr.detectChanges();
 		this.scrollToCurrentView();
 	}
+
+
+	changeDay(date: Date) {
+		this.viewDate = date;
+		this.view = CalendarView.Week;
+	}
+
 
 	private scrollToCurrentView() {
 		if (this.view === CalendarView.Week || CalendarView.Day) {
@@ -181,6 +240,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.calendrierService.deleteRdv(this.user, event);
 		console.log(this.user);
 	}
+
+	eventClicked({ event }: { event: CalendarEvent }): void {
+		console.log('Event clicked', event);
+		this.openEdit(event, this.contactEvent);
+	}
+
 
 	sendMofication() {
 		console.log(this.user);
@@ -244,6 +309,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	openEdit(event, contact) {
+		console.log('openEdit');
 		const dialogRef = this.dialog.open(PopUpCalendarComponent, {
 			width: '700px',
 			// height: '600px',
@@ -266,10 +332,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 			console.log(result)
 		});
 
-	}
-
-	ngOnDestroy() {
-		this.subscription.unsubscribe();
 	}
 
 }

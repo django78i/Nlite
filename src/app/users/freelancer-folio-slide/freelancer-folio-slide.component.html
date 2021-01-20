@@ -1,0 +1,17 @@
+<section>
+    <span class="material-icons sortie" (click)="onNoClick()">cancel</span>
+    <div class="header">
+        <h2>{{data.titre}}</h2>
+        <p>A partir de : {{data.prix}}€</p>
+    </div>
+    <div class="swiper-container">
+        <swiper [config]="config" #usefulSwiper>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngFor="let photo of data.photos" [ngStyle]="{'background-image': 'url(' + photo + ')'}">
+                    <button mat-raised-button class="valider" (click)="valider()">Je veux la même chose !</button>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </swiper>
+    </div>
+</section>

@@ -4,7 +4,7 @@ import { SignService } from 'src/app/services/sign.service';
 import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { Message } from './../../models/message.model';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 	templateUrl: './chat-com.component.html',
 	styleUrls: ['./chat-com.component.scss']
 })
-export class ChatComComponent implements OnInit {
+export class ChatComComponent implements OnInit, AfterViewInit {
 
 
 	contact$: Observable<User>;
@@ -29,6 +29,7 @@ export class ChatComComponent implements OnInit {
 	uid: string;
 	users: any;
 	tempsEnMs = Date.now()
+	container: HTMLElement;
 
 	constructor(private route: ActivatedRoute, public auth: AngularFireAuth,
 		public messageService: MessgesService, public userService: UserService, private afs: AngularFirestore,
@@ -51,14 +52,30 @@ export class ChatComComponent implements OnInit {
 
 	}
 
-	envoyer() {
-		const discuss = new Message(
-			this.users.uid,
-			this.discussion,
-			this.tempsEnMs
-		)
-		this.messageService.saveMessage(discuss, this.params, this.users.uid);
+	ngAfterViewInit() {
+	}
 
+	envoyer() {
+
+		this.contact$.pipe(
+			tap(contact => {
+				const keyPair = this.users.status == 'freelancer' ? this.users.uid + contact.uid : contact.uid + this.users.uid;
+				console.log(keyPair);
+				const discuss = new Message(
+					this.users.uid,
+					contact.displayName,
+					contact.uid,
+					this.users.displayName,
+					this.discussion,
+					this.tempsEnMs,
+					keyPair,
+					''
+				)
+				console.log(discuss);
+				this.messageService.saveMessage(discuss, this.params, this.users.uid);
+				this.discussion = '';
+			})
+		).subscribe();
 	}
 
 	position(message) {

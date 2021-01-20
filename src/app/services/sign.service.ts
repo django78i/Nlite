@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Subject, Observable, BehaviorSubject, combineLatest, Subscription, from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -20,7 +21,7 @@ export class SignService {
     user: Observable<any>;
     userRegister : any;
 
-    constructor(private afs: AngularFirestore, public auth: AngularFireAuth) {
+    constructor(private afs: AngularFirestore, public auth: AngularFireAuth, private router : Router) {
 
     }
 
@@ -41,14 +42,22 @@ export class SignService {
                         datas.user.displayName,
                         datas.user.email,
                         '', 
+                        '',
                         'client',
-                        []
+                        [],
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        ''
                     )
                     console.log('création');
                     this.createUser(donnee);
                 })
-
+                
             }
+            this.router.navigate(['']);
         })
 
     }
@@ -61,8 +70,15 @@ export class SignService {
             user.displayName,
             user.email,
             user.password,
+            '',
             'client',
-            []
+            [],
+            '',
+            '',
+            '',
+            '',
+            '',
+            ''
         )
         this.createUser(newUser);
     }

@@ -1,6 +1,32 @@
-.sidenav-container {
-  height: 100%;
+.contentPc{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
+
+.bottomMobile, .topMobile{
+  display: none;
+}
+.menuMobile{
+  display: none;
+}
+
+.menuHeader{
+  height: 100px;
+  background: black;
+  width: 100%;
+}
+
+mat-toolbar{
+  justify-content: space-between;
+}
+
+
+.buttonZone{
+  display: flex;
+  align-items: center;
+}
+
 
 .sidenav {
   width: 200px;
@@ -20,7 +46,34 @@
 
 .contenu{
   width: 100%;
+  padding: 0 16px;
   overflow-x: hidden;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and(max-width : 550px){
+.contentPc{
+  display: none;
+}
+
+.bottomMobile, .topMobile{
+  display: flex;
+  width: 100%;
+}
+
+.bottomMobile{
+  z-index: 100000;
+  position: fixed;
+  bottom: 0;
+}
+
+
+  .menuMobile{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  }
+
 }

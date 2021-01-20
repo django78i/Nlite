@@ -1,0 +1,52 @@
+<h2>Gérez vos paramètres de rendez-vous</h2>
+<form [formGroup]="dateForm" (ngSubmit)="sendMofication()">
+    <div class="form-group">
+        <p>Durée minimum d'un créneau</p>
+        <div class="crenaux">
+            <mat-form-field appearance="legacy" style="width: 10%;">
+                <mat-label>valeur</mat-label>
+                <input matInput placeholder="valeur" class="form-control" formControlName="valeur">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>unité</mat-label>
+                <mat-select name="unite" class="form-control" formControlName="unite">
+                    <mat-option *ngFor="let unite of unite" [value]="unite.value">
+                        {{unite.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>mode de prestation</mat-label>
+            <mat-select name="mode" class="form-control" formControlName="mode">
+                <mat-option *ngFor="let mode of mode" [value]="mode.value">
+                    {{mode.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="validationAuto">Validation automatique</mat-slide-toggle>
+        <mat-form-field>
+            <mat-label>Jour de repos</mat-label>
+            <mat-select name="jourFerie" class="form-control" multiple formControlName="jourFerie">
+                <mat-option *ngFor="let jourFerie of jourFerie" [value]="jourFerie">{{jourFerie}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p>Délai prise de rendez-vous</p>
+        <div class="crenaux">
+            <mat-form-field appearance="legacy" style="width: 20%;">
+                <mat-label>valeur</mat-label>
+                <input matInput placeholder="valeur" class="form-control" formControlName="valDelai">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>unité</mat-label>
+                <mat-select name="uniteDelai" class="form-control" formControlName="uniteDelai">
+                    <mat-option *ngFor="let unite of unite" [value]="unite.value">
+                        {{unite.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button>Enregistrer</button>
+</form>

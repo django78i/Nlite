@@ -1,13 +1,38 @@
-.calendrier{
-    width: 736px;
+.calendrier {
+  width: 100%;
 }
 
-.scroll-container{
-    height: 500px;
+.scroll-container {
+  height: 500px;
 }
 
-.calenderContent{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+.calenderContent {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+:host ::ng-deep .cal-week-view .cal-time-label-column {
+  width: 43px !important;
+}
+:host ::ng-deep .cal-week-view .cal-time {
+  display: flex;
+  font-weight: 500 !important;
+  width: 43px;
+  font-size: 12px;
+  justify-content: center;
+}
+
+:host ::ng-deep b {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+:host ::ng-deep .cal-hour-segment cal-hour-start {
+  display: flex !important;
+  justify-content: flex-start !important;
+}
+:host ::ng-deep .cal-week-view .cal-day-headers {
+  padding-left: 43px !important;
+
 }

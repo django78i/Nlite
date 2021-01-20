@@ -1,12 +1,14 @@
+<span class="material-icons sortie" (click)="onNoClick()">cancel</span>
 <form [formGroup]="dateForm" (ngSubmit)="sendMofication()">
-    <h3>Indiquez votre indisponibilité</h3>
+    <h1>Prendre rendez-vous</h1>
+    <p>le : {{jourDebut}}  à {{this.heureFin}}</p>
     <div class="form-group">
         <!-- Heures RDV -->
-        <div class="haut">
+        <!-- <div class="haut">
             <div class="hautGauche">
                 <p>début</p>
                 <div class="debut">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field class="date" appearance="fill">
                         <mat-label>Choisissez une date</mat-label>
                         <input matInput [matDatepicker]="picker" class="form-control" formControlName="jourDebut">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -23,7 +25,7 @@
             <div class="hautDroit">
                 <p>fin</p>
                 <div class="fin">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field class="date" appearance="fill">
                         <mat-label>Choisissez une date</mat-label>
                         <input matInput [matDatepicker]="picker1" class="form-control" formControlName="jourFin">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -37,30 +39,34 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="bas">
-            <mat-form-field class="example-full-width">
+            <mat-form-field style="width: 45%; margin-right: 10%;" appearance="legacy">
                 <mat-label>Votre nom</mat-label>
                 <input matInput placeholder="Entrez un titre" class="form-control" formControlName="nomClient">
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field style="width: 45%;" appearance="legacy">
                 <mat-label>Votre prénom</mat-label>
                 <input matInput placeholder="Entrez un titre" class="form-control" formControlName="prenomClient">
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field style="width: 100%;" appearance="legacy">
                 <mat-label>Adresse</mat-label>
                 <input matInput placeholder="Entrez un titre" class="form-control" formControlName="adresse">
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field style="width: 50%; margin-right: 10%;" appearance="legacy">
                 <mat-label>Ville</mat-label>
                 <input matInput placeholder="Entrez un titre" class="form-control" formControlName="ville">
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field style="width: 40%;" appearance="legacy">
                 <mat-label>Code Postale</mat-label>
                 <input matInput placeholder="Entrez un titre" class="form-control" formControlName="codePostal">
             </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="legacy">
+                <mat-label>Commentaire</mat-label>
+                <textarea matInput placeholder="Entrez un titre" class="form-control" formControlName="commentaire"></textarea>
+            </mat-form-field>
         </div>
     </div>
-    <button type="submit">Envoyez</button>
+    <button mat-raised-button class="valider">Valider</button>
 </form>
-<button (click)="onNoClick()">Annuler</button>
+<button mat-raised-button class="valider false" (click)="onNoClick()">Annuler</button>

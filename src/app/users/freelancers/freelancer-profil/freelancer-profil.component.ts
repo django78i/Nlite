@@ -19,7 +19,8 @@ export interface DialogData {
 	name: string;
 	photo: string;
 	description: string;
-	autre: string;
+	folioUid: string;
+	folio: any;
 	categories: []
 }
 
@@ -61,7 +62,7 @@ export class FreelancerProfilComponent implements OnInit {
 		console.log(user);
 		const dialogRef = this.dialog.open(PopUpEditUserComponent, {
 			width: '550px',
-			// height: '600px',
+			height: '600px',
 			data: { uid: user.uid, name: user.displayName, photo: user.image ? user.image : '', description: user.description ? user.description : '', categories: user.categories ? user.categories : '' }
 		});
 
@@ -72,12 +73,13 @@ export class FreelancerProfilComponent implements OnInit {
 			console.log(result)
 		});
 	}
-	openFolio(user, folio): void {
+	openFolio(user, folioUid, folio): void {
 		console.log(user);
 		const dialogRef = this.dialog.open(PopEditFoliosComponent, {
-			width: '550px',
-			height: '600px',
-			data: { uid: user, autre: folio }
+			maxWidth : '99vw',
+			width: '95vw',
+			height: '100vh',
+			data: { uid: user, folioUid: folioUid, folio: folio }
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
@@ -95,6 +97,13 @@ export class FreelancerProfilComponent implements OnInit {
 			data: { uid: uid }
 		});
 
+	}
+
+	vue(){
+		const texte = document.getElementById('description');
+		const plus = document.getElementById('plus');
+		texte.style.height = 'auto';
+		plus.style.display = 'none';
 	}
 
 }

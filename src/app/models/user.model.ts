@@ -4,7 +4,14 @@ export class User {
         public displayName: string,
         public email: string,
         public password: string,
+        public departement: string,
         public status: string,
-        public categories: []
+        public categories: [],
+        public creneau : any,
+        public delai : any,
+        public jourRepos : any,
+        public validationAuto : any,
+        public modeRdv : any,
+        public description : any
     ){}
 }

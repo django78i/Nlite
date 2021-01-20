@@ -26,14 +26,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule, } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { NavheaderComponent } from './navheader/navheader.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import { MailSendingComponent } from './mail-sending/mail-sending.component';
 import { HomeComponent } from './home/home.component';
 import { SignInUpComponent } from './login/sign-in-up/sign-in-up.component';
@@ -42,29 +53,31 @@ import { ChatComComponent } from './chat/chat-com/chat-com.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { FreelancerProfilComponent } from './users/freelancers/freelancer-profil/freelancer-profil.component';
 import { UserProfilComponent } from './users/user/user-profil/user-profil.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpEditUserComponent } from './users/pop-up-edit-user/pop-up-edit-user.component';
 import { FreelancerProfilClientComponent } from './users/freelancers/freelancer-profil-client/freelancer-profil-client.component';
-import { MatTabsModule } from '@angular/material/tabs';
 import { PortFolioService } from './services/portfolio.service';
 import { PopEditFoliosComponent } from './users/freelancers/pop-edit-folios/pop-edit-folios.component';
 import { PopUpCreateFolioComponent } from './users/freelancers/pop-up-create-folio/pop-up-create-folio.component'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DemoUtilsModule } from './calendar/demo-utils/module'
-import { MatDatepickerModule, } from '@angular/material/datepicker';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { PopUpCalendarComponent } from './calendar/pop-up-calendar/pop-up-calendar.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CalendrierService } from './services/calendrier.services';
-import {MatSelectModule} from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendrierClientComponent } from './calendar/calendrier-client/calendrier-client.component';
 import { PopUpCalenderClientComponent } from './calendar/pop-up-calender-client/pop-up-calender-client.component';
+import { MessageViewComponent } from './chat/message-view/message-view.component';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { FolioCarouselComponent } from './users/freelancers/folio-carousel/folio-carousel.component';
+import { FreelancerFolioSlideComponent } from './users/freelancer-folio-slide/freelancer-folio-slide.component';
+import {MatMenuModule} from '@angular/material/menu';
+import{ MessagingService } from './services/messaging.service';
+import { EditRdvComponent } from './users/freelancers/edit-rdv/edit-rdv.component'
+
 
 registerLocaleData(localeFr);
 
@@ -91,13 +104,18 @@ registerLocaleData(localeFr);
 		PopUpCalendarComponent,
 		CalendrierClientComponent,
 		PopUpCalenderClientComponent,
+		MessageViewComponent,
+		FolioCarouselComponent,
+		FreelancerFolioSlideComponent,
+		EditRdvComponent,
 	],
 	entryComponents: [
 		PopEditFoliosComponent,
 		PopUpEditUserComponent,
 		PopUpCreateFolioComponent,
 		PopUpCalendarComponent,
-		PopUpCalenderClientComponent
+		PopUpCalenderClientComponent,
+		FreelancerFolioSlideComponent
 	],
 	imports: [
 		BrowserModule,
@@ -126,8 +144,14 @@ registerLocaleData(localeFr);
 		MatNativeDateModule,
 		NgxMaterialTimepickerModule.setLocale('fr-FR'),
 		MatSelectModule,
-		NgbModule
-		],
+		NgbModule,
+		NgxUsefulSwiperModule,
+		MatSliderModule,
+		MatChipsModule,
+		MatExpansionModule,
+		MatAutocompleteModule,
+		MatMenuModule
+	],
 	providers: [
 		MatDatepickerModule,
 		FormulaireService,
@@ -136,7 +160,8 @@ registerLocaleData(localeFr);
 		MessgesService,
 		PortFolioService,
 		CalendrierService,
-		{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+		MessagingService,
+		{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
 	],
 	bootstrap: [AppComponent]
 })

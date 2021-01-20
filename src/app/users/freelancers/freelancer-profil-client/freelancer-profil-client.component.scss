@@ -1,40 +1,73 @@
-section.ProfilEntete{
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 50px;
+section.profilEntete {
+  // width: 100vw;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+  margin-top: 20px;
 }
 
-.container{
-    display: flex;
-    justify-content: space-around;
+.container {
+  display: flex;
+  justify-content: space-around;
 }
 
-.userContent{
-    display: flex;
-    flex: 1;
-    justify-content: space-around;
-    margin-top: 50px;
+:host ::ng-deep mat-tab-group {
+  width: 100%;
 }
 
-.imageInner{
-    width: 100%;
-    height: 100%;
+:host ::ng-deep .mat-tab-label-active {
+  border-radius: 30px;
+  padding: 0;
+  background-color: #3467c9;
+  color: white;
+}
+:host ::ng-deep .mat-tab-label {
+  padding: 0;
 }
 
-.photoProfil{
-    display: flex;
-    flex-direction: column;
+:host ::ng-deep .mat-ink-bar {
+  display: none;
 }
 
-.photo{
-    height: 200px;
-    width : 300px;
-    border: 1px solid black;
- 
+:host ::ng-deep .mat-tab-header {
+  border-bottom: none !important;
+  position: absolute;
+  z-index: 1000;
+  width: 90%;
+
+  .fix-search & {
+    position: fixed;
+    top: 0px;
+  }
 }
 
-mat-tab-group {
-    width: 100%;
+:host ::ng-deep .mat-tab-body-wrapper {
+  margin-top: 54px;
+}
+
+.imageProfil {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.profilInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.folioContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  // margin-top: 20px;
+}
+
+.titre {
+  display: flex;
+  justify-content: space-between;
 }

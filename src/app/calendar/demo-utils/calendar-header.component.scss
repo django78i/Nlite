@@ -1,0 +1,15 @@
+.headerCalendar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  display: flex !important;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.dateIcon {
+  display: flex;
+}

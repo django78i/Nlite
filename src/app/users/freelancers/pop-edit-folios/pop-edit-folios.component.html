@@ -1,18 +1,60 @@
+<span class="material-icons sortie" (click)="onNoClick()">cancel</span>
 <div mat-dialog-content class="contenu">
+    <div class="entete">
+        <h2>Edition du portofolio</h2>
+    </div>
+    <form [formGroup]="folio" (ngSubmit)="sendMofication()">
+        <div class="form-group">
+            <div class="tete">
+                <mat-form-field appearance="legacy" style="width: 45%;">
+                    <mat-label>Titre</mat-label>
+                    <input matInput placeholder="Titre" class="form-control" formControlName="nom">
+                </mat-form-field>
+                <mat-form-field appearance="legacy" style="width: 45%;">
+                    <mat-label>prix Mininum</mat-label>
+                    <input matInput placeholder="prix" class="form-control" formControlName="prixMinimum">
+                </mat-form-field>
+            </div>
+            <div class="bas">
+                <mat-form-field appearance="legacy">
+                    <mat-label>description</mat-label>
+                    <textarea matInput placeholder="description" class="form-control"
+                        formControlName="description"></textarea>
+                </mat-form-field>
+                <!-- <button mat-raised-button class="connection">Enregistrer</button> -->
+            </div>
+        </div>
+    </form>
     <div class="photoProfil">
         <div class="photo">
             <img *ngIf="this.imageUrl" class="image" [src]="imageUrl| async" alt="">
         </div>
-        <input type="file" (change)="uploadFile($event)">
+        <button mat-raised-button class="connection" (click)="savePhoto()" [disabled]="disabled">Ajouter au portfolio</button>
     </div>
 
-    <div class="photoList">
-        <div *ngFor = "let photo of photos | async"  [ngStyle]="{'background-image': 'url(' + photo.url + ')'}" class="photoList">
-           <p>titre</p> 
-        </div>
+    <div class="swiper-container">
+        <swiper [config]="config" #usefulSwiper>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="photo" style="border: none;">
+                        <label for="typeFile-input">
+                            <img src="../../../../assets/icones/add_circle_outline-black-18dp.svg" alt="">
+                        </label>
+                        <input #takeInput type="file" (change)="uploadFile($event)" id="typeFile-input">
+                    </div>
+                </div>
+                <div class="swiper-slide" *ngFor="let photo of photoss" (click)="deletePhoto(photo)">
+                <!-- <div class="swiper-slide" *ngFor="let photo of photos | async" (click)="deletePhoto(photo)"> -->
+                    <span class="material-icons supp" >cancel</span>
+                    <div class="photo" [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </swiper>
     </div>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button> 
-    <button mat-button [mat-dialog-close]="data" (click)="sendModification(imageUrl)" cdkFocusInitial>Ok</button>
+<div mat-dialog-actions style="display: flex;justify-content: center;">
+    <button mat-raised-button class="connection" (click)="sendMofication()">Enregistrer</button>
+    <button mat-raised-button class="connection" (click)="onNoClick()">Quitter</button>
+    <!-- <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button> -->
 </div>

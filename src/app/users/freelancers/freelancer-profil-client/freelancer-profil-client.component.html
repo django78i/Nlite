@@ -1,28 +1,30 @@
 <section *ngIf="freelancer$ | async as freelancer">
-    <section class="ProfilEntete">
-        <div class="container">
-            <div class="userContent">
-                <div class="photoProfil">
-                    <div class="photo">
-                        <img [src]="freelancer.image" alt="" class="imageInner">
-                    </div>
-                </div>
-                <div class="Info">
-                    <p>{{ freelancer.displayName}}</p>
-                    <p *ngFor="let categorie of freelancer.categories">{{ categorie }}</p>
-                    <p>{{ freelancer.description}}</p>
-                </div>
-            </div>
+    <section class="profilEntete">
+        <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
+        <div class="profilInfo">
+            <h1>{{freelancer.displayName}}</h1>
+            <h2 *ngFor="let categorie of freelancer.categories">{{categorie}}</h2>
+            <p class="subTitle">{{freelancer.adresse}}</p>
         </div>
     </section>
     <section class="contenu">
-        <div class="container">
-            <mat-tab-group [dynamicHeight] = "true" mat-stretch-tabs [color]="backgroundColorToggle" [backgroundColor]="backgroundColorToggle">
-                <mat-tab label="Portfolios">
-                    <app-calendrier-client [freelancer]="freelancer" [freeUid]="params"></app-calendrier-client>
+        <div class="container" (scroll)="fixed()">
+            <mat-tab-group [dynamicHeight]="true" [(selectedIndex)]="demo1TabIndex" mat-stretch-tabs>
+                <mat-tab label="Portfolio">
+                    <div class="folioContent" *ngFor="let folio of portfolioList | async">
+                        <div class="titre">
+                            <h2>{{folio.titre}}</h2>
+                            <p class="subTitle">A partir de {{folio.prixMinimum}}€</p>
+                        </div>
+                        <app-folio-carousel [titre]="folio.titre" [photos]="folio.photos" [prix] = folio.prixMinimum></app-folio-carousel>
+                    </div>
                 </mat-tab>
-                <mat-tab label="Second"> Content 2 </mat-tab>
-                <mat-tab label="Third"> Content 3 </mat-tab>
+                <mat-tab label="Calendrier">
+                    <app-calendrier-client [freelancer]="freelancer" [freeUid]="params" ></app-calendrier-client>
+                </mat-tab>
+                <mat-tab label="Chat">
+                    <button (click)="openRoom(freelancer)">chatter</button>
+                    Content 3 </mat-tab>
             </mat-tab-group>
         </div>
     </section>

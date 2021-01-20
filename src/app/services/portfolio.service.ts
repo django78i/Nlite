@@ -15,8 +15,12 @@ export class PortFolioService {
     portfoliosList: Observable<any[]>
     photosSubject: Subject<any>;
     photos: Observable<any>;
+    rdvSubject : BehaviorSubject<any>;
+    rdv : Observable<any>;
 
     constructor(private afs: AngularFirestore, private userService: UserService) {
+        this.rdvSubject = new BehaviorSubject(null);
+        this.rdv = this.rdvSubject;
 
     }
 
@@ -31,12 +35,17 @@ export class PortFolioService {
         ))
     }
 
+    getFreelancerFolio(uid) {
+        return this.afs.collection('portfolios').doc<Portfolio>(uid).collection('projets').valueChanges();
+
+    }
+
     createPortfolio(folio, uid) {
         console.log(folio);
         this.afs.collection('portfolios').doc(uid).collection('projets').doc(folio.uid).set(Object.assign({}, folio));
     }
 
-    getPhotos(userUid, folioUid): Observable<any> {
+    getPhotos(userUid, folioUid): Observable<any[]> {
         console.log('getUser');
         this.photosSubject = new BehaviorSubject(null);
         this.photosSubject.next('');
@@ -49,6 +58,11 @@ export class PortFolioService {
     }
 
 
+    updateFolio(userUid, folioUid, folio){
+        console.log(folio);
+        this.afs.collection('portfolios').doc(userUid).collection('projets').doc(folioUid).update(Object.assign({}, folio));
+
+    }
 
 
 

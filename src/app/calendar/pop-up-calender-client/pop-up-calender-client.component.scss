@@ -1,0 +1,51 @@
+.debut,
+.fin {
+  display: flex;
+  gap: 10px;
+}
+
+.date {
+  width: 40%;
+}
+
+.heures {
+  width: 20%;
+}
+
+.hautGauche{
+    flex: 1;
+}
+
+.hautDroit{
+    flex: 1;
+}
+
+.sortie {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 100;
+  color: rgba(128, 120, 120, 0.344);
+}
+
+.valider {
+  background: #3467c9;
+  color: white;
+  width: 90%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  margin-bottom: 10px;
+}
+
+.false {
+  background: none;
+  color: rgba(0, 0, 0, 0.241);
+}
+
+mat-form-field.mat-form-field {
+  font-size: 12px;
+  line-height: 3.2 !important;
+}

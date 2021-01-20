@@ -1,7 +1,5 @@
-<mat-sidenav-container class="sidenav-container">
-	<mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-		[mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-		<mat-toolbar routerLink="">Menu</mat-toolbar>
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+	<mat-drawer #drawer>
 		<mat-nav-list>
 			<a mat-list-item routerLink="chat">Chat</a>
 			<a mat-list-item routerLink="usersList">Liste des freelancers</a>
@@ -11,19 +9,64 @@
 				<a mat-list-item routerLink="login">Se connecter</a>
 			</ng-template>
 		</mat-nav-list>
-	</mat-sidenav>
-	<mat-sidenav-content>
-		<mat-toolbar color="primary" class="header">
-			<button type="button" aria-label="Toggle sidenav" mat-icon-button 
-				*ngIf="isHandset$ | async">
-				<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-			</button>
-			<span (click)="drawer.toggle()">testMailing</span>
-				<div  *ngIf = "user | async as user" (click)="profil(user.status)">{{ user.displayName}}</div>
-		</mat-toolbar>
-		<!-- Contenu -->
+	</mat-drawer>
+	<mat-drawer-content>
 		<div class="contenu">
-			<router-outlet></router-outlet>
+			<mat-toolbar>
+				<div class="menuMobile">
+					<div class="logo">
+						<p>nLite</p>
+					</div>
+					<div class="userZone">
+						<div class="userProfil">
+							<ng-template #connect>
+								<p routerLink="login">Se connecter</p>
+							</ng-template>
+							<button mat-button [matMenuTriggerFor]="menu">
+								<p *ngIf="auth.user | async as user; else connect">{{user.displayName}} </p>
+							</button>
+							<mat-menu #menu="matMenu" >
+								<button mat-menu-item *ngIf="user | async as user" (click)="profil(user.status)">Mon Espace</button>
+								<button mat-menu-item (click)="logout()">Se déconnecter</button>
+							</mat-menu>
+						</div>
+					</div>
+				</div>
+				<div class="contentPc">
+					<span>My App</span>
+					<div class="buttonZone">
+						<div *ngIf="user | async as user" (click)="profil(user.status)" style="color: black;">
+							{{ user.displayName}}</div>
+						<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+							<mat-icon (click)="drawer.toggle()">menu</mat-icon>
+						</button>
+						<span class="example-spacer"></span>
+					</div>
+				</div>
+			</mat-toolbar>
+			<div style="width: 100%; margin-bottom: 70px;">
+				<router-outlet></router-outlet>
+			</div>
+			<div class="bottomMobile">
+				<mat-toolbar>
+					<button mat-icon-button class="example-icon favorite-icon"
+						aria-label="Example icon-button with heart icon" routerLink="home">
+						<img src="../../../assets/icones/menuMobile/home-24px.svg" alt="">
+					</button>
+					<button mat-icon-button class="example-icon favorite-icon"
+						aria-label="Example icon-button with heart icon" routerLink="calendar" *ngIf="user| async">
+						<img src="../../../assets/icones/menuMobile/event_note-24px.svg" alt="">
+					</button>
+					<button mat-icon-button class="example-icon favorite-icon"
+						aria-label="Example icon-button with heart icon" routerLink="chat">
+						<img src="../../../assets/icones/menuMobile/sms-24px.svg" alt="">
+					</button>
+					<button mat-icon-button class="example-icon favorite-icon"
+						aria-label="Example icon-button with heart icon" routerLink="freelanceList">
+						<img src="../../../assets/icones/menuMobile/search-24px.svg" alt="">
+					</button>
+				</mat-toolbar>
+			</div>
 		</div>
-	</mat-sidenav-content>
-</mat-sidenav-container>
+	</mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,5 @@
+<div #scrollMe id="discussionContent">
+    <p class="textDiscuss" style="align-self: flex-start;" *ngFor="let message of message">
+    <!-- <p class="textDiscuss" [ngStyle]="{'align-self': position(message.senderId)}" *ngFor="let message of message"> -->
+        {{message.contenu}}</p>
+</div>

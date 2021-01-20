@@ -1,12 +1,6 @@
-<div *ngIf="auth.user | async as user; else showLogin">
-    <h1>Hello {{ user.displayName }}!</h1>
-    <button (click)="logout()">Logout</button>
-</div>
-<ng-template #showLogin>
-    <p>Connectez vous</p>
-    <button (click)="login()">Se connecter avec Google</button>
-    <p>zone de texte</p>
-    <div *ngIf="user | async">
-        <p>nom : {{user.nom | async}}</p>
+    <div class="buttonContent">
+        <div class="connectionGoogle">
+            <button class="connection" mat-raised-button color="primary" (click)="login()"><img src="../assets/icones/googleIcon.svg" alt=""></button>
+            <button class="connection" mat-raised-button color="primary" (click)="login()"><img src="../assets/icones/facebookIcon.svg" alt=""></button>
+        </div>
     </div>
-</ng-template>

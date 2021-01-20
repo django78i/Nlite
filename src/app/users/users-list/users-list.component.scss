@@ -1,35 +1,114 @@
-.container{
-    width: 1000px;
+.profilEntete {
+  // width: 100vw;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px 10px;
 }
 
-
-.contenuList{
-    width: 600px;
-    height: 80vh;
+.imageProfil {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-
-.listItem{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    // background: red;
-    padding: 0 10px;
-    padding-top: 10px;
-    align-items: center;
-    box-shadow: 10px 5px 5px 0px rgba(184,175,184,1);;
-    span{
-        cursor: pointer;
-    }
+.profilInfo {
+  display: flex;
+  flex-direction: column;
 }
 
-.icones{
-    display: flex;
-    justify-content: space-between;
-    width: 70px;
+.listItem {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
 }
 
-.iconImg{
-    cursor: pointer;
+.titre {
+  color: black;
+}
+
+.categList {
+  display: flex;
+  gap: 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+.small {
+  font-size: 10px;
+}
+ul {
+  list-style-type: none;
+  margin-bottom: 5px !important;
+  padding-left: 0px;
+}
+
+//formulaire
+
+.search {
+  display: flex;
+}
+
+.filter {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.searchButton {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.material-icons.iconFiltre {
+  padding: 10px;
+  color: white;
+  background: black;
+  border-radius: 10px;
+}
+
+.iconFiltre{
+  margin-top: 30px;
+}
+
+.present {
+  height: 84px;
+}
+
+form {
+  flex: 3;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-select.localSelect {
+  height: 40px;
+  border-radius: 20px;
+}
+
+.form-control.localSelect {
+  padding: 31px 0.75rem;
+}
+
+// :host ::ng-deep .localiteSearch.mat-form-field-label {
+//   top: 40px;
+//   left: 20px;
+// }
+:host ::ng-deep .localiteSearch.mat-form-field-appearance-legacy .mat-form-field-underline,
+:host ::ng-deep .typeFilter.mat-form-field-appearance-legacy .mat-form-field-underline{
+  height: 0px;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+.slider{
+  padding : 10px 0.75rem;
 }

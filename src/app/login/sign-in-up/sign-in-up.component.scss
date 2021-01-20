@@ -1,8 +1,23 @@
 .container{
     display: flex;
-    gap: 20px;
+    flex-direction: column;
 }
 
 .signIn, .signUp{
+    margin-top: 10px;
     flex: 1;
+    display: flex;
+}
+
+section{
+    height: 80vh;
+    display: flex;
+    align-items: flex-end;
+}
+
+.connection{
+    flex: 1;
+    // width: 148px;
+    height: 67px;
+    border-radius: 35px;
 }

@@ -1,0 +1,19 @@
+<section class="headerCalendar">
+  <div class="icon">
+    <img src="../../../assets/icones/menuMobile/west-black-18dp.svg" alt="précèdent" mwlCalendarPreviousView
+      [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+    <!-- <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate"
+      (viewDateChange)="viewDateChange.next(viewDate)">
+      Aujourd'hui
+    </div> -->
+    <img src="../../../assets/icones/menuMobile/east-black-18dp.svg" alt="suivant" mwlCalendarNextView [view]="view"
+      [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+    <p style="margin: 0;">{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</p>
+  </div>
+  <div class="dateIcon">
+    <img (click)="viewChange.emit(CalendarView.Month)" [class.active]="view === CalendarView.Month"
+      src="../../../assets/icones/menuMobile/view_comfy-24px.svg" alt="">
+    <img (click)="viewChange.emit(CalendarView.Week)" [class.active]="view === CalendarView.Week"
+      src="../../../assets/icones/menuMobile/view_week-24px.svg" alt="">
+  </div>
+</section>

@@ -1,9 +1,7 @@
-<div class="contenu">
+<div id="contenu">
     <h1>Bienvenue dans le chat</h1>
     <p>{{(contact$|async)?.displayName}}</p>
+    <app-message-view *ngIf="messages | async as message" [message]="message" [uid]="users.uid"></app-message-view>
     <input type="text" class="form-control" [(ngModel)]="discussion" (keyup)="discusSubject.next(discussion)">
     <button mat-raised-button color="primary" (click)="envoyer()">Primary</button>
-    <div class="discussionContent">
-        <p class="textDiscuss"  [ngStyle]="{'align-self': position(message.senderId)}" *ngFor="let message of messages | async">{{message.contenu}}</p>
-    </div>
 </div>

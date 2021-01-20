@@ -1,34 +1,117 @@
-.wrapper{
-    display: flex;
-    max-width: 1300px;
-    margin-top: 30px;
+.wrapper {
+  display: flex;
+  max-width: 1300px;
+  margin-top: 30px;
 }
 
-.formulaire{
-    flex: 1;
+.formulaire {
+  flex: 1;
 }
 
-.calendrier{
-    flex: 3;
+.calendrier {
+  flex: 3;
 }
 
-.debut, .fin{
-    display: flex;
-    padding : 0 10px;
-    gap: 10px;
-    
+.debut,
+.fin {
+  display: flex;
+  padding: 0 10px;
+  gap: 10px;
 }
 
 .mat-form-field {
-    flex:1;
-    max-width: 180px;
+  flex: 1;
+  max-width: 180px;
 }
 
-.heures{
-    flex : 1;
-    max-width: 200px;
+.heures {
+  flex: 1;
+  max-width: 200px;
 }
 
+@media screen and (max-width: 550px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .calendrier {
+    flex: 1;
+  }
+  .scroll-container {
+    height: 300px;
+    width: 350px;
+  }
+}
 
+.dark-theme {
+  // First define some global color variables for your app, these are just for the demo, they can be anything you like
+  $bg-dark-primary: #1f262d;
+  $bg-dark-secondary: #394046;
+  $bg-active: #2c343a;
+  $text-color: #d5d6d7;
+  $border-color: rgba(0, 0, 0, 0.6);
 
+//   @include cal-theme(
+//     (
+//       bg-primary: $bg-dark-primary,
+//       bg-secondary: $bg-dark-secondary,
+//       weekend-color: indianred,
+//       bg-active: $bg-active,
+//       border-color: $border-color,
+//       gray: $bg-dark-secondary,
+//       today-bg: $bg-dark-secondary,
+//       event-color-primary: $bg-dark-secondary,
+//     )
+//   );
 
+  // How to override a non themable property, this was copied from chrome -> inspect element -> styles panel
+  .cal-month-view .cal-day-cell.cal-out-month .cal-day-number {
+    opacity: 0.15;
+  }
+
+  // Everything else below is just themes the demo, it's probably not relevant to your app
+  background-color: $bg-dark-primary;
+  color: $text-color;
+
+  .card {
+    border-color: $border-color;
+  }
+
+  .card-header {
+    background-color: $bg-dark-secondary;
+  }
+
+  .card-body {
+    background-color: $bg-dark-primary;
+  }
+
+  .nav-tabs {
+    border-bottom-color: $border-color;
+  }
+
+  .nav-tabs .nav-link.active {
+    background-color: $bg-dark-primary;
+    color: $text-color;
+    border-color: $border-color;
+  }
+
+  .nav-tabs .nav-link:hover,
+  .nav-tabs .nav-link:focus {
+    border-color: $border-color;
+  }
+}
+
+// // Call the calendar mixin with a sass color map of your theme. Every property is optional.
+// // For a list of all variables and how they are used,
+// // see https://github.com/mattlewis92/angular-calendar/tree/master/projects/angular-calendar/src/variables.scss
+// @include cal-theme(
+//   (
+//     bg-primary: $bg-dark-primary,
+//     bg-secondary: $bg-dark-secondary,
+//     weekend-color: indianred,
+//     bg-active: $bg-active,
+//     border-color: $border-color,
+//     gray: $bg-dark-secondary,
+//     today-bg: $bg-dark-secondary,
+//     event-color-primary: $bg-dark-secondary,
+//   )
+// );

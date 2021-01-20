@@ -1,18 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+p,
+h2,
+h3,
+h4,
+h1 {
+  font-family: "Poppins", sans-serif;
+  margin: 0 !important;
+}
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// .container{
-//     width: 1300px;
-// }
+h1 {
+  font-size: 25px;
+}
+h2 {
+  font-size: 16px;
+}
+h3{
+  line-height: 12px;
+}
+p {
+  font-size: 12px;
+}
+.container {
+  padding: 0 !important;
+}
+
+section {
+  width: 100% !important;
+}
+
+.subTitle {
+  color: #a9acb9;
+}
+
+.custom .mat-dialog-container {
+  padding: 0;
+}
+
+button:focus {
+  outline: none !important;
+}
 
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~open-iconic/font/css/open-iconic-bootstrap.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~open-iconic/font/css/open-iconic-bootstrap.css";
 
 .my-custom-class span {
-    color: #ff3d7f !important;
+  color: #ff3d7f !important;
 }
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";

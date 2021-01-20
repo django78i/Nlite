@@ -1,21 +1,59 @@
-<section class="contenuList">
-    <!-- <div class="container">
-        <h1>Liste des utilisateurs</h1>
-        <div class="listItem" *ngFor="let user of usersList | async">
-            <p>{{user.displayName}}</p>
-            <span class="material-icons" (click)="openRoom(user)">message</span>
+<div class="container">
+    <h1>Rechercher</h1>
+    <div class="search">
+        <form [formGroup]="searchForm">
+            <div class="form-group">
+                <mat-form-field class="localiteSearch">
+                    <mat-label>Où ?</mat-label>
+                    <mat-select name="location" class="form-control localSelect" formControlName="location">
+                        <mat-option *ngFor="let location of lieu" [value]="location.value">
+                            {{location.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div class="filter">
+                                    <p>Ajouter des filtres</p>
+                                </div>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="filtresSup">
+                            <mat-form-field class="typeFilter">
+                                <mat-label>Quoi ?</mat-label>
+                                <mat-select name="type" class="form-control " formControlName="type">
+                                    <mat-option *ngFor="let type of types" [value]="type.value">
+                                        {{type.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+            
+                            <p>A partir de : {{prixFiltre | async}}</p>
+                            <mat-slider thumbLabel class="form-control slider" [max]="200" [min]="0"
+                                formControlName="prix" thumbLabel="true" tickInterval="1000">
+                            </mat-slider>
+                            
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </form>
+        <div class="searchButton">
+            <span class="material-icons iconFiltre" (click)="appear()">search</span>
         </div>
-
-    </div> -->
-    <div class="container">
-        <h1>Liste des utilisateurs</h1>
-        <div class="listItem" *ngFor="let freelancer of freelancerList | async">
-            <p>{{freelancer.displayName}}</p>
-            <div class="icones">
-                <span class="material-icons iconImg" (click)="profileNavigate(freelancer)">face</span>
-                <span class="material-icons iconImg" (click)="openRoom(freelancer)">message</span>
+    </div>
+    <div class="listItem" *ngFor="let freelancer of freelancerList | async">
+        <div class="profilEntete" (click)="profileNavigate(freelancer)">
+            <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
+            <div class="profilInfo">
+                <p class="subTitle titre">{{freelancer.displayName}}</p>
+                <ul class="categList">
+                    <li *ngFor="let categorie of freelancer.categories"> {{categorie}} </li>
+                </ul>
+                <p class="subTitle small">{{freelancer.adresse}}</p>
             </div>
         </div>
-
     </div>
-</section>
+</div>

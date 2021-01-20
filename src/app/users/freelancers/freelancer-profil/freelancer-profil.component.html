@@ -1,36 +1,29 @@
 <section class="wrapper" *ngIf="user | async as user">
-    <section class="ProfilEntete">
-        <div class="container">
-            <div class="userContent">
-                <div class="photoProfil">
-                    <div class="photo">
-                        <img [src]="user.image" alt="" class="imageInner">
-                    </div>
-                </div>
-                <div class="Info">
-                    <p>{{ user.displayName}}</p>
-                    <p *ngFor="let categorie of user.categories">{{ categorie }}</p>
-                    <p>{{ user.description}}</p>
-                </div>
-                <span class="material-icons" (click)="openDialog(user)">
-                    create
-                </span>
+    <section class="profilEntete">
+        <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + user.image + ')'}"></div>
+        <div class="profilInfo">
+            <h2>{{user.displayName}}</h2>
+            <h3 *ngFor="let categorie of user.categories">{{categorie}}</h3>
+            <p> {{user.modeRdv}}</p>
+            <p class="subTitle">{{user.adresse}}</p>
+            <div id="description">
+                <p style="font-size: 10px; line-height: 12px;">{{user.description}}</p>
+                <p id="plus" style="position: absolute;bottom: 0;right: 0;font-size: 10px; line-height: 12px;background: white;" (click)="vue()">...<span style="color: darkgrey;">Voir la suite</span></p>
             </div>
         </div>
     </section>
     <section class="contenu">
         <div class="container">
-            <mat-tab-group mat-stretch-tabs [color]="backgroundColorToggle" [backgroundColor]="backgroundColorToggle">
+            <mat-tab-group mat-stretch-tabs [dynamicHeight]="true">
                 <mat-tab label="Portfolios">
-                    <p style="color: black;">Lite des portfolios</p>
                     <div class="folioList">
                         <div class="image" *ngFor="let portfolio of portfolioList | async">
-                            <p>contenu</p>
                             <p>{{portfolio.titre}}</p>
                             <div class="photoProfil">
                                 <div class="photo">
                                     <div class="edit">
-                                        <span class="material-icons" (click)="openFolio(user.uid,portfolio.uid )">create</span>
+                                        <span class="material-icons"
+                                            (click)="openFolio(user.uid,portfolio.uid, portfolio)">create</span>
                                         <span class="material-icons ">delete</span>
                                     </div>
                                     <img [src]="portfolio.miniature" alt="" class="image">
@@ -40,8 +33,10 @@
                     </div>
                     <span class="material-icons add" (click)="createFolio(user.uid)">add_circle</span>
                 </mat-tab>
-                <mat-tab label="Second"> Content 2 </mat-tab>
-                <mat-tab label="Third"> Content 3 </mat-tab>
+                <mat-tab label="Gestion rdv">
+                    <app-edit-rdv [freelancer]="user"></app-edit-rdv>
+                </mat-tab>
+                <mat-tab label="tarifs"> Content 3 </mat-tab>
             </mat-tab-group>
         </div>
     </section>

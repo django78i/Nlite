@@ -80,7 +80,7 @@ export class UserService {
     }
 
     upDateUser(user) {
-
+        console.log(user);
         this.afs.collection('users').doc(user.uid).update(Object.assign({}, user));
     }
 

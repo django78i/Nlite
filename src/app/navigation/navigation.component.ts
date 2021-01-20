@@ -54,5 +54,9 @@ export class NavigationComponent implements OnInit {
     user === 'freelancer' ?  this.router.navigate(['freelancerProfil']) : this.router.navigate(['clientProfil']) 
   }
 
+  home() {
+    console.log("ici");
+    this.router.navigate[' '];
+  }
 
 }

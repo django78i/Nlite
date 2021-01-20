@@ -13,13 +13,14 @@ import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
   { path: 'login', component: SignInUpComponent },
-  { path: 'usersList', component: UsersListComponent },
+  { path: 'freelanceList', component: UsersListComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'chatCom/:id', component: ChatComComponent },
   { path: 'freelancerProfil', component: FreelancerProfilComponent },
   { path: 'clientProfil', component: UserProfilComponent },
   { path: 'freelanceClientProfil/:id', component: FreelancerProfilClientComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
 ];
 

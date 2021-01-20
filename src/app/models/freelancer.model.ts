@@ -4,7 +4,11 @@ export class Freelancer {
         public nom: string,
         public mail: string,
         public photo : string,
+        public departement: string,
+        public status: string,
         public description : string, 
+        public prixMinimum : number,
+        public categories: [],
         public portfolio : []
     ){}
 }

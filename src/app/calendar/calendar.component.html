@@ -44,22 +44,32 @@
     <div class="calendrier">
         <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">
         </mwl-demo-utils-calendar-header>
+        <ng-template #loading>
+            <div class="text-center">
+                <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
+                Loading events...
+            </div>
+        </ng-template>
 
-        <div [ngSwitch]="view" class="scroll-container" #scrollContainer>
-            <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-                (eventTimesChanged)="eventTimesChanged($event)"
-                (columnHeaderClicked)="clickedColumn = $event.isoDayNumber" (dayClicked)="clickedDate = $event.day.date"
-                [activeDayIsOpen]="true" [locale]="locale">
-            </mwl-calendar-month-view>
-            <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-                (dayHeaderClicked)="dateCreate($event.day.date, $event.date)"
-                (hourSegmentClicked)="dateCreate($event, $event.date)" (eventTimesChanged)="eventTimesChanged($event)"
-                [locale]="locale">
-            </mwl-calendar-week-view>
-            <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-                (hourSegmentClicked)="clickedDate = $event.date" (eventTimesChanged)="eventTimesChanged($event)"
-                [locale]="locale">
-            </mwl-calendar-day-view>
+        <div *ngIf="events$ | async;else loading; let events">
+            <div [ngSwitch]="view" class="scroll-container" #scrollContainer>
+                <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (eventTimesChanged)="eventTimesChanged($event)"
+                    (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
+                    (dayClicked)="clickedDate = $event.day.date" [activeDayIsOpen]="true" [locale]="locale"
+                    (dayClicked)="changeDay($event.day.date)" (eventClicked)="eventClicked($event)" [excludeDays]="excludeDays">
+                </mwl-calendar-month-view>
+                <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (dayHeaderClicked)="dateCreate($event.day.date, $event.date)"
+                    (hourSegmentClicked)="dateCreate($event, $event.date)" (eventClicked)="eventClicked($event)"
+                    (eventTimesChanged)="eventTimesChanged($event)" [locale]="locale" [dayStartHour]="5"
+                    [dayEndHour]="20" [weekStartsOn]="weekStartsOn" [excludeDays]="excludeDays">
+                </mwl-calendar-week-view>
+                <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+                    (hourSegmentClicked)="clickedDate = $event.date" (eventTimesChanged)="eventTimesChanged($event)"
+                    [locale]="locale" [dayStartHour]="9" [dayEndHour]="17" (eventClicked)="eventClicked($event)">
+                </mwl-calendar-day-view>
+            </div>
         </div>
     </div>
 </div>
