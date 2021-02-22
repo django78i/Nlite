@@ -1,14 +1,14 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MessgesService } from './../../services/messages.service';
-import { SignService } from 'src/app/services/sign.service';
 import { User } from './../../models/user.model';
 import { UserService } from './../../services/user.service';
 import { Message } from './../../models/message.model';
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/internal/operators/map';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 	contact$: Observable<User>;
 	messages: Observable<Message[]>;
 	params: any;
-
+	donnee: any;
 	discussion: any;
 	discussionList: any;
 	discusSubject = new Subject;
@@ -35,16 +35,21 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 		public messageService: MessgesService, public userService: UserService, private afs: AngularFirestore,
 		private elem: ElementRef) {
 
-		this.route.params.subscribe((params) => {
-			this.params = params.id,
-				this.contact$ = this.userService.getSingleContact(params.id);
-			this.auth.onAuthStateChanged((user) => {
-				this.messages = this.messageService.getMessages(params.id);
-				this.userService.user.subscribe((user) => {
-					this.users = user;
-				})
+		this.auth.onAuthStateChanged((user) => {
+			this.userService.user.subscribe((user) => {
+				console.log(user);
+				this.users = user;
+				
 			})
-		})
+		});
+
+		this.params = this.route.paramMap
+			.pipe(map(() => window.history.state),
+				tap(param => {
+					this.donnee = param.data.val;
+					this.messages = this.messageService.getMessages(this.donnee.uid);
+				})
+			);
 	}
 
 	ngOnInit(): void {
@@ -56,26 +61,21 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 	}
 
 	envoyer() {
-
-		this.contact$.pipe(
-			tap(contact => {
-				const keyPair = this.users.status == 'freelancer' ? this.users.uid + contact.uid : contact.uid + this.users.uid;
-				console.log(keyPair);
-				const discuss = new Message(
-					this.users.uid,
-					contact.displayName,
-					contact.uid,
-					this.users.displayName,
-					this.discussion,
-					this.tempsEnMs,
-					keyPair,
-					''
-				)
-				console.log(discuss);
-				this.messageService.saveMessage(discuss, this.params, this.users.uid);
-				this.discussion = '';
-			})
-		).subscribe();
+		const keyPair = this.users.status == 'freelancer' ? this.users.uid + this.donnee.clientId : this.donnee.freeUid + this.users.uid;
+		console.log(keyPair);
+		const discuss = new Message(
+			this.users.uid,
+			this.users.status == 'freelancer' ? this.donnee.freelance : this.donnee.client,
+			this.users.status == 'freelancer' ? this.donnee.clientId : this.donnee.freeUid,
+			this.users.displayName,
+			this.discussion,
+			this.tempsEnMs,
+			keyPair,
+			''
+		)
+		console.log(discuss);
+		this.messageService.saveMessage(discuss, this.params, this.users.uid);
+		this.discussion = '';
 	}
 
 	position(message) {

@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 	firstFormGroup: any;
+	signForm: any;
 
 
-	constructor(private _formBuilder: FormBuilder, public signService: SignService, 
-				public auth: AngularFireAuth, private router: Router) { }
+	constructor(private _formBuilder: FormBuilder, public signService: SignService,
+		public auth: AngularFireAuth, private router: Router) { }
 
 	ngOnInit(): void {
 		this.initForm();
@@ -28,17 +29,29 @@ export class SignUpComponent implements OnInit {
 			password: ['']
 		});
 
+		this.signForm = this._formBuilder.group({
+			email: [''],
+			password: ['']
+		});
+
 	}
 
 	createUser() {
 		const formValue = this.firstFormGroup.value;
+		console.log(formValue);
 		this.signService.userEmailPassword(formValue);
-		this.router.navigate(['']);
+		this.router.navigate(['/home']);
 	}
 
 	logout() {
-        this.auth.signOut();
-    }
+		this.auth.signOut();
+	}
+
+	sign() {
+		const formValue = this.signForm.value;
+		this.signService.signUser(formValue);
+		this.router.navigate(['/home']);
+	}
 
 
 

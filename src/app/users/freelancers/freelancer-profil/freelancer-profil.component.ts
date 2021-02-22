@@ -46,7 +46,6 @@ export class FreelancerProfilComponent implements OnInit {
 				this.user = this.userService.getCurrentUSer(user);
 				this.portfolioList = this.porfolioService.getUserPortfoliosList(this.user);
 				this.porfolioService.portfoliosList.subscribe((data) => {
-					console.log(data);
 				})
 			}
 		})
@@ -59,7 +58,6 @@ export class FreelancerProfilComponent implements OnInit {
 	}
 
 	openDialog(user): void {
-		console.log(user);
 		const dialogRef = this.dialog.open(PopUpEditUserComponent, {
 			width: '550px',
 			height: '600px',
@@ -70,7 +68,6 @@ export class FreelancerProfilComponent implements OnInit {
 			console.log('The dialog was closed');
 			//   this.animal = result;
 
-			console.log(result)
 		});
 	}
 	openFolio(user, folioUid, folio): void {
@@ -83,10 +80,6 @@ export class FreelancerProfilComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
-			//   this.animal = result;
-
-			console.log(result)
 		});
 	}
 

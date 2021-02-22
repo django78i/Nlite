@@ -1,15 +1,15 @@
 :host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
-  height: 0px;
+  display: none;
 }
 .titleHeader {
-  margin-top: 30px;
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .form {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 10px;
 }
 
 mat-form-field {
@@ -17,26 +17,48 @@ mat-form-field {
 }
 
 mat-select {
-  height: 85px;
+  // height: 85px;
+  border: none;
   border-radius: 40px;
+  box-shadow: -7px 20px 59px -16px;
+}
+
+:host ::ng-deep .mat-select-value {
+  width: 100%;
+}
+
+:host ::ng-deep .mat-form-field-wrapper,
+:host ::ng-deep .mat-form-field-infix {
+  padding: 0;
+}
+
+input {
+  border-radius: 40px;
+  box-shadow: -7px 20px 59px -16px;
+  position: relative;
+  background: white;
+}
+
+mat-label {
+  color: #a9acb9;
+  font-weight: 500;
 }
 
 .form-control {
-  // margin-top: 100px;
-  padding: 31px 0.75rem;
+  padding: 31px 2.75rem;
 }
 
 :host ::ng-deep .mat-form-field-label {
-  top: 54px;
-  left: 20px;
+  top: 37px;
+  left: 52px;
 }
 
-// :host ::ng-deep .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
-// .mat-form-field-label{
-//     transform: translateY(-54px) scale(0.75) perspective(100px) translateZ(0.001px);
-// }
+:host ::ng-deep .mat-form-field-subscript-wrapper {
+  display: none;
+}
 
-.valider {
+.valider,
+.mail {
   background: black;
   color: white;
   width: 90%;
@@ -45,4 +67,18 @@ mat-select {
   align-items: center;
   justify-content: center;
   border-radius: 40px;
+  margin-top: 10px;
+}
+
+.mail {
+  height: 40px;
+  background: #3467c9;
+  width: 80%;
+}
+
+.checkBoxes {
+  align-self: flex-start;
+  margin-left: 45px !important;
+  font-weight: 600;
+  margin-top: 10px;
 }

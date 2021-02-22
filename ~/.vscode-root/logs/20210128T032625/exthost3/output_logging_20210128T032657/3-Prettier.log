@@ -1,0 +1,39 @@
+["INFO" - 03:26:57] Extension Name: esbenp.prettier-vscode.
+["INFO" - 03:26:57] Extension Version: 5.8.0.
+["INFO" - 03:26:57] Enabling prettier for languages: ansible, css, graphql, home-assistant, html, javascript, javascriptreact, json, json5, jsonc, less, markdown, mdx, mongo, postcss, scss, typescript, typescriptreact, vue, yaml
+["INFO" - 03:26:57] Enabling prettier for file extensions: .JSON-tmLanguage, ._js, .avsc, .bones, .cjs, .component.html, .css, .es, .es6, .frag, .geojson, .gltf, .gql, .graphql, .graphqls, .gs, .har, .htm, .html, .html.hl, .ice, .inc, .jake, .js, .js.flow, .jsb, .jscad, .jsfl, .jsm, .json, .json5, .jsonc, .jss, .jsx, .less, .markdown, .mcmeta, .md, .mdown, .mdwn, .mdx, .mir, .mjml, .mjs, .mkd, .mkdn, .mkdown, .njs, .pac, .pcss, .postcss, .reek, .ronn, .rviz, .scss, .sjs, .ssjs, .st, .sublime-build, .sublime-commands, .sublime-completions, .sublime-keymap, .sublime-macro, .sublime-menu, .sublime-mousemap, .sublime-project, .sublime-settings, .sublime-syntax, .sublime-theme, .sublime-workspace, .sublime_metrics, .sublime_session, .syntax, .tfstate, .tfstate.backup, .topojson, .ts, .tsx, .vue, .webapp, .webmanifest, .workbook, .wxs, .wxss, .xht, .xhtml, .xsjs, .xsjslib, .yaml, .yaml-tmlanguage, .yaml.sed, .yml, .yml.mysql, .yy, .yyp
+["INFO" - 03:26:57] Enabling prettier for range supported languages: graphql, javascript, javascriptreact, json, typescript, typescriptreact
+["INFO" - 03:28:42] Formatting /home/diakite/Documents/testmailing/testMailing/src/app/google-compenent/google-compenent.component.html
+["INFO" - 03:28:42] Using ignore file (if present) at /home/diakite/Documents/testmailing/testMailing/.prettierignore
+["INFO" - 03:28:42] Using bundled version of prettier.
+["INFO" - 03:28:42] File Info:
+{
+  "ignored": false,
+  "inferredParser": "angular"
+}
+["INFO" - 03:28:43] Detected local configuration (i.e. .prettierrc or .editorconfig), VS Code configuration will not be used
+["INFO" - 03:28:43] Prettier Options:
+{
+  "filepath": "/home/diakite/Documents/testmailing/testMailing/src/app/google-compenent/google-compenent.component.html",
+  "parser": "angular",
+  "useTabs": false,
+  "tabWidth": 2
+}
+["INFO" - 03:28:43] Formatting completed in 194.96779ms.
+["INFO" - 03:28:44] Formatting /home/diakite/Documents/testmailing/testMailing/src/app/google-compenent/google-compenent.component.html
+["INFO" - 03:28:44] Using ignore file (if present) at /home/diakite/Documents/testmailing/testMailing/.prettierignore
+["INFO" - 03:28:44] Using bundled version of prettier.
+["INFO" - 03:28:44] File Info:
+{
+  "ignored": false,
+  "inferredParser": "angular"
+}
+["INFO" - 03:28:44] Detected local configuration (i.e. .prettierrc or .editorconfig), VS Code configuration will not be used
+["INFO" - 03:28:44] Prettier Options:
+{
+  "filepath": "/home/diakite/Documents/testmailing/testMailing/src/app/google-compenent/google-compenent.component.html",
+  "parser": "angular",
+  "useTabs": false,
+  "tabWidth": 2
+}
+["INFO" - 03:28:44] Formatting completed in 76.492691ms.

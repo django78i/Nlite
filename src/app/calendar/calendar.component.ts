@@ -107,7 +107,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 			this.events$ = this.calendrierService.getRdv(user).pipe(
 				map(event => {
 					return event.map(events => {
-						this.contactEvent = events.contact;
+						this.contactEvent = events;
 						return {
 							// title: events.event.title,
 							start: events.event.start.toDate(),
@@ -271,7 +271,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 		}
 		let contact;
 		const userEvent = {
-			contact: contact = {
+			// contact: contact = {
 				userUid: this.user.uid,
 				uid: id,
 				adresse: '',
@@ -279,7 +279,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 				codePostal: '',
 				nomClient: '',
 				type: 'Indisponible',
-			},
+			// },
 			event: newDate
 		}
 		console.log(userEvent);

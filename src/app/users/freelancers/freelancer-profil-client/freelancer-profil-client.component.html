@@ -2,29 +2,58 @@
     <section class="profilEntete">
         <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
         <div class="profilInfo">
-            <h1>{{freelancer.displayName}}</h1>
-            <h2 *ngFor="let categorie of freelancer.categories">{{categorie}}</h2>
-            <p class="subTitle">{{freelancer.adresse}}</p>
+            <h2>{{freelancer.displayName}}</h2>
+            <ul class="categList">
+                <li *ngFor="let categorie of freelancer.categories" class="categories ">
+                    <div class="dot"></div>
+                    <p class="subTitle small">{{categorie}}</p>
+                </li>
+            </ul>
+            <p class="subTitle">{{freelancer.adresse.rue}}, {{freelancer.adresse.codePostal}}
+                {{freelancer.adresse.ville}} </p>
+            <div id="description" *ngIf="freelancer.description">
+                <p style="font-size: 10px; line-height: 12px;">{{freelancer.description}}</p>
+                <p id="plus"
+                    style="position: absolute;bottom: 0;right: 0;font-size: 10px; line-height: 12px;background: white;"
+                    (click)="vue()">...<span style="color: darkgrey;">Voir la suite</span></p>
+            </div>
         </div>
+        <button mat-raised-button class="chatter" (click)="openRoom(freelancer)" style="padding: 0;"><img
+                src="../../assets/icones/chat.svg" alt=""></button>
     </section>
     <section class="contenu">
-        <div class="container" (scroll)="fixed()">
+        <div class="container">
             <mat-tab-group [dynamicHeight]="true" [(selectedIndex)]="demo1TabIndex" mat-stretch-tabs>
                 <mat-tab label="Portfolio">
-                    <div class="folioContent" *ngFor="let folio of portfolioList | async">
-                        <div class="titre">
-                            <h2>{{folio.titre}}</h2>
-                            <p class="subTitle">A partir de {{folio.prixMinimum}}€</p>
+                    <div *ngIf="(portfolioList| async )?.length ; else folio">
+                        <div class="folioContent" *ngFor="let folio of portfolioList | async">
+                            <div class="titre">
+                                <h2>{{folio.titre}}</h2>
+                                <p class="subTitle">A partir de {{folio.prixMinimum}}€</p>
+                            </div>
+                            <app-folio-carousel [titre]="folio.titre" [photos]="folio.photos" [prix]=folio.prixMinimum>
+                            </app-folio-carousel>
                         </div>
-                        <app-folio-carousel [titre]="folio.titre" [photos]="folio.photos" [prix] = folio.prixMinimum></app-folio-carousel>
                     </div>
+                    <ng-template #folio>
+                        <div
+                            style="width: 100%;height: 200px;display: flex;justify-content: center;align-items: center;">
+                            <div>
+                                <img src="../../assets/icones/folionull.svg" alt="">
+                                <p class="subTitle">Aucun portfolio</p>
+                            </div>
+                        </div>
+                    </ng-template>
                 </mat-tab>
                 <mat-tab label="Calendrier">
-                    <app-calendrier-client [freelancer]="freelancer" [freeUid]="params" ></app-calendrier-client>
+                    <app-devis [freelancer]="freelancer" [user]="user" *ngIf="freelancer.modeRdv == 'sur devis'">
+                    </app-devis>
+                    <app-calendrier-client [freelancer]="freelancer" [freeUid]="params"
+                        *ngIf="freelancer.modeRdv == 'domicile uniquement'"></app-calendrier-client>
                 </mat-tab>
-                <mat-tab label="Chat">
-                    <button (click)="openRoom(freelancer)">chatter</button>
-                    Content 3 </mat-tab>
+                <mat-tab label="Prestations">
+                    <app-freelancer-tarif [freelancer]="freelancer"></app-freelancer-tarif>
+                </mat-tab>
             </mat-tab-group>
         </div>
     </section>

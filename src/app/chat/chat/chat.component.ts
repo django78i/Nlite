@@ -11,14 +11,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class ChatComponent implements OnInit, AfterViewInit {
 
-  userList: Observable<any[]>;
+  user: Observable<any>;
   roomList: Observable<any[]>;
 
   constructor(public userService: UserService, private router: Router, public auth: AngularFireAuth) {
     this.auth.onAuthStateChanged((user) => {
       if (user) {
-        const user$ = this.userService.getCurrentUSer(user);
-        this.roomList = this.userService.getRooms(user$);
+        this.user = this.userService.getCurrentUSer(user);
+        this.roomList = this.userService.getRooms(this.user);
       }
     })
   }
@@ -31,6 +31,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   discuss(id) {
-    this.router.navigate(['/chatCom', id]);
+    console.log(id);
+    const val ={
+      freeUid : id.freeUid,
+      clientId : id.clientUid,
+      client : id.user,
+      freelance : id.freelancer,
+      uid : id.uid,
+
+    }
+    this.router.navigate(['/chatCom'], {state : {data: {val}}});
   }
 }

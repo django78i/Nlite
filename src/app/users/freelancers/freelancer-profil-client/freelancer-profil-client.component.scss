@@ -3,8 +3,8 @@ section.profilEntete {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 50px;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  padding-top: 10px;
 }
 
 .container {
@@ -14,6 +14,16 @@ section.profilEntete {
 
 :host ::ng-deep mat-tab-group {
   width: 100%;
+}
+
+#description {
+  position: relative;
+  height: 49px;
+  overflow: hidden;
+}
+
+h3 {
+  line-height: 12px;
 }
 
 :host ::ng-deep .mat-tab-label-active {
@@ -58,16 +68,55 @@ section.profilEntete {
 .profilInfo {
   display: flex;
   flex-direction: column;
+  width: 202px;
 }
 
 .folioContent {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  // margin-top: 20px;
+  margin-top: 10px;
 }
 
 .titre {
   display: flex;
   justify-content: space-between;
+}
+
+.categList {
+  display: flex;
+  gap: 10px;
+  font-family: "Poppins", sans-serif;
+  line-height: 10px;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: blue;
+}
+
+.small {
+  font-size: 10px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.chatter {
+  border-radius: 50%;
+  height: 58px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,0 +1,25 @@
+.valider {
+  background: #3467C9;
+  color: white;
+  width: 75%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  margin-top: 10px;
+}
+
+.formulaire {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.butt{
+    display: flex;
+    justify-content: center;
+}

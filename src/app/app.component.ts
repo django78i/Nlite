@@ -1,10 +1,11 @@
-import { MessagingService } from './services/messaging.service';
+// import { MessagingService } from './services/messaging.service';
 import { Formulaire } from './models/form.model';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { FormulaireService } from './services/formulaire.service'
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
 // import './utils.rxjs.operators';
 
 @Component({
@@ -23,16 +24,16 @@ export class AppComponent {
   checkSubcription = Subscription;
 
 
-  constructor(public msg: MessagingService, private _formBuilder: FormBuilder, private formService: FormulaireService, public auth: AngularFireAuth) {
+  constructor(private _formBuilder: FormBuilder, private formService: FormulaireService, public auth: AngularFireAuth) {
 
   }
 
   ngOnInit(): void {
-    this.auth.user
-      .subscribe(user => {
-        this.msg.getPermission(user)
-        this.msg.receiveMessages()
-      })
+    // this.auth.user
+    //   .subscribe(user => {
+    //     this.msg.getPermission(user)
+    //     this.msg.receiveMessages()
+    //   })
 
   }
 

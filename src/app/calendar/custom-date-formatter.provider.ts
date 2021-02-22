@@ -15,7 +15,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
   }
 
   public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
-    return formatDate(date, 'EEE', locale);
+    return formatDate(date, 'EEE d', locale);
   }
 
 }

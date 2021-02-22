@@ -13,11 +13,21 @@
     margin-bottom: 30px;
     border-radius: 10px;
     // background: red;
-    padding: 0 10px;
-    padding-top: 10px;
+    padding: 5px 10px;
+    // padding-top: 10px;
     align-items: center;
-    box-shadow: 10px 5px 5px 0px rgba(184,175,184,1);;
+    box-shadow: 1px 5px 18px 3px #b8afb8;
     span{
         cursor: pointer;
     }
 }
+
+.imageProfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  

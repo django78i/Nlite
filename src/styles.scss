@@ -1,22 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-}
 p,
 h2,
 h3,
 h4,
 h1 {
-  font-family: "Poppins", sans-serif;
   margin: 0 !important;
 }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 h1 {
   font-size: 25px;
@@ -24,7 +16,7 @@ h1 {
 h2 {
   font-size: 16px;
 }
-h3{
+h3 {
   line-height: 12px;
 }
 p {
@@ -59,3 +51,16 @@ button:focus {
 }
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.titlezer {
+  font-weight: 700 !important;
+}

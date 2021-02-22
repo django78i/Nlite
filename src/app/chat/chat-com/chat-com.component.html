@@ -1,7 +1,19 @@
-<div id="contenu">
-    <h1>Bienvenue dans le chat</h1>
-    <p>{{(contact$|async)?.displayName}}</p>
-    <app-message-view *ngIf="messages | async as message" [message]="message" [uid]="users.uid"></app-message-view>
-    <input type="text" class="form-control" [(ngModel)]="discussion" (keyup)="discusSubject.next(discussion)">
-    <button mat-raised-button color="primary" (click)="envoyer()">Primary</button>
-</div>
+<section *ngIf="params|async as param" class="messageClass">
+    <section *ngIf="users" style="height: 100%;">
+        <div class="titre">
+            <h2>Discussion avec : </h2>
+            <h2 *ngIf="users.uid == param.data.val.freeUid" style="color: #3467c9;"> {{param.data.val.client}}</h2>
+            <h2 *ngIf="users.uid == param.data.val.clientId" style="color: #3467c9;"> {{param.data.val.freelance}}</h2>
+        </div>
+        <app-message-view *ngIf="messages | async as message"
+            [contactUid]="users.status =='freelancer? param.data.val.clientId : param.data.val.freeUid'"
+            [message]="message" [userUid]="users.uid" style="height: 80%;"></app-message-view>
+        <div class="message">
+            <input placeholder="Envoyer votre message" type="text" class="form-control" [(ngModel)]="discussion"
+                (keyup)="discusSubject.next(discussion)" (keydown.enter)="envoyer()">
+            <span class="material-icons iconSend" (click)="envoyer()">
+                send
+            </span>
+        </div>
+    </section>
+</section>

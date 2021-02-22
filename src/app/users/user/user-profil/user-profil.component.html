@@ -1,22 +1,44 @@
 <h2>Hello,</h2>
 <h2>{{(user|async)?.displayName}}</h2>
 
-<div *ngIf="rdv |async as rdvs;else noRdv">
-    <div class="rdvCard">
-        <p style="display: flex;justify-content: space-between;color: #A9ACB9;font-size: 10px;"><span>Prochain
-                rendez-vous</span><span>&rarr;</span></p>
-        <h2>{{rdvs.date}}</h2>
-        <p>Avec <span style="color: #3467C9;">{{rdvs.nom}}</span></p>
+<div *ngIf="rdv|async as rdv;else noRdv">
+    <!-- <div *ngIf="rdv |async as rdvs;else noRdv"> -->
+    <div class="rdvCard" (click)="openDialog(rdv[0])">
+        <p style="display: flex;justify-content: space-between;" class="infoTitre"><span>Prochain
+                rendez-vous :</span><span>&rarr;</span></p>
+        <h2>{{rdv[0].event.start.toDate() |date : 'short':'GMT' :locale }} </h2>
+        <p>Avec <span style="color: #3467C9;">{{rdv[0].freeName}}</span></p>
     </div>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <p class="infoTitre"> Voir tous mes rendez-vous :</p>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span class="material-icons">perm_contact_calendar</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+                <li *ngFor="let rdvs of rdv">
+                    <p>{{rdvs.event.start.toDate()|date : 'short':'GMT': locale }}
+                        <span class="infoTitre">avec </span> <span style="color: #3467C9;">{{rdvs.freeName}}</span>
+                    </p>
+                </li>
+            </ul>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
 <ng-template #noRdv>
     <p>Aucun rdv</p>
 </ng-template>
 <div>
     <div class="rdvCard">
-        <div class="msg" *ngFor="let list of msgList | async">
-            {{list.name}}
+        <div class="msg" *ngFor="let list of msgList | async" (click)="checkRoom(list)">
+            <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + list.freeImage + ')'}"></div>
+            <p>{{list.freelancer}}</p>
         </div>
-        <p style="font-size: 10px; justify-content : center; display: flex; margin-top: 10px;"> Voir tous les messages</p>
+        <p style="font-size: 10px; justify-content : center; display: flex; margin-top: 10px;" routerLink="/chat"> Voir
+            tous les messages</p>
     </div>
 </div>

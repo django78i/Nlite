@@ -29,6 +29,8 @@ export class FolioCarouselComponent implements OnInit {
 	
 	config: SwiperOptions = {
 		pagination: { el: '.swiper-pagination', clickable: true },
+		slidesPerView : 'auto',
+		spaceBetween: 10,
 		navigation: {
 			nextEl: '.swiper-button-next',
 			prevEl: '.swiper-button-prev'

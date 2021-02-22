@@ -19,6 +19,7 @@ export class NavigationComponent implements OnInit {
   isAuth: boolean = false;
 
   user: Observable<any>;
+  url : "../../../assets/icones/logo.svg";
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -44,7 +45,7 @@ export class NavigationComponent implements OnInit {
       this.isAuth = user ? true : false;
       console.log(user);
       if(user){
-        this.user = this.afs.collection<User>('users').doc(user.uid).valueChanges();
+        this.user = this.userService.user;
       }
     })
   }

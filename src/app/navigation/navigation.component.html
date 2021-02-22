@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="true">
+<!-- <mat-drawer-container class="example-container" [hasBackdrop]="true">
 	<mat-drawer #drawer>
 		<mat-nav-list>
 			<a mat-list-item routerLink="chat">Chat</a>
@@ -10,29 +10,35 @@
 			</ng-template>
 		</mat-nav-list>
 	</mat-drawer>
-	<mat-drawer-content>
-		<div class="contenu">
-			<mat-toolbar>
-				<div class="menuMobile">
-					<div class="logo">
-						<p>nLite</p>
-					</div>
-					<div class="userZone">
-						<div class="userProfil">
-							<ng-template #connect>
-								<p routerLink="login">Se connecter</p>
-							</ng-template>
-							<button mat-button [matMenuTriggerFor]="menu">
-								<p *ngIf="auth.user | async as user; else connect">{{user.displayName}} </p>
-							</button>
-							<mat-menu #menu="matMenu" >
-								<button mat-menu-item *ngIf="user | async as user" (click)="profil(user.status)">Mon Espace</button>
-								<button mat-menu-item (click)="logout()">Se déconnecter</button>
-							</mat-menu>
-						</div>
-					</div>
+	<mat-drawer-content> -->
+<!-- <div class="contenu"> -->
+<div class="menuMobile">
+	<mat-toolbar>
+		<div class="logo">
+			<!-- <p>nLite</p> -->
+			<img class="logo" src="../../../assets/icones/logo.svg" alt="">
+		</div>
+		<button mat-raised-button color="warn">Nous rejoindre</button>
+		<div class="userZone">
+			<div class="userProfil">
+				<ng-template #connect>
+					<p routerLink="login">Se connecter</p>
+				</ng-template>
+				<div *ngIf="user | async as user; else connect">
+					<button mat-button [matMenuTriggerFor]="menu">
+						{{user.displayName}}
+					</button>
+					<mat-menu #menu="matMenu">
+						<button mat-menu-item (click)=" profil(user.status)">Mon
+							Espace</button>
+						<button mat-menu-item (click)="logout()">Se déconnecter</button>
+					</mat-menu>
 				</div>
-				<div class="contentPc">
+			</div>
+		</div>
+	</mat-toolbar>
+</div>
+<!-- <div class="contentPc">
 					<span>My App</span>
 					<div class="buttonZone">
 						<div *ngIf="user | async as user" (click)="profil(user.status)" style="color: black;">
@@ -42,31 +48,34 @@
 						</button>
 						<span class="example-spacer"></span>
 					</div>
-				</div>
-			</mat-toolbar>
-			<div style="width: 100%; margin-bottom: 70px;">
-				<router-outlet></router-outlet>
-			</div>
-			<div class="bottomMobile">
-				<mat-toolbar>
-					<button mat-icon-button class="example-icon favorite-icon"
-						aria-label="Example icon-button with heart icon" routerLink="home">
-						<img src="../../../assets/icones/menuMobile/home-24px.svg" alt="">
-					</button>
-					<button mat-icon-button class="example-icon favorite-icon"
-						aria-label="Example icon-button with heart icon" routerLink="calendar" *ngIf="user| async">
-						<img src="../../../assets/icones/menuMobile/event_note-24px.svg" alt="">
-					</button>
-					<button mat-icon-button class="example-icon favorite-icon"
-						aria-label="Example icon-button with heart icon" routerLink="chat">
-						<img src="../../../assets/icones/menuMobile/sms-24px.svg" alt="">
-					</button>
-					<button mat-icon-button class="example-icon favorite-icon"
-						aria-label="Example icon-button with heart icon" routerLink="freelanceList">
-						<img src="../../../assets/icones/menuMobile/search-24px.svg" alt="">
-					</button>
-				</mat-toolbar>
-			</div>
+				</div> -->
+<div style="width: 100%; height: 86%;padding: 0 16px;">
+	<router-outlet></router-outlet>
+</div>
+<div class="bottomMobile">
+	<mat-toolbar>
+		<a routerLink="home">
+			<img src="../../../assets/icones/home-black-18dp.svg" alt="" routerLinkActive="active-link">
+		</a>
+		<div *ngIf="user| async as user">
+			<a routerLink="calendar" *ngIf="user.status == 'freelancer'; else showFav">
+				<img src="../../../assets/icones/calendar_today-black-18dp.svg" alt="" routerLinkActive="active-link">
+			</a>
+			<ng-template #showFav>
+				<a routerLink="calendar">
+					<img src="../../../assets/icones/star_rate-black-18dp.svg" alt="" routerLinkActive="active-link">
+				</a>
+			</ng-template>
 		</div>
-	</mat-drawer-content>
-</mat-drawer-container>
+		<a routerLink="chat" *ngIf="user|async">
+			<img src="../../../assets/icones/chat_bubble-black-18dp.svg" alt="" routerLinkActive="active-link">
+		</a>
+		<a routerLink="freelanceList">
+			<img src="../../../assets/icones/menuMobile/search-24px.svg" alt="" routerLinkActive="active-link">
+		</a>
+
+	</mat-toolbar>
+</div>
+<!-- </div> -->
+<!-- </mat-drawer-content>
+</mat-drawer-container> -->

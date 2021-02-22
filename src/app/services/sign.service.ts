@@ -19,9 +19,9 @@ export class SignService {
     isAuth: Observable<any>;
     userSubject = new Subject<any>();
     user: Observable<any>;
-    userRegister : any;
+    userRegister: any;
 
-    constructor(private afs: AngularFirestore, public auth: AngularFireAuth, private router : Router) {
+    constructor(private afs: AngularFirestore, public auth: AngularFireAuth, private router: Router) {
 
     }
 
@@ -41,7 +41,7 @@ export class SignService {
                         datas.user.uid,
                         datas.user.displayName,
                         datas.user.email,
-                        '', 
+                        '',
                         '',
                         'client',
                         [],
@@ -50,41 +50,49 @@ export class SignService {
                         '',
                         '',
                         '',
-                        ''
+                        '',
+                        []
                     )
                     console.log('création');
                     this.createUser(donnee);
                 })
-                
+
             }
-            this.router.navigate(['']);
+            this.router.navigate(['home']);
         })
 
     }
 
     userEmailPassword(user) {
+        // let newUser;
         this.auth.createUserWithEmailAndPassword(user.email, user.password);
-        const id = this.afs.createId();
-        const newUser = new User(
-            id,
-            user.displayName,
-            user.email,
-            user.password,
-            '',
-            'client',
-            [],
-            '',
-            '',
-            '',
-            '',
-            '',
-            ''
-        )
-        this.createUser(newUser);
+        firebase.auth().onAuthStateChanged((users) => {
+            console.log(users);
+            const newUser = {
+                displayName: 'johny',
+                email: user.email,
+                uid: users.uid,
+                status: 'client',
+                password: user.password
+            }
+            this.createUser(newUser);
+        })
+        // val.pipe(
+        //     switchMap(user =>{
+        //         // return newUser = {
+        //         //     displayName : user.displayName
+        //         // }
+        //     })
+        // )
+        // const id = this.afs.createId();
     }
 
     createUser(user) {
         this.afs.collection('users').doc(user.uid).set(Object.assign({}, user));
+    }
+
+    signUser(user){
+        this.auth.signInWithEmailAndPassword(user.email, user.password);
     }
 
     logout() {

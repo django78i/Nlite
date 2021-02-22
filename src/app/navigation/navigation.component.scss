@@ -1,32 +1,36 @@
-.contentPc{
+.contentPc {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.bottomMobile, .topMobile{
+.bottomMobile,
+.topMobile {
   display: none;
 }
-.menuMobile{
-  display: none;
+.menuMobile {
+  padding: 0 16px;
+  position: absolute;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.menuHeader{
+.menuHeader {
   height: 100px;
   background: black;
   width: 100%;
 }
 
-mat-toolbar{
+mat-toolbar {
   justify-content: space-between;
 }
 
-
-.buttonZone{
+.buttonZone {
   display: flex;
   align-items: center;
 }
-
 
 .sidenav {
   width: 200px;
@@ -44,36 +48,60 @@ mat-toolbar{
   justify-content: space-between;
 }
 
-.contenu{
+.contenu {
   width: 100%;
-  padding: 0 16px;
   overflow-x: hidden;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-@media screen and(max-width : 550px){
-.contentPc{
-  display: none;
-}
-
-.bottomMobile, .topMobile{
-  display: flex;
-  width: 100%;
-}
-
-.bottomMobile{
-  z-index: 100000;
-  position: fixed;
-  bottom: 0;
-}
-
-
-  .menuMobile{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+@media screen and(max-width : 550px) {
+  .contentPc {
+    display: none;
   }
 
+  mat-toolbar{
+    height: 7%;
+  }
+
+  .bottomMobile,
+  .topMobile {
+    display: flex;
+    width: 100%;
+  }
+
+  .bottomMobile {
+    // z-index: 100000;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .menuMobile {
+    padding: 0 16px;
+    position: absolute;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.logo {
+  height: 43px;
+  width: 50px;
+}
+
+.active-link {
+  fill: blue;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eyeball {
+  fill: red !important;
 }

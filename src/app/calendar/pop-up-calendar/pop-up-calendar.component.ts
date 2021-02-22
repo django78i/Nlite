@@ -116,15 +116,15 @@ export class PopUpCalendarComponent implements OnInit {
 		}
 		let contact;
 		const userEvent = {
-			contact: contact = {
-				userUid: this.data.userUid,
-				uid: this.data.uid,
-				adresse: formValue['adresse'],
-				ville: formValue['ville'],
-				codePostal: formValue['codePostal'],
-				nomClient: formValue['nomClient'],
-				type: formValue['type']
-			},
+			// contact: contact = {
+			userUid: this.data.userUid,
+			uid: this.data.uid,
+			adresse: formValue['adresse'],
+			ville: formValue['ville'],
+			codePostal: formValue['codePostal'],
+			nomClient: formValue['nomClient'],
+			type: formValue['type'],
+			// },
 			event: newDate
 		}
 		this.calendrierService.editRdv(userEvent);

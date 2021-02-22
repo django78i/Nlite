@@ -2,14 +2,33 @@
   width: 100%;
 }
 
+.formulaire {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  justify-content: center;
+}
+
 .scroll-container {
-  height: 500px;
+  height: 300px;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .calenderContent {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  // margin-top: 50px;
 }
 
 :host ::ng-deep .cal-week-view .cal-time-label-column {
@@ -34,5 +53,7 @@
 }
 :host ::ng-deep .cal-week-view .cal-day-headers {
   padding-left: 43px !important;
-
+  span {
+    display: none;
+  }
 }

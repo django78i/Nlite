@@ -13,6 +13,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, startWith } from 'rxjs/operators';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 
 interface Lieu {
@@ -32,19 +33,37 @@ interface Type {
 })
 export class UsersListComponent implements OnInit {
 
-	usersList: Observable<User[]>;
+	addresss: any[];
+	formattedaddress = " ";
+
+	public AddressChange(address: any) {
+
+		this.addresss = address;
+		//setting address from API to local variable 
+		this.formattedaddress = address.formatted_address
+	}
+	public handleAddressChange(address: Address) {
+		this.addresss = address.address_components;
+		this.formattedaddress = address.formatted_address
+
+	}
+	options = {
+		componentRestrictions: {
+			country: ["FR"]
+		}
+	}
+
+
+
 	curentUser: Observable<User>;
 	freelancerList: Observable<User[]>;
 	searchForm: FormGroup;
 	prixFiltre: Observable<any>;
 	prix: number;
-	lieu: Lieu[] = [
-		{ value: 'Yvelines', viewValue: 'Yvelines' },
-		{ value: 'Loire-Atlantique', viewValue: 'Loire-Atlantique' },
-	];
 	types: Type[] = [
 		{ value: 'coiffure', viewValue: 'coiffeur' },
 		{ value: 'plombier', viewValue: 'plombier' },
+		{ value: 'All', viewValue: 'Tous les freelancers' },
 	];
 
 	//skills filter
@@ -68,41 +87,43 @@ export class UsersListComponent implements OnInit {
 				this.curentUser = this.userService.getCurrentUSer(user)
 			}
 		})
-		this.req = history.state.data ? history.state.data : this.formulaireService.req ? this.formulaireService.req : '';
-		this.req ? this.formulaireService.filterSubject.next(this.req) : this.formulaireService.filterSubject.next({ location: 'All', type: 'All' });
+		this.req = history.state.data ? history.state.data : { location: 'All', type: 'All', allFreelancer: true };
+		console.log(this.req);
+		this.formulaireService.filterSubject.next(this.req);
 		this.freelancerList = this.formulaireService.freelancerList;
 		this.initForm();
-		//filterSkills
-		this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-			startWith(<string>null),
-			map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
-
 	}
 
 	initForm() {
 		this.searchForm = this.formBuilder.group({
-			location: [''],
+			location: '',
 			prix: [''],
-			type: ['']
+			type: ''
 		});
-		this.searchForm.patchValue(this.req);
+		console.log(this.req);
+		this.req.location = this.req.location == 'All' ? 'Toute la France' : this.req.location;
+		// this.req.type = this.req.type == 'All' ? this.req.location : 'Toute la France';
+		this.req ? this.searchForm.patchValue(this.req) : '';
 	}
 
 	appear() {
 		const value = this.searchForm.value;
+		let val = this.addresss.find(ad => ad.types.find(v => v === 'administrative_area_level_2' ? true : ''));
 		const newForm = {
-			location: value['location'],
-			prix: value['prix'],
-			type: value['type']
+			req: {
+				location: val.short_name,
+				prix: value['prix'],
+				type: value['type']
+			}
 		}
 		console.log(newForm);
 		this.formulaireService.filterSubject.next(newForm);
 	}
 
-	openRoom(contactUid) {
-		this.userService.openRoom(contactUid);
-		this.router.navigate(['chatCom', contactUid.uid]);
-	}
+	// openRoom(contactUid) {
+	// 	this.userService.openRoom(contactUid);
+	// 	this.router.navigate(['chatCom', contactUid.uid]);
+	// }
 
 	profileNavigate(contactUid) {
 		this.router.navigate(['freelanceClientProfil', contactUid.uid])
@@ -110,41 +131,41 @@ export class UsersListComponent implements OnInit {
 
 
 	//skills Formulaire
-	add(event: MatChipInputEvent): void {
-		const input = event.input;
-		const value = event.value;
+	// add(event: MatChipInputEvent): void {
+	// 	const input = event.input;
+	// 	const value = event.value;
 
-		// Add our fruit
-		if ((value || '').trim()) {
-			this.fruits.push(value.trim());
-		}
+	// 	// Add our fruit
+	// 	if ((value || '').trim()) {
+	// 		this.fruits.push(value.trim());
+	// 	}
 
-		// Reset the input value
-		if (input) {
-			input.value = '';
-		}
+	// 	// Reset the input value
+	// 	if (input) {
+	// 		input.value = '';
+	// 	}
 
-		this.fruitCtrl.setValue(null);
-	}
+	// 	this.fruitCtrl.setValue(null);
+	// }
 
-	remove(fruit: string): void {
-		const index = this.fruits.indexOf(fruit);
+	// remove(fruit: string): void {
+	// 	const index = this.fruits.indexOf(fruit);
 
-		if (index >= 0) {
-			this.fruits.splice(index, 1);
-		}
-	}
+	// 	if (index >= 0) {
+	// 		this.fruits.splice(index, 1);
+	// 	}
+	// }
 
-	selected(event: MatAutocompleteSelectedEvent): void {
-		this.fruits.push(event.option.viewValue);
-		this.fruitInput.nativeElement.value = '';
-		this.fruitCtrl.setValue(null);
-	}
+	// selected(event: MatAutocompleteSelectedEvent): void {
+	// 	this.fruits.push(event.option.viewValue);
+	// 	this.fruitInput.nativeElement.value = '';
+	// 	this.fruitCtrl.setValue(null);
+	// }
 
-	private _filter(value: string): string[] {
-		const filterValue = value.toLowerCase();
+	// private _filter(value: string): string[] {
+	// 	const filterValue = value.toLowerCase();
 
-		return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
-	}
+	// 	return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+	// }
 
 }

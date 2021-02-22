@@ -1,11 +1,10 @@
 import { Calendrier } from './../models/calendar.model';
-import { CalendarEvent } from 'angular-calendar';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { first, map, tap, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +12,7 @@ import { first, map, tap, switchMap } from 'rxjs/operators';
 export class CalendrierService {
     rdvSubject: Subject<any[]>;
     lastrdv: Observable<any>;
-    rdvList :Subject<any>;
+    rdvList: Subject<any>;
 
 
     constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {
@@ -24,37 +23,43 @@ export class CalendrierService {
 
     createRdv(event) {
         console.log(event);
-        this.afs.collection('users').doc(event.contact.userUid).collection('rdv').doc(event.contact.uid).set(Object.assign({}, event));
+        this.afs.collection('rdv').doc(event.event.id).set(Object.assign({}, event));
+    }
+
+    createdevis(devis) {
+        console.log(devis);
+        let id = this.afs.createId();
+        this.afs.collection('devis').doc(id).set(Object.assign({}, devis));
     }
 
 
     createRdvClient(event) {
         console.log(event);
-        this.afs.collection('users').doc(event.contact.userUid).collection('rdv').doc(event.contact.uid).set(Object.assign({}, event));
-        this.afs.collection('users').doc(event.contact.freeUid).collection('rdv').doc(event.contact.uid).set(Object.assign({}, event));
+        this.afs.collection('rdv').doc(event.event.id).set(Object.assign({}, event));
     }
 
     getRdv(user): Observable<Calendrier[]> {
         console.log('ici');
-        console.log(user.uid);
-        return this.afs.collection('users').doc(user.uid).collection<Calendrier>('rdv').valueChanges();
+        console.log(user);
+        return this.afs.collection<Calendrier>('rdv', ref => ref.where('freeUid', '==', user.uid)).valueChanges();
     }
 
     getLastRdv(user): Observable<any> {
-        this.rdvList = new BehaviorSubject(null);
         console.log('last:', user);
-        this.rdvList.next(user);
-        this.lastrdv = this.rdvList.pipe(
-            switchMap(user => this.afs.collection('users').doc(user).collection('rdv', ref => ref.orderBy('event.start')).valueChanges()),
-            map(rdv=> rdv.splice(0, rdv.length-1)),
-            tap(rdv => console.log(rdv))
-        )
-        return this.lastrdv;
+        return this.afs.collection('rdv', ref => ref.where('userUid', '==', user)).valueChanges()
+            .pipe(map(res => _.sortBy(res, 'event.start', 'desc')),
+        );
     }
 
     deleteRdv(user, rdv) {
         console.log(user, rdv);
         this.afs.collection('users').doc(user.uid).collection('rdv').doc(rdv.id).delete();
+    }
+
+
+    delete(rdv) {
+        console.log(rdv);
+        this.afs.collection('rdv').doc(rdv.rdv.event.id).delete();
     }
 
     editRdv(event) {

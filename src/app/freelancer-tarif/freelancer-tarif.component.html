@@ -1,0 +1,19 @@
+<p>Tarifs de <span style="color: #3467C9">{{freelancer.displayName}}</span></p>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let section of freelancer.prestation">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>{{section.titre}}</h2>
+            </mat-panel-title>
+            <mat-panel-description>
+                <!-- This is a summary of the content -->
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ul>
+            <li *ngFor="let sousSect of section.sousSection">
+                <p>{{sousSect.nom}} : {{sousSect.prix}}€</p>
+                <p class="subTitle">Créneau de {{sousSect.valeur}} {{sousSect.unite}}</p>
+            </li>
+        </ul>
+    </mat-expansion-panel>
+</mat-accordion>

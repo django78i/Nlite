@@ -1,7 +1,21 @@
-// .discussionContent{
-//     width: 500px;
-//     height: 600px;
-//     overflow-y: auto;
-//     display: flex;
-//     flex-direction: column;
-// }
+.messageClass {
+  padding-top: 10px;
+  height: 100%;
+}
+
+.message {
+  position: relative;
+  margin-top: 10px;
+}
+
+.iconSend {
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+}
+
+.titre{
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}

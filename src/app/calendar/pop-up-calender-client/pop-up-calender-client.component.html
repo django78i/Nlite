@@ -1,72 +1,31 @@
-<span class="material-icons sortie" (click)="onNoClick()">cancel</span>
-<form [formGroup]="dateForm" (ngSubmit)="sendMofication()">
-    <h1>Prendre rendez-vous</h1>
-    <p>le : {{jourDebut}}  à {{this.heureFin}}</p>
-    <div class="form-group">
-        <!-- Heures RDV -->
-        <!-- <div class="haut">
-            <div class="hautGauche">
-                <p>début</p>
-                <div class="debut">
-                    <mat-form-field class="date" appearance="fill">
-                        <mat-label>Choisissez une date</mat-label>
-                        <input matInput [matDatepicker]="picker" class="form-control" formControlName="jourDebut">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <div class="toggle-example heures">
-                        <input [ngxTimepicker]="toggleTimepicker" class="form-control" formControlName="heureDebut"
-                            [disableClick]="true" readonly [format]="24">
-                        <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
-                        <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
-                    </div>
-                </div>
+<div class="sec">
+    <span class="material-icons sortie" (click)="onNoClick()">cancel</span>
+    <form [formGroup]="dateForm" (ngSubmit)="sendMofication()">
+        <h1>Prendre rendez-vous</h1>
+        <p>le : {{jourDebut}} à {{this.heureFin}}</p>
+        <div class="form-group">
+            <div class="bas">
+                <mat-form-field style="width: 45%; margin-right: 10%;" appearance="legacy">
+                    <mat-label>Votre nom</mat-label>
+                    <input matInput placeholder="Entrez un titre" class="form-control" formControlName="nomClient">
+                </mat-form-field>
+                <mat-form-field style="width: 45%;" appearance="legacy">
+                    <mat-label>Votre prénom</mat-label>
+                    <input matInput placeholder="Entrez un titre" class="form-control" formControlName="prenomClient">
+                </mat-form-field>
+                <mat-form-field style="width: 45%;" appearance="legacy">
+                    <mat-label>Numéro de téléphone</mat-label>
+                    <input matInput placeholder="Entrez un titre" class="form-control" formControlName="telClient">
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+                <mat-form-field style="width: 100%" appearance="legacy">
+                    <mat-label>Commentaire</mat-label>
+                    <textarea matInput placeholder="Entrez un titre" class="form-control"
+                        formControlName="commentaire"></textarea>
+                </mat-form-field>
             </div>
-            <div class="hautDroit">
-                <p>fin</p>
-                <div class="fin">
-                    <mat-form-field class="date" appearance="fill">
-                        <mat-label>Choisissez une date</mat-label>
-                        <input matInput [matDatepicker]="picker1" class="form-control" formControlName="jourFin">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
-                    <div class="toggle-example heures">
-                        <input [ngxTimepicker]="toggleTimepicker1" class="form-control" formControlName="heureFin"
-                            [disableClick]="true" [format]="24" readonly>
-                        <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
-                        <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <div class="bas">
-            <mat-form-field style="width: 45%; margin-right: 10%;" appearance="legacy">
-                <mat-label>Votre nom</mat-label>
-                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="nomClient">
-            </mat-form-field>
-            <mat-form-field style="width: 45%;" appearance="legacy">
-                <mat-label>Votre prénom</mat-label>
-                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="prenomClient">
-            </mat-form-field>
-            <mat-form-field style="width: 100%;" appearance="legacy">
-                <mat-label>Adresse</mat-label>
-                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="adresse">
-            </mat-form-field>
-            <mat-form-field style="width: 50%; margin-right: 10%;" appearance="legacy">
-                <mat-label>Ville</mat-label>
-                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="ville">
-            </mat-form-field>
-            <mat-form-field style="width: 40%;" appearance="legacy">
-                <mat-label>Code Postale</mat-label>
-                <input matInput placeholder="Entrez un titre" class="form-control" formControlName="codePostal">
-            </mat-form-field>
-            <mat-form-field style="width: 100%" appearance="legacy">
-                <mat-label>Commentaire</mat-label>
-                <textarea matInput placeholder="Entrez un titre" class="form-control" formControlName="commentaire"></textarea>
-            </mat-form-field>
         </div>
-    </div>
-    <button mat-raised-button class="valider">Valider</button>
-</form>
-<button mat-raised-button class="valider false" (click)="onNoClick()">Annuler</button>
+        <button mat-raised-button class="valider" [disabled]="dateForm.invalid">Valider</button>
+    </form>
+    <button mat-raised-button class="valider false" (click)="onNoClick()">Annuler</button>
+</div>

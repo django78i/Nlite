@@ -1,5 +1,8 @@
 <div #scrollMe id="discussionContent">
-    <p class="textDiscuss" style="align-self: flex-start;" *ngFor="let message of message">
-    <!-- <p class="textDiscuss" [ngStyle]="{'align-self': position(message.senderId)}" *ngFor="let message of message"> -->
-        {{message.contenu}}</p>
+    <div class="msg" *ngFor="let msg of message"
+        [ngStyle]="{'align-self' :position(msg.senderId),'background':back(msg.senderId) }">
+        <p [style.color]="color(msg.senderId)"> {{msg.contenu}}</p>
+        <p [style.color]="color(msg.senderId)" [style.alignSelf]="flex-end"
+            style="font-size: 9px;color: rgb(111, 111, 111);">{{msg.timestamp|date : 'short':'GMT' }}</p>
+    </div>
 </div>

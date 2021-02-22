@@ -27,6 +27,8 @@ export class PopEditFoliosComponent implements OnInit {
 	url: any;
 	config: SwiperOptions = {
 		pagination: { el: '.swiper-pagination', clickable: true },
+		slidesPerView : 'auto',
+		spaceBetween: 10,
 		navigation: {
 			nextEl: '.swiper-button-next',
 			prevEl: '.swiper-button-prev'
@@ -122,7 +124,9 @@ export class PopEditFoliosComponent implements OnInit {
 			description: formVal.description
 		}
 		console.log(folio);
-		this.portfoflioService.updateFolio(this.data.uid, this.data.folioUid, folio)
+		this.portfoflioService.updateFolio(this.data.uid, this.data.folioUid, folio);
+		this.dialogRef.close();
+
 	}
 
 

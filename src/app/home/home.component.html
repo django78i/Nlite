@@ -1,25 +1,30 @@
 <div class="titleHeader">
-    <h1>Rechercher</h1>
+    <h1 class="titlezer">Rechercher</h1>
     <h2 style="color: #A9ACB9;">Un freelancer près de chez vous</h2>
 </div>
 <div class="form">
-    <form [formGroup]="searchForm" (ngSubmit)="searchResult()">
+    <form [formGroup]="searchForm" (ngSubmit)="searchResult()"
+        style="display: flex;flex-direction: column;align-items: center;">
         <mat-form-field>
             <mat-label>Que cherchez-vous ?</mat-label>
-            <mat-select name="freelancer" class="form-control" formControlName="freelanceType">
+            <mat-select name="freelancer" class="form-control" formControlName="freelanceType" [disabled]="checked">
                 <mat-option *ngFor="let type of types" [value]="type.value">
                     {{type.viewValue}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Où ?</mat-label>
-            <mat-select name="location" class="form-control" formControlName="location">
-                <mat-option *ngFor="let location of locations" [value]="location.value">
-                    {{location.viewValue}}
-                </mat-option>
-            </mat-select>
+            <mat-label>Où</mat-label>
+            <input ngx-google-places-autocomplete [options]='options' matInput class="form-control" [disabled]="checked"
+                #placesRef="ngx-places" formControlName="location" (onAddressChange)="handleAddressChange($event)" />
         </mat-form-field>
-        <button mat-raised-button class="valider">Rechercher</button>
+        <mat-checkbox formControlName="checked" class="checkBoxes" [(ngModel)]="checked">Tous les freelancers</mat-checkbox>
+        <button mat-raised-button class="valider"><span class="material-icons"
+                style="color: white;margin-right: 10px;font-size: 36px;">search</span>Rechercher</button>
     </form>
 </div>
+<section style="margin-top: 50px;display: flex;flex-direction: column;align-items: center;"
+    *ngIf="this.userService.isAuth === false">
+    <button mat-raised-button class="mail" routerLink="/mail"> Connexion par mail</button>
+    <app-sign-in-up></app-sign-in-up>
+</section>

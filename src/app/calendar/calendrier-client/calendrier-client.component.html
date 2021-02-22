@@ -1,3 +1,29 @@
+<h3>Veuillez choisir votre prestation :</h3>
+<div class="formulaire">
+    <mat-form-field style="width: 40%;">
+        <mat-label>services</mat-label>
+        <mat-select name="services" #t (selectionChange)="callType(t.value)" class="form-control"
+            [(ngModel)]="selectedValue">
+            <mat-option *ngFor="let service of services" [value]="service.value">
+                {{service.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width: 40%;">
+        <mat-label>sous</mat-label>
+        <mat-select name="unite" class="form-control" [(ngModel)]="selectedsousSect" [disabled]="stop" #v
+            (selectionChange)="prest(v.value)">
+            <mat-option *ngFor="let sousSelec of sousServices" [value]="sousSelec.value">
+                {{sousSelec.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="info">
+    <p class="detail">{{selectedValue}}<span class="material-icons" *ngIf="selectedValue">navigate_next</span>
+        {{selectedsousSect}} </p>
+    <p *ngIf="valu">Vous avez un créneau de : {{valu.duree}} {{valu.unite}}</p>
+</div>
 <section class="calenderContent">
     <div class="calendrier">
         <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">

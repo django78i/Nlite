@@ -20,10 +20,16 @@
     flex: 1;
 }
 
+
+.sec{
+  position: relative;
+}
+
+
 .sortie {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 0px;
+  top: 0px;
   z-index: 100;
   color: rgba(128, 120, 120, 0.344);
 }
