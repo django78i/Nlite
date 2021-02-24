@@ -1,13 +1,4 @@
-import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { SignService } from '../services/sign.service';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { User } from '../models/user.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -16,48 +7,14 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  isAuth: boolean = false;
 
-  user: Observable<any>;
-  url : "../../../assets/icones/logo.svg";
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
-  constructor(private router: Router, private afs: AngularFirestore, private breakpointObserver: BreakpointObserver, public auth: AngularFireAuth, public signService: SignService, public userService: UserService) {
+  constructor() {
   }
 
 
   ngOnInit(): void {
-    this.state();
-    // this.user = this.userService.user;
   }
 
-  logout() {
-    this.signService.logout();
-  }
 
-  state() {
-    this.auth.onAuthStateChanged((user) => {
-      this.isAuth = user ? true : false;
-      console.log(user);
-      if(user){
-        this.user = this.userService.user;
-      }
-    })
-  }
-
-  profil(user){
-    console.log(user);
-    user === 'freelancer' ?  this.router.navigate(['freelancerProfil']) : this.router.navigate(['clientProfil']) 
-  }
-
-  home() {
-    console.log("ici");
-    this.router.navigate[' '];
-  }
 
 }

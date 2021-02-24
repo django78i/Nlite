@@ -1,5 +1,4 @@
 section.profilEntete {
-  // width: 100vw;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -14,6 +13,7 @@ section.profilEntete {
 
 :host ::ng-deep mat-tab-group {
   width: 100%;
+  margin-top: 30px;
 }
 
 #description {
@@ -42,18 +42,7 @@ h3 {
 
 :host ::ng-deep .mat-tab-header {
   border-bottom: none !important;
-  position: absolute;
-  z-index: 1000;
-  width: 90%;
-
-  .fix-search & {
-    position: fixed;
-    top: 0px;
-  }
-}
-
-:host ::ng-deep .mat-tab-body-wrapper {
-  margin-top: 54px;
+  width: 100%;
 }
 
 .imageProfil {

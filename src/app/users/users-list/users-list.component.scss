@@ -9,13 +9,14 @@
 
 mat-accordion {
   position: absolute;
-  bottom: 5px;
+  bottom: 110px;
   left: 62px;
 }
 
 .container {
   height: 100%;
   position: relative;
+  padding-top: 30px !important;
 }
 
 .dot {

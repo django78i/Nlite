@@ -38,6 +38,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       client : id.user,
       freelance : id.freelancer,
       uid : id.uid,
+      photo : id.freePhoto
 
     }
     this.router.navigate(['/chatCom'], {state : {data: {val}}});

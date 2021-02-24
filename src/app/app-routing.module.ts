@@ -10,10 +10,12 @@ import { FreelancerProfilComponent } from './users/freelancers/freelancer-profil
 import { UserProfilComponent } from './users/user/user-profil/user-profil.component';
 import { FreelancerProfilClientComponent } from './users/freelancers/freelancer-profil-client/freelancer-profil-client.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const routes: Routes = [
   { path: 'login', component: SignInUpComponent },
   { path: 'mail', component: SignUpComponent },
+  { path: 'nav', component: NavigationComponent },
   { path: 'freelanceList', component: UsersListComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'chatCom', component: ChatComComponent },

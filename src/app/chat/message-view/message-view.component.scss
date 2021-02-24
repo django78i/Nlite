@@ -1,5 +1,5 @@
 #discussionContent{
-    height: 85%;
+    height: 80%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
 }
 
 .msg{
-    padding: 5px;
+    padding: 5px 16px !important;
     border-radius: 5px;
     justify-content: flex-start;
     display: flex;

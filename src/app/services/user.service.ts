@@ -38,14 +38,14 @@ export class UserService {
     constructor(private afs: AngularFirestore, public auth: AngularFireAuth, private router: Router) {
 
         this.contactSubject = new BehaviorSubject(null);
-        this.userSubject = new BehaviorSubject(null);
+        // this.userSubject = new BehaviorSubject(null);
         this.messageSubject = new BehaviorSubject(null);
 
         // recupération user en cours
         this.auth.onAuthStateChanged((user) => {
             if (user) {
                 this.isAuth = true;
-                this.getCurrentUSer(user)
+                this.getCurrentUSer(user);
             }
         })
 
@@ -53,6 +53,7 @@ export class UserService {
 
     getCurrentUSer(user): Observable<User> {
         console.log('get user :', user);
+        this.userSubject = new BehaviorSubject(null);
         this.userSubject.next(user);
         this.user = this.userSubject
             .pipe(

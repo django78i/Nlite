@@ -64,7 +64,7 @@ export interface DialogData {
 	creneau: any,
 	validationAuto: any,
 	freeName: any,
-	adresse : any
+	adresse: any
 }
 type CalendarPeriod = 'day' | 'week' | 'month';
 
@@ -267,31 +267,31 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 
 	viewChanged() {
 		this.cdr.detectChanges();
-		this.scrollToCurrentView();
+		// this.scrollToCurrentView();
 	}
 
 
 
 	ngAfterViewInit() {
-		if (this.events$) {
-			this.scrollToCurrentView();
-		}
+		// if (this.events$) {
+		// 	this.scrollToCurrentView();
+		// }
 	}
 
 
 
-	private scrollToCurrentView() {
-		if (this.view === CalendarView.Week || CalendarView.Day) {
-			// each hour is 60px high, so to get the pixels to scroll it's just the amount of minutes since midnight
-			const minutesSinceStartOfDay = differenceInMinutes(
-				startOfHour(new Date()),
-				startOfDay(new Date())
-			);
-			const headerHeight = this.view === CalendarView.Week ? 60 : 0;
-			this.scrollContainer.nativeElement.scrollTop =
-				minutesSinceStartOfDay + headerHeight;
-		}
-	}
+	// private scrollToCurrentView() {
+	// 	if (this.view === CalendarView.Week || CalendarView.Day) {
+	// 		// each hour is 60px high, so to get the pixels to scroll it's just the amount of minutes since midnight
+	// 		const minutesSinceStartOfDay = differenceInMinutes(
+	// 			startOfHour(new Date()),
+	// 			startOfDay(new Date())
+	// 		);
+	// 		const headerHeight = this.view === CalendarView.Week ? 60 : 0;
+	// 		this.scrollContainer.nativeElement.scrollTop =
+	// 			minutesSinceStartOfDay + headerHeight;
+	// 	}
+	// }
 
 	setView(view: CalendarView) {
 		this.view = view;
@@ -306,6 +306,8 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 	opensnack(message) {
 		this._snackBar.open(message, '', {
 			duration: 2000,
+			horizontalPosition: 'right',
+			verticalPosition: 'top'
 		});
 	}
 
@@ -362,7 +364,7 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 					event: event,
 					creneau: cren,
 					validationAuto: this.freelancer.validationAuto,
-					adresse : this.freelancer.adresse
+					adresse: this.freelancer.adresse
 				}
 			});
 		}

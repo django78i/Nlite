@@ -67,17 +67,17 @@ export class UsersListComponent implements OnInit {
 	];
 
 	//skills filter
-	visible = true;
-	selectable = true;
-	removable = true;
-	separatorKeysCodes: number[] = [ENTER, COMMA];
-	fruitCtrl = new FormControl();
-	filteredFruits: Observable<string[]>;
+	// visible = true;
+	// selectable = true;
+	// removable = true;
+	// separatorKeysCodes: number[] = [ENTER, COMMA];
+	// fruitCtrl = new FormControl();
+	// filteredFruits: Observable<string[]>;
 	req: any;
-	fruits: string[] = ['toutes'];
-	allFruits: string[] = ['toutes', 'dreads', 'afro', 'degradé', 'femme', 'beauté'];
-	@ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-	@ViewChild('auto') matAutocomplete: MatAutocomplete;
+	// fruits: string[] = ['toutes'];
+	// allFruits: string[] = ['toutes', 'dreads', 'afro', 'degradé', 'femme', 'beauté'];
+	// @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+	// @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
 	constructor(private route: ActivatedRoute, private formulaireService: FormulaireService, private formBuilder: FormBuilder, private userService: UserService, private auth: AngularFireAuth, private router: Router, private forulaireService: FormulaireService) { }
 
@@ -102,7 +102,6 @@ export class UsersListComponent implements OnInit {
 		});
 		console.log(this.req);
 		this.req.location = this.req.location == 'All' ? 'Toute la France' : this.req.location;
-		// this.req.type = this.req.type == 'All' ? this.req.location : 'Toute la France';
 		this.req ? this.searchForm.patchValue(this.req) : '';
 	}
 
@@ -120,52 +119,9 @@ export class UsersListComponent implements OnInit {
 		this.formulaireService.filterSubject.next(newForm);
 	}
 
-	// openRoom(contactUid) {
-	// 	this.userService.openRoom(contactUid);
-	// 	this.router.navigate(['chatCom', contactUid.uid]);
-	// }
 
 	profileNavigate(contactUid) {
 		this.router.navigate(['freelanceClientProfil', contactUid.uid])
 	}
-
-
-	//skills Formulaire
-	// add(event: MatChipInputEvent): void {
-	// 	const input = event.input;
-	// 	const value = event.value;
-
-	// 	// Add our fruit
-	// 	if ((value || '').trim()) {
-	// 		this.fruits.push(value.trim());
-	// 	}
-
-	// 	// Reset the input value
-	// 	if (input) {
-	// 		input.value = '';
-	// 	}
-
-	// 	this.fruitCtrl.setValue(null);
-	// }
-
-	// remove(fruit: string): void {
-	// 	const index = this.fruits.indexOf(fruit);
-
-	// 	if (index >= 0) {
-	// 		this.fruits.splice(index, 1);
-	// 	}
-	// }
-
-	// selected(event: MatAutocompleteSelectedEvent): void {
-	// 	this.fruits.push(event.option.viewValue);
-	// 	this.fruitInput.nativeElement.value = '';
-	// 	this.fruitCtrl.setValue(null);
-	// }
-
-	// private _filter(value: string): string[] {
-	// 	const filterValue = value.toLowerCase();
-
-	// 	return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
-	// }
 
 }

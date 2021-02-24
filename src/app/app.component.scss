@@ -1,0 +1,42 @@
+.logo {
+  height: 43px;
+  width: 50px;
+}
+
+.active-link {
+  fill: rgb(0, 0, 0);
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-toolbar {
+  padding: 0 16px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+mat-toolbar.menuTop {
+  top: 0;
+  display: flex;
+  height: 55px;
+}
+
+mat-toolbar.bottom {
+  position: sticky;
+  //   position: absolute;
+  bottom: 0;
+  z-index: 10000;
+  height: 40px;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: auto;
+}

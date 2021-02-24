@@ -7,7 +7,7 @@ import * as moment from 'moment';
 	templateUrl: './message-view.component.html',
 	styleUrls: ['./message-view.component.scss']
 })
-export class MessageViewComponent implements AfterViewInit, AfterViewChecked {
+export class MessageViewComponent implements AfterViewInit {
 
 	@ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -51,16 +51,16 @@ export class MessageViewComponent implements AfterViewInit, AfterViewChecked {
 		} else return pos = '#FFFFFF';
 	}
 
-	ngAfterViewChecked() {
-		this.scrollToBottom();
-	}
+	// ngAfterViewChecked() {
+	// 	this.scrollToBottom();
+	// }
 
 
-	scrollToBottom(): void {
-		try {
-			this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-		} catch (err) { }
-	}
+	// scrollToBottom(): void {
+	// 	try {
+	// 		this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+	// 	} catch (err) { }
+	// }
 
 
 }
