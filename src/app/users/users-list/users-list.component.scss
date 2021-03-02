@@ -1,16 +1,27 @@
-.profilEntete {
-  // width: 100vw;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  padding: 10px 10px;
+// @import "../../../styles.scss";
+.miniTitre {
+  font-weight: 500;
+}
+
+.primaire{
+  color : #5337f7;
 }
 
 mat-accordion {
   position: absolute;
-  bottom: 110px;
+  bottom: 0px;
   left: 62px;
+}
+
+mat-expansion-panel {
+  border-top-right-radius: 32px !important;
+  border-top-left-radius: 30px !important;
+  border-bottom-right-radius: 33px !important;
+  border-bottom-left-radius: 33px !important;
+}
+
+mat-expansion-panel-header {
+  background: black !important;
 }
 
 .container {
@@ -19,22 +30,10 @@ mat-accordion {
   padding-top: 30px !important;
 }
 
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: blue;
-}
-
-.categories {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
 input {
   border-radius: 40px;
   box-shadow: 0 14px 12px 4px rgba(0, 0, 0, 0.12);
+  background: white;
 }
 
 mat-label {
@@ -48,48 +47,13 @@ mat-label {
 }
 
 mat-select {
-  // height: 85px;
   border: none;
   border-radius: 40px;
   box-shadow: -5px 29px 20px -8px rgb(0 0 0 / 12%);
 }
 
-.imageProfil {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
-.profilInfo {
-  display: flex;
-  flex-direction: column;
-}
 
-.listItem {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 15px;
-}
-
-.titre {
-  color: black;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.categList {
-  display: flex;
-  gap: 10px;
-  font-family: "Poppins", sans-serif;
-  line-height: 10px;
-}
-
-.small {
-  font-size: 10px;
-}
 ul {
   list-style-type: none;
   margin-bottom: -2px !important;
@@ -106,6 +70,7 @@ ul {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  color: white;
 }
 
 .searchButton {
@@ -115,12 +80,12 @@ ul {
   justify-content: center;
 }
 
-.material-icons.iconFiltre {
-  padding: 10px;
-  color: white;
-  background: black;
-  border-radius: 10px;
-  margin-top: 30px;
+.iconFiltre {
+  padding: 10px !important;
+  color: white !important;
+  background: #5337f7;
+  border-radius: 10px !important;
+  margin-top: 30px !important;
 }
 
 form {
@@ -130,7 +95,6 @@ form {
 mat-form-field {
   width: 100%;
 }
-
 
 .form-control {
   padding: 31px 2.75rem;
@@ -146,4 +110,11 @@ mat-form-field {
 
 .slider {
   padding: 10px 0.75rem;
+}
+
+.content{
+  height: 330px;
+  width: 100%;
+  overflow-y: auto;
+
 }

@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent {
 
 
 	isAuth: boolean = false;
-
+	userFormat: any;
 	user: Observable<any>;
 	url: "../../../assets/icones/logo.svg";
 
@@ -28,7 +28,13 @@ export class AppComponent {
 			this.isAuth = user ? true : false;
 			console.log(user);
 			if (user) {
-				this.user = this.userService.user;
+				this.user = this.userService.user.pipe(
+					tap(user => {
+						const spl = user.displayName.split(" ").map(n => n[0]).join("");
+						this.userFormat = spl;
+						console.log(spl);
+					})
+				);
 			}
 		})
 

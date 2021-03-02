@@ -1,15 +1,17 @@
 <div class="container">
-    <h1 class="titlezer">Rechercher</h1>
+    <h1 class="titrePrincipal">Résultats</h1>
+    <h2 *ngIf="req" class="sousTitrePrincipal">pour <span class="primaire">{{titre.type}}</span>, <span
+            class="primaire">{{titre.lieu}}</span></h2>
     <div class="search">
         <form [formGroup]="searchForm">
             <div class="form-group">
                 <mat-form-field>
                     <mat-label>Où cherchez-vous ?</mat-label>
-                    <input ngx-google-places-autocomplete [options]='options' matInput class="form-control"
+                    <input ngx-google-places-autocomplete [options]='options' matInput class="form-control formulaire"
                         #placesRef="ngx-places" formControlName="location"
                         (onAddressChange)="handleAddressChange($event)" />
                 </mat-form-field>
-
+                <p *ngIf="countObser">Résultats <span style="color: #a9acb9;">({{countObser}})</span></p>
                 <mat-accordion>
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
@@ -43,21 +45,23 @@
             <span class="material-icons iconFiltre" (click)="appear()">search</span>
         </div>
     </div>
-    <div class="listItem" *ngFor="let freelancer of freelancerList | async">
-        <div class="profilEntete" (click)="profileNavigate(freelancer)">
-            <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
-            <div class="profilInfo">
-                <p class="subTitle titre">{{freelancer.displayName}}
-                    <span class="material-icons" style="color: #3467C9;font-size: 17px;">verified</span>
-                </p>
-                <ul class="categList">
-                    <li *ngFor="let categorie of freelancer.categories" class="categories ">
-                        <div class="dot"></div>
-                        <p class="subTitle small">{{categorie}}</p>
-                    </li>
-                </ul>
-                <p class="subTitle small">{{freelancer.adresse.ville | uppercase}}({{freelancer.adresse.codePostal}})
-                </p>
+    <div class="content">
+        <div class="listItem" *ngFor="let freelancer of freelancerList | async">
+            <div class="profilEntete" (click)="profileNavigate(freelancer)">
+                <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
+                <div class="profilInfo">
+                    <h3 class="titreSecondaire">{{freelancer.displayName}}
+                        <span class="material-icons" style="color: #3467C9;font-size: 17px;">verified</span>
+                    </h3>
+                    <ul class="categList">
+                        <li *ngFor="let categorie of freelancer.categories" class="categories ">
+                            <div class="dot"></div>
+                            <p class="subTitle">{{categorie}}</p>
+                        </li>
+                    </ul>
+                    <p class="subTitle">{{freelancer.adresse.ville | uppercase}}({{freelancer.adresse.codePostal}})
+                    </p>
+                </div>
             </div>
         </div>
     </div>

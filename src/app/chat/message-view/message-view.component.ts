@@ -32,23 +32,29 @@ export class MessageViewComponent implements AfterViewInit {
 	position(message) {
 		let pos;
 		if (message == this.userUid) {
-			return pos = 'flex-start';
-		} else return pos = 'flex-end';
+			return pos = 'flex-end';
+		} else return pos = 'flex-start';
 	}
 
+	content(message) {
+		let pos;
+		if (message == this.userUid) {
+			return pos = 'flex-end';
+		} else return pos = 'flex-start';
+	}
 
 	back(message) {
 		let pos;
 		if (message == this.userUid) {
-			return pos = '#FFFFFF';
-		} else return pos = '#3467C9';
+			return pos = '#3467C9';
+		} else return pos = '#FFFFFF';
 	}
 
-	color(message){
+	color(message) {
 		let pos;
 		if (message == this.userUid) {
-			return pos = '#0E0E0F';
-		} else return pos = '#FFFFFF';
+			return pos = '#FFFFFF';
+		} else return pos = '#0E0E0F';
 	}
 
 	// ngAfterViewChecked() {

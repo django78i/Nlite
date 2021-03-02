@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
+import * as moment from 'moment';
+
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +16,7 @@ export class CalendrierService {
     lastrdv: Observable<any>;
     rdvList: Subject<any>;
 
+    jour = new Date()
 
     constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {
         this.rdvSubject = new Subject;
@@ -45,10 +48,12 @@ export class CalendrierService {
     }
 
     getLastRdv(user): Observable<any> {
-        console.log('last:', user);
+        console.log('last:', this.jour);
         return this.afs.collection('rdv', ref => ref.where('userUid', '==', user)).valueChanges()
-            .pipe(map(res => _.sortBy(res, 'event.start', 'desc')),
-        );
+            .pipe(
+                map(rdv => rdv.filter((rdv: any) => moment(this.jour).isBefore(rdv.event.start.toDate()))),
+                map(res => _.sortBy(res, 'event.start', 'desc')),
+            );
     }
 
     deleteRdv(user, rdv) {

@@ -13,9 +13,9 @@
             <p class="subTitle">Date de RDV</p>
             <p>{{data.rdv.event.start.toDate()|date: 'short'}}</p>
         </div>
-        <button mat-flat-button class="etat" [style.background]="data.rdv.event.color.primary">{{data.rdv.type}}</button>
+        <button mat-button class="etat" [style.background]="data.rdv.event.color.primary">{{data.rdv.type}}</button>
     </div>
 </section>
 <div class="button">
-    <button class="connection" mat-raised-button (click)="delete()" color="warn">Annuler mon rendez-vous</button>
+    <button class="connection" mat-raised-button (click)="delete()" color="warn">Annuler rendez-vous</button>
 </div>

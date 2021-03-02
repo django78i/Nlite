@@ -54,7 +54,7 @@ export interface DialogData {
 		`,
 	],
 })
-export class CalendarComponent implements OnInit, AfterViewInit {
+export class CalendarComponent implements OnInit {
 	@ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 	//traduction
 	locale: string = 'fr';
@@ -193,14 +193,14 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 	}
 
 
-	ngAfterViewInit() {
-		this.scrollToCurrentView();
-	}
+	// ngAfterViewInit() {
+	// 	this.scrollToCurrentView();
+	// }
 
-	viewChanged() {
-		this.cdr.detectChanges();
-		this.scrollToCurrentView();
-	}
+	// viewChanged() {
+	// 	this.cdr.detectChanges();
+	// 	this.scrollToCurrentView();
+	// }
 
 
 	changeDay(date: Date) {

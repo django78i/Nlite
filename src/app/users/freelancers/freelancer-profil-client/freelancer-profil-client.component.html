@@ -6,11 +6,12 @@
             <ul class="categList">
                 <li *ngFor="let categorie of freelancer.categories" class="categories ">
                     <div class="dot"></div>
-                    <p class="subTitle small">{{categorie}}</p>
+                    <p class="subTitle ">{{categorie}}</p>
                 </li>
             </ul>
-            <p class="subTitle">{{freelancer.adresse.rue}}, {{freelancer.adresse.codePostal}}
-                {{freelancer.adresse.ville}} </p>
+            <p class="subTitle">{{freelancer.adresse.rue}}, </p>
+            <p class="subTitle">{{freelancer.adresse.codePostal}}
+                {{freelancer.adresse.ville}}</p>
             <div id="description" *ngIf="freelancer.description">
                 <p style="font-size: 10px; line-height: 12px;">{{freelancer.description}}</p>
                 <p id="plus"

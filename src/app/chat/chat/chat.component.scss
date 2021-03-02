@@ -1,33 +1,10 @@
-*{
-    margin: 0;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .contenuList{
-    width: 600px;
-    height: 80vh;
+    padding-top: 32px;
 }
-
-.listItem{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    // background: red;
-    padding: 5px 10px;
-    // padding-top: 10px;
-    align-items: center;
-    box-shadow: 1px 5px 18px 3px #b8afb8;
-    span{
-        cursor: pointer;
-    }
-}
-
-.imageProfil {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  

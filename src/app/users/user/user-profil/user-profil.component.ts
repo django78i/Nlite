@@ -31,6 +31,7 @@ export class UserProfilComponent implements OnInit {
 	locale: string = 'fr';
 	msgList: Observable<any>;
 	rdvList: any[] = [];
+	lastRdv: any;
 
 	constructor(public dialog: MatDialog, private router: Router, private userService: UserService, private calendrierService: CalendrierService,) { }
 
@@ -38,7 +39,7 @@ export class UserProfilComponent implements OnInit {
 		moment.locale('fr');
 		this.user = this.userService.user.pipe(
 			tap(user => this.rdv = this.calendrierService.getLastRdv(user.uid).
-				pipe(tap(res => console.log(res)))
+				pipe(tap(res => this.lastRdv = res[0]))
 			)
 		);
 		this.msgList = this.userService.getRooms(this.userService.user);

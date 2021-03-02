@@ -2,7 +2,9 @@
     <swiper [config]="config" #usefulSwiper>
         <div class="swiper-wrapper">
             <div class="swiper-slide" *ngFor="let photo of photos; let i = index">
-                <div class="photo" [ngStyle]="{'background-image': 'url(' + photo + ')'}" (click)="openDialog(photos,i)"></div>
+                <div class="photo" [defaultImage]="image" [lazyLoad]="photo" (click)="openDialog(photos,i)">
+                </div>
+                <!-- <div class="photo" [ngStyle]="{'background-image': 'url(' + photo + ')'}" (click)="openDialog(photos,i)"></div> -->
             </div>
         </div>
         <!-- <div class="swiper-pagination"></div> -->

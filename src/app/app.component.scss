@@ -1,16 +1,15 @@
+// @import "../styles.scss";
 .logo {
   height: 43px;
   width: 50px;
 }
 
 .active-link {
-  fill: rgb(0, 0, 0);
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  fill: #5337f7;
+}
+
+.active-link.titreIcon {
+  color: #5337f7;
 }
 
 mat-toolbar {
@@ -23,20 +22,33 @@ mat-toolbar.menuTop {
   top: 0;
   display: flex;
   height: 55px;
+  position: absolute;
+  left: 0;
 }
 
 mat-toolbar.bottom {
-  position: sticky;
-  //   position: absolute;
+  position: fixed;
+  border-top: 1px solid #7b78784d;
   bottom: 0;
   z-index: 10000;
   height: 40px;
 }
 
-.total {
+a {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  position: relative;
-  overflow: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p.titreIcon {
+  line-height: 10px;
+  font-size: 10px;
+  color: #a1a1a2;
+}
+
+
+.butts {
+  color: white;
+  // background: $primary-accent;
 }

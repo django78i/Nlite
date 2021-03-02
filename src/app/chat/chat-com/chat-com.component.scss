@@ -1,5 +1,4 @@
 .messageClass {
-  padding-top: 10px;
   height: 100%;
 }
 
@@ -18,4 +17,13 @@
   display: flex;
   align-items: flex-end;
   gap: 10px;
+}
+
+
+.msgWrapper{
+  padding-top: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }

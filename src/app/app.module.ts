@@ -88,6 +88,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { PopUpConnectComponent } from './users/freelancers/pop-up-connect/pop-up-connect.component';
 import { PopUpUserRdvComponent } from './users/user/pop-up-user-rdv/pop-up-user-rdv.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 registerLocaleData(localeFr);
 
@@ -172,6 +173,7 @@ registerLocaleData(localeFr);
 		MatMenuModule,
 		MatCheckboxModule,
 		MatSnackBarModule,
+		LazyLoadImageModule,
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyDje0NxnKezRv_AwMSdrhaTL3rhQIkFT4o',
 			libraries: ['places']

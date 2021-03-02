@@ -330,7 +330,7 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 			}
 			val = this.prestaChoisi.sousSection.find(sous => sous.nom == this.selectedsousSect);
 			cren = {
-				valeur: val.valeur,
+				valeur: val.unite == "m" ? val.valeur < 30 ? 30 : val.valeur : val.valeur,
 				unite: val.unite
 			}
 			this.creneau = cren;

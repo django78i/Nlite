@@ -8,9 +8,9 @@ import { FreelancerFolioSlideComponent } from '../../freelancer-folio-slide/free
 
 export interface DialogData {
 	uid: number,
-	photos : [],
-	titre : string,
-	prix : number,
+	photos: [],
+	titre: string,
+	prix: number,
 }
 
 
@@ -22,14 +22,16 @@ export interface DialogData {
 export class FolioCarouselComponent implements OnInit {
 	@ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
 
-	@Input()photos : any[];
-	@Input()titre : any;
-	@Input()prix : number;
+	@Input() photos: any[];
+	@Input() titre: any;
+	@Input() prix: number;
 
-	
+	image = '../../../assets/icones/videoTest.png';
+	// image = 'https://i2.wp.com/watermarkcounseling.com/wp-content/uploads/2018/12/background-design-marble-850796.jpg?ssl=1';
+
 	config: SwiperOptions = {
 		pagination: { el: '.swiper-pagination', clickable: true },
-		slidesPerView : 'auto',
+		slidesPerView: 'auto',
 		spaceBetween: 10,
 		navigation: {
 			nextEl: '.swiper-button-next',
@@ -50,7 +52,7 @@ export class FolioCarouselComponent implements OnInit {
 			maxWidth: '100%',
 			width: '100%',
 			height: '100vh',
-			data: { uid: i, photos : photos, titre: this.titre, prix : this.prix },
+			data: { uid: i, photos: photos, titre: this.titre, prix: this.prix },
 			panelClass: 'custom',
 		});
 	}

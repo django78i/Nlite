@@ -98,7 +98,7 @@ export class FreelancerProfilClientComponent implements OnInit, OnDestroy {
 		const dialogRef = this.dialog.open(PopUpConnectComponent, {
 			maxWidth: '90%',
 			width: '90%',
-			height: '200px',
+			height: '303px',
 			panelClass: 'custom',
 		});
 	}

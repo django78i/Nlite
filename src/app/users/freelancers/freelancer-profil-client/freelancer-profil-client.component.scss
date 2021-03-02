@@ -13,7 +13,7 @@ section.profilEntete {
 
 :host ::ng-deep mat-tab-group {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 5px;
 }
 
 #description {
@@ -29,7 +29,7 @@ h3 {
 :host ::ng-deep .mat-tab-label-active {
   border-radius: 30px;
   padding: 0;
-  background-color: #3467c9;
+  background-color: #5337f7;
   color: white;
 }
 :host ::ng-deep .mat-tab-label {
@@ -109,3 +109,4 @@ ul {
   justify-content: center;
   align-items: center;
 }
+

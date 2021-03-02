@@ -1,14 +1,10 @@
 <section *ngIf="params|async as param" class="messageClass">
-    <section *ngIf="users" style="height: 100%;">
-        <!-- <div class="titre"> -->
+    <section *ngIf="users" class="msgWrapper" >
         <h2 *ngIf="users.uid == param.data.val.freeUid" style="color: #3467c9;">{{param.data.val.client}}</h2>
         <h2 *ngIf="users.uid == param.data.val.clientId" style="color: #3467c9;">{{param.data.val.freelance}}</h2>
-        <!-- <h2 *ngIf="users.uid == param.data.val.freeUid" style="color: #3467c9;"> </h2> -->
-        <!-- <h2 *ngIf="users.uid == param.data.val.clientId" style="color: #3467c9;"> {{param.data.val.freelance}}</h2> -->
-        <!-- </div> -->
         <app-message-view *ngIf="messages | async as message"
             [contactUid]="users.status =='freelancer? param.data.val.clientId : param.data.val.freeUid'"
-            [message]="message" [userUid]="users.uid" style="height: 80%;"></app-message-view>
+            [message]="message" [userUid]="users.uid" ></app-message-view>
         <div class="message">
             <input placeholder="Envoyer votre message" type="text" class="form-control" [(ngModel)]="discussion"
                 (keyup)="discusSubject.next(discussion)" (keydown.enter)="envoyer()">

@@ -1,44 +1,49 @@
-<h2>Hello,</h2>
-<h2>{{(user|async)?.displayName}}</h2>
-
-<div *ngIf="rdv|async as rdv;else noRdv">
-    <!-- <div *ngIf="rdv |async as rdvs;else noRdv"> -->
-    <div class="rdvCard" (click)="openDialog(rdv[0])">
-        <p style="display: flex;justify-content: space-between;" class="infoTitre"><span>Prochain
-                rendez-vous :</span><span>&rarr;</span></p>
-        <h2>{{rdv[0].event.start.toDate() |date : 'short':'GMT' :locale }} </h2>
-        <p>Avec <span style="color: #3467C9;">{{rdv[0].freeName}}</span></p>
+<section style="height: 100%;padding-top: 30px;">
+    <h1 class="titrePrincipal">Hello</h1>
+    <div class="sub">
+        <h1 class="titrePrincipal">{{(user|async)?.displayName}}</h1>
+        <img src="../../../../assets/icones/icons8-pouces-vers-le-haut-48.png" alt="">
     </div>
-    <mat-accordion>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <p class="infoTitre"> Voir tous mes rendez-vous :</p>
-                </mat-panel-title>
-                <mat-panel-description>
-                    <span class="material-icons">perm_contact_calendar</span>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <ul>
-                <li *ngFor="let rdvs of rdv">
-                    <p>{{rdvs.event.start.toDate()|date : 'short':'GMT': locale }}
-                        <span class="infoTitre">avec </span> <span style="color: #3467C9;">{{rdvs.freeName}}</span>
-                    </p>
-                </li>
-            </ul>
-        </mat-expansion-panel>
-    </mat-accordion>
-</div>
-<ng-template #noRdv>
-    <p>Aucun rdv</p>
-</ng-template>
-<div>
-    <div class="rdvCard">
-        <div class="msg" *ngFor="let list of msgList | async" (click)="checkRoom(list)">
-            <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + list.freeImage + ')'}"></div>
-            <p>{{list.freelancer}}</p>
+    <h2 class="sousTitrePrincipal" style="margin-top: 16px !important; color: rgb(187, 187, 187);">Voici ton planning : </h2>
+    <div *ngIf="(rdv |async)?.length as rv;else noRdv">
+        <div class="rdvCard" (click)="openDialog(lastRdv)">
+            <p style="display: flex;justify-content: space-between;" class="infoTitre"><span>Prochain
+                    rendez-vous :</span><span>&rarr;</span></p>
+            <h2>{{lastRdv.event.start.toDate() |date : 'short':'GMT' :locale }} </h2>
+            <p>Avec <span style="color: #3467C9;">{{lastRdv.freeName}}</span></p>
         </div>
-        <p style="font-size: 10px; justify-content : center; display: flex; margin-top: 10px;" routerLink="/chat"> Voir
-            tous les messages</p>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p class="infoTitre"> Voir tous mes rendez-vous :</p>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <span class="material-icons">perm_contact_calendar</span>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li *ngFor="let rdvs of rdv | async">
+                        <p>{{rdvs.event.start.toDate()|date : 'short':'GMT': locale }}
+                            <span class="infoTitre">avec </span> <span style="color: #3467C9;">{{rdvs.freeName}}</span>
+                        </p>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
-</div>
+    <ng-template #noRdv>
+        <p>Aucun rdv</p>
+    </ng-template>
+    <div>
+        <div class="rdvCard">
+            <div class="msg" *ngFor="let list of msgList | async" (click)="checkRoom(list)">
+                <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + list.freeImage + ')'}"></div>
+                <p>{{list.freelancer}}</p>
+            </div>
+            <p style="font-size: 10px; justify-content : center; display: flex; margin-top: 10px;" routerLink="/chat">
+                Voir
+                tous les messages</p>
+        </div>
+    </div>
+</section>

@@ -1,27 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
+$primary-accent: #5337f7;
+$warn: rgb(232, 3, 3);
+// html,
 p,
 h2,
 h3,
 h4,
 h1 {
   margin: 0 !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
+.miniTitre {
+  font-weight: 500px !important;
+}
 
-h1 {
-  font-size: 25px;
-}
-h2 {
-  font-size: 16px;
-}
-h3 {
-  line-height: 12px;
-}
-p {
-  font-size: 12px;
-}
 .container {
   padding: 0 !important;
 }
@@ -34,6 +28,54 @@ section {
   color: #a9acb9;
 }
 
+.categList {
+  display: flex;
+  gap: 10px;
+  line-height: 23px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: blue;
+}
+
+.profilEntete {
+  // width: 100vw;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+}
+
+.listItem {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+  background: white;
+  margin-bottom: 4px;
+}
+
+.imageProfil {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.profilInfo {
+  display: flex;
+  flex-direction: column;
+}
+
 .custom .mat-dialog-container {
   padding: 0;
 }
@@ -42,25 +84,93 @@ button:focus {
   outline: none !important;
 }
 
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
+.formulaire {
+  border: none;
+  border-radius: 40px !important;
+  box-shadow: -5px 29px 20px -8px rgb(0 0 0 / 12%);
+}
+
+// @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~open-iconic/font/css/open-iconic-bootstrap.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 .my-custom-class span {
   color: #ff3d7f !important;
 }
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
+* {
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
 
 html,
 body {
   height: 100%;
-}
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
+  background: #f5f5f7;
 }
 
-.titlezer {
+.titrePrincipal {
   font-weight: 700 !important;
+  font-size: 40px !important;
+  letter-spacing: -0.04em !important;
+}
+
+.sousTitrePrincipal {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em !important;
+}
+
+.titreSecondaire {
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  letter-spacing: normal !important;
+}
+
+.buttonPrimaire {
+  width: 90% !important;
+  height: 67px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 40px !important;
+  margin-top: 10px !important;
+}
+
+.buttonSecondaire {
+  padding: 0px 24px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 20px !important;
+  font-size: 11px;
+}
+
+.primary {
+  background: $primary-accent;
+  color: white;
+}
+
+.secondary {
+  background: $primary-accent;
+  color: white;
+}
+
+.warn {
+  background: $warn;
+  color: white;
+}
+
+.connection {
+  min-width: 50px !important;
+  height: 45px;
+  border-radius: 50% !important;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
 }
