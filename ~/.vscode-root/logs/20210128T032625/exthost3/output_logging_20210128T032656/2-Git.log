@@ -1,0 +1,33 @@
+Looking for git in: git
+Using git 2.25.1 from git
+> git rev-parse --git-dir
+Open repository: /home/diakite/Documents/testmailing/testMailing
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+fatal: no upstream configured for branch 'master'
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git show --textconv :package.json
+> git ls-files --stage -- /home/diakite/Documents/testmailing/testMailing/package.json
+> git check-ignore -v -z --stdin
+> git cat-file -s ea88f06f50721583643498e14951b34254a6d9c1
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :src/app/app.module.ts
+> git ls-files --stage -- /home/diakite/Documents/testmailing/testMailing/src/app/app.module.ts
+> git cat-file -s 347dc7e53280c77785f682c772eb1da863dd016b
+> git check-ignore -v -z --stdin
+> git show --textconv :src/app/google-compenent/google-compenent.component.html
+> git ls-files --stage -- /home/diakite/Documents/testmailing/testMailing/src/app/google-compenent/google-compenent.component.html
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+fatal: no upstream configured for branch 'master'
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template

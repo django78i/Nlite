@@ -1,0 +1,12 @@
+file:///home/diakite/Documents/testmailing/testMailing/src/app/google-compenent/google-compenent.component.html {"mtime":1611798914778,"ctime":1611266713047,"size":395,"etag":"36ckhbrfbcn","orphaned":false}
+<p>google-compenent works!</p>
+<div class="container">
+  <h1>GeeksforGeeks</h1>
+  <h2>Google Places Autocomplete</h2>
+  <input
+    ngx-google-places-autocomplete
+    [options]="options"
+    (onAddressChange)="AddressChange($event)"
+  />
+  {{ formattedaddress }}
+</div>

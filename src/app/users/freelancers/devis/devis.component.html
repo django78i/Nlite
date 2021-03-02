@@ -1,0 +1,28 @@
+<h1>Demandez votre devis</h1>
+<div class="formulaire">
+    <mat-form-field style="width: 40%;">
+        <mat-label>services</mat-label>
+        <mat-select name="services" #t (selectionChange)="callType(t.value)" class="form-control"
+            [(ngModel)]="selectedValue">
+            <mat-option *ngFor="let service of services" [value]="service.value">
+                {{service.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width: 40%;">
+        <mat-label>sous</mat-label>
+        <mat-select name="unite" class="form-control" [(ngModel)]="selectedsousSect" [disabled]="stop"
+            (selectionChange)="validDevis()">
+            <mat-option *ngFor="let sousSelec of sousServices" [value]="sousSelec.value">
+                {{sousSelec.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field >
+        <mat-label>Commentaire</mat-label>
+        <textarea matInput [(ngModel)]="commentaire"></textarea>
+    </mat-form-field>
+</div>
+<div class="butt">
+    <button mat-raised-button class="valider" [disabled]="disable" (click)="send()">Demander un devis</button>
+</div>
