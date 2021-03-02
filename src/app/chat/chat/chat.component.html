@@ -1,10 +1,17 @@
-<section class="contenuList">
+<section class="contenuList" *ngIf="user |async as user">
     <div class="container">
-        <h1>Liste des communications</h1>
-        <div *ngIf="roomList| async as rooms; else notif">
-            <div class="listItem" *ngFor="let room of rooms">
-                <p>{{room.name}}</p>
-                <span class="material-icons" (click)="discuss(room.uid)">message</span>
+        <h1>Liste des messages</h1>
+        <div *ngIf="roomList| async as rooms; else notif" style="margin-top: 10px;">
+            <div class="listItem" *ngFor="let room of rooms; let i = index" (click)="discuss(room)">
+                <div class="profilEntete">
+                    <div *ngIf="user.uid != room.freeUid" class="imageProfil"
+                        [ngStyle]="{'background-image': 'url(' +room.freeImage+ ')'}"></div>
+                    <button *ngIf="user.uid == room.freeUid"  class="connection">
+                        {{userFormat[i]}}
+                    </button>
+                    <p *ngIf="user.uid == room.freeUid">{{room.user}}</p>
+                    <p *ngIf="user.uid == room.clientUid">{{room.freelancer}}</p>
+                </div>
             </div>
         </div>
     </div>

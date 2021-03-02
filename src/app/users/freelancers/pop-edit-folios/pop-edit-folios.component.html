@@ -43,9 +43,9 @@
                         <input #takeInput type="file" (change)="uploadFile($event)" id="typeFile-input">
                     </div>
                 </div>
-                <div class="swiper-slide" *ngFor="let photo of photoss" (click)="deletePhoto(photo)">
+                <div class="swiper-slide" *ngFor="let photo of photoss" >
                 <!-- <div class="swiper-slide" *ngFor="let photo of photos | async" (click)="deletePhoto(photo)"> -->
-                    <span class="material-icons supp" >cancel</span>
+                    <span class="material-icons supp" (click)="deletePhoto(photo)">cancel</span>
                     <div class="photo" [ngStyle]="{'background-image': 'url(' + photo + ')'}"></div>
                 </div>
             </div>

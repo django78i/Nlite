@@ -1,23 +1,10 @@
-*{
-    margin: 0;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .contenuList{
-    width: 600px;
-    height: 80vh;
-}
-
-.listItem{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    // background: red;
-    padding: 0 10px;
-    padding-top: 10px;
-    align-items: center;
-    box-shadow: 10px 5px 5px 0px rgba(184,175,184,1);;
-    span{
-        cursor: pointer;
-    }
+    padding-top: 32px;
 }

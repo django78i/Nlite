@@ -5,7 +5,7 @@
             <h2>{{user.displayName}}</h2>
             <h3 *ngFor="let categorie of user.categories">{{categorie}}</h3>
             <p> {{user.modeRdv}}</p>
-            <p class="subTitle">{{user.adresse}}</p>
+            <p class="subTitle">{{user.adresse.rue}}, {{user.adresse.codePostal}} {{user.adresse.ville}}</p>
             <div id="description">
                 <p style="font-size: 10px; line-height: 12px;">{{user.description}}</p>
                 <p id="plus" style="position: absolute;bottom: 0;right: 0;font-size: 10px; line-height: 12px;background: white;" (click)="vue()">...<span style="color: darkgrey;">Voir la suite</span></p>
@@ -36,7 +36,9 @@
                 <mat-tab label="Gestion rdv">
                     <app-edit-rdv [freelancer]="user"></app-edit-rdv>
                 </mat-tab>
-                <mat-tab label="tarifs"> Content 3 </mat-tab>
+                <mat-tab label="tarifs"> 
+                    <app-tarifs [user]="user"></app-tarifs>    
+                </mat-tab>
             </mat-tab-group>
         </div>
     </section>

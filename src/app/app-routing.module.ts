@@ -10,18 +10,21 @@ import { FreelancerProfilComponent } from './users/freelancers/freelancer-profil
 import { UserProfilComponent } from './users/user/user-profil/user-profil.component';
 import { FreelancerProfilClientComponent } from './users/freelancers/freelancer-profil-client/freelancer-profil-client.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const routes: Routes = [
   { path: 'login', component: SignInUpComponent },
+  { path: 'mail', component: SignUpComponent },
+  { path: 'nav', component: NavigationComponent },
   { path: 'freelanceList', component: UsersListComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'chatCom/:id', component: ChatComComponent },
+  { path: 'chatCom', component: ChatComComponent },
   { path: 'freelancerProfil', component: FreelancerProfilComponent },
   { path: 'clientProfil', component: UserProfilComponent },
   { path: 'freelanceClientProfil/:id', component: FreelancerProfilClientComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'home', component: HomeComponent },
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

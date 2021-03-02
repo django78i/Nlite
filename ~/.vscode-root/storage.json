@@ -2,20 +2,20 @@
     "telemetry.machineId": "8f203253b9b00dcab075c6086e6f80ce25888ab0ccd4b6d60c87306c26032e6d",
     "openedPathsList": {
         "workspaces3": [
-            "file:///home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
-            "file:///home/diakite/Documents/testmailing/testMailing"
+            "file:///home/diakite/Documents/testmailing/testMailing",
+            "file:///home/diakite/Documents/ITPmarketing/frontend/ITPmarketing"
         ],
         "files2": []
     },
     "windowsState": {
         "lastActiveWindow": {
-            "folder": "file:///home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
-            "backupPath": "/home/diakite/Documents/testmailing/testMailing/~/.vscode-root/Backups/dad24abb298bf4b464a673a577d260a0",
+            "folder": "file:///home/diakite/Documents/testmailing/testMailing",
+            "backupPath": "/home/diakite/Documents/testmailing/testMailing/~/.vscode-root/Backups/95f4dc0a341ba2d2d5c7712a853d7bb6",
             "uiState": {
-                "mode": 1,
-                "x": 1611,
+                "mode": 0,
+                "x": 1616,
                 "y": 64,
-                "width": 1024,
+                "width": 1019,
                 "height": 704
             }
         },
@@ -65,24 +65,24 @@
                                     "id": "openRecentFolder",
                                     "uri": {
                                         "$mid": 1,
-                                        "fsPath": "/home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
-                                        "external": "file:///home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
-                                        "path": "/home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
-                                        "scheme": "file"
-                                    },
-                                    "enabled": true,
-                                    "label": "/home/diakite/Documents/ITPmarketing/frontend/ITPmarketing"
-                                },
-                                {
-                                    "id": "openRecentFolder",
-                                    "uri": {
-                                        "$mid": 1,
+                                        "fsPath": "/home/diakite/Documents/testmailing/testMailing",
                                         "external": "file:///home/diakite/Documents/testmailing/testMailing",
                                         "path": "/home/diakite/Documents/testmailing/testMailing",
                                         "scheme": "file"
                                     },
                                     "enabled": true,
                                     "label": "/home/diakite/Documents/testmailing/testMailing"
+                                },
+                                {
+                                    "id": "openRecentFolder",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
+                                        "path": "/home/diakite/Documents/ITPmarketing/frontend/ITPmarketing",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "/home/diakite/Documents/ITPmarketing/frontend/ITPmarketing"
                                 },
                                 {
                                     "id": "vscode.menubar.separator"
@@ -124,9 +124,8 @@
                         "label": "Save &&As..."
                     },
                     {
-                        "id": "workbench.action.files.saveAll",
-                        "label": "Save A&&ll",
-                        "enabled": false
+                        "id": "saveAll",
+                        "label": "Save A&&ll"
                     },
                     {
                         "id": "vscode.menubar.separator"
@@ -182,11 +181,8 @@
                                     "label": "File &&Icon Theme"
                                 },
                                 {
-                                    "id": "vscode.menubar.separator"
-                                },
-                                {
-                                    "id": "workbench.userDataSync.actions.turnOn",
-                                    "label": "Turn on Settings Sync..."
+                                    "id": "workbench.action.selectProductIconTheme",
+                                    "label": "&&Product Icon Theme"
                                 }
                             ]
                         }
@@ -420,7 +416,8 @@
                                 },
                                 {
                                     "id": "workbench.action.togglePanel",
-                                    "label": "Show &&Panel"
+                                    "label": "Show &&Panel",
+                                    "checked": true
                                 },
                                 {
                                     "id": "vscode.menubar.separator"
@@ -807,107 +804,6 @@
             "Run": {
                 "items": [
                     {
-                        "id": "workbench.action.debug.start",
-                        "label": "&&Start Debugging"
-                    },
-                    {
-                        "id": "workbench.action.debug.run",
-                        "label": "Run &&Without Debugging"
-                    },
-                    {
-                        "id": "workbench.action.debug.stop",
-                        "label": "&&Stop Debugging",
-                        "enabled": false
-                    },
-                    {
-                        "id": "workbench.action.debug.restart",
-                        "label": "&&Restart Debugging",
-                        "enabled": false
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
-                        "id": "workbench.action.debug.configure",
-                        "label": "Open &&Configurations"
-                    },
-                    {
-                        "id": "debug.addConfiguration",
-                        "label": "A&&dd Configuration..."
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
-                        "id": "workbench.action.debug.stepOver",
-                        "label": "Step &&Over",
-                        "enabled": false
-                    },
-                    {
-                        "id": "workbench.action.debug.stepInto",
-                        "label": "Step &&Into",
-                        "enabled": false
-                    },
-                    {
-                        "id": "workbench.action.debug.stepOut",
-                        "label": "Step O&&ut",
-                        "enabled": false
-                    },
-                    {
-                        "id": "workbench.action.debug.continue",
-                        "label": "&&Continue",
-                        "enabled": false
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
-                        "id": "editor.debug.action.toggleBreakpoint",
-                        "label": "Toggle &&Breakpoint"
-                    },
-                    {
-                        "id": "submenuitem.22",
-                        "label": "&&New Breakpoint",
-                        "submenu": {
-                            "items": [
-                                {
-                                    "id": "editor.debug.action.conditionalBreakpoint",
-                                    "label": "&&Conditional Breakpoint..."
-                                },
-                                {
-                                    "id": "editor.debug.action.toggleInlineBreakpoint",
-                                    "label": "Inline Breakp&&oint"
-                                },
-                                {
-                                    "id": "workbench.debug.viewlet.action.addFunctionBreakpointAction",
-                                    "label": "&&Function Breakpoint..."
-                                },
-                                {
-                                    "id": "editor.debug.action.addLogPoint",
-                                    "label": "&&Logpoint..."
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
-                        "id": "workbench.debug.viewlet.action.enableAllBreakpoints",
-                        "label": "&&Enable All Breakpoints"
-                    },
-                    {
-                        "id": "workbench.debug.viewlet.action.disableAllBreakpoints",
-                        "label": "Disable A&&ll Breakpoints"
-                    },
-                    {
-                        "id": "workbench.debug.viewlet.action.removeAllBreakpoints",
-                        "label": "Remove &&All Breakpoints"
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
                         "id": "debug.installAdditionalDebuggers",
                         "label": "&&Install Additional Debuggers..."
                     }
@@ -928,49 +824,12 @@
                         "id": "vscode.menubar.separator"
                     },
                     {
-                        "id": "workbench.action.tasks.runTask",
-                        "label": "&&Run Task..."
-                    },
-                    {
-                        "id": "workbench.action.tasks.build",
-                        "label": "Run &&Build Task..."
-                    },
-                    {
                         "id": "workbench.action.terminal.runActiveFile",
                         "label": "Run &&Active File"
                     },
                     {
                         "id": "workbench.action.terminal.runSelectedText",
                         "label": "Run &&Selected Text"
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
-                        "id": "workbench.action.tasks.showTasks",
-                        "label": "Show Runnin&&g Tasks...",
-                        "enabled": false
-                    },
-                    {
-                        "id": "workbench.action.tasks.restartTask",
-                        "label": "R&&estart Running Task...",
-                        "enabled": false
-                    },
-                    {
-                        "id": "workbench.action.tasks.terminate",
-                        "label": "&&Terminate Task...",
-                        "enabled": false
-                    },
-                    {
-                        "id": "vscode.menubar.separator"
-                    },
-                    {
-                        "id": "workbench.action.tasks.configureTaskRunner",
-                        "label": "&&Configure Tasks..."
-                    },
-                    {
-                        "id": "workbench.action.tasks.configureDefaultBuildTask",
-                        "label": "Configure De&&fault Build Task..."
                     }
                 ]
             },
@@ -1038,7 +897,7 @@
                     },
                     {
                         "id": "workbench.action.toggleDevTools",
-                        "label": "&&Toggle Developer Tools"
+                        "label": "Toggle Developer Tools"
                     },
                     {
                         "id": "workbench.action.openProcessExplorer",
@@ -1409,53 +1268,9 @@
                 "label": "Shift+Alt+F3",
                 "userSettingsLabel": "shift+alt+f3"
             },
-            "workbench.action.debug.start": {
-                "label": "F5",
-                "userSettingsLabel": "f5"
-            },
-            "workbench.action.debug.run": {
-                "label": "Ctrl+F5",
-                "userSettingsLabel": "ctrl+f5"
-            },
-            "workbench.action.debug.stop": {
-                "label": "Shift+F5",
-                "userSettingsLabel": "shift+f5"
-            },
-            "workbench.action.debug.restart": {
-                "label": "Ctrl+Shift+F5",
-                "userSettingsLabel": "ctrl+shift+f5"
-            },
-            "workbench.action.debug.stepOver": {
-                "label": "F10",
-                "userSettingsLabel": "f10"
-            },
-            "workbench.action.debug.stepInto": {
-                "label": "F11",
-                "userSettingsLabel": "f11"
-            },
-            "workbench.action.debug.stepOut": {
-                "label": "Shift+F11",
-                "userSettingsLabel": "shift+f11"
-            },
-            "workbench.action.debug.continue": {
-                "label": "F5",
-                "userSettingsLabel": "f5"
-            },
-            "editor.debug.action.toggleBreakpoint": {
-                "label": "F9",
-                "userSettingsLabel": "f9"
-            },
-            "editor.debug.action.toggleInlineBreakpoint": {
-                "label": "Shift+F9",
-                "userSettingsLabel": "shift+f9"
-            },
             "workbench.action.terminal.split": {
                 "label": "Ctrl+Shift+5",
                 "userSettingsLabel": "ctrl+shift+5"
-            },
-            "workbench.action.tasks.build": {
-                "label": "Ctrl+Shift+B",
-                "userSettingsLabel": "ctrl+shift+b"
             },
             "workbench.action.keybindingsReference": {
                 "label": "Ctrl+K Ctrl+R",
@@ -1470,5 +1285,5 @@
     },
     "theme": "vs-dark",
     "themeBackground": "#1e1e1e",
-    "pickerWorkingDir": "/home/diakite/Documents/ITPmarketing/frontend"
+    "pickerWorkingDir": "/home/diakite/Documents/testmailing"
 }

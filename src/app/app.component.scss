@@ -1,0 +1,54 @@
+// @import "../styles.scss";
+.logo {
+  height: 43px;
+  width: 50px;
+}
+
+.active-link {
+  fill: #5337f7;
+}
+
+.active-link.titreIcon {
+  color: #5337f7;
+}
+
+mat-toolbar {
+  padding: 0 16px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+mat-toolbar.menuTop {
+  top: 0;
+  display: flex;
+  height: 55px;
+  position: absolute;
+  left: 0;
+}
+
+mat-toolbar.bottom {
+  position: fixed;
+  border-top: 1px solid #7b78784d;
+  bottom: 0;
+  z-index: 10000;
+  height: 40px;
+}
+
+a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p.titreIcon {
+  line-height: 10px;
+  font-size: 10px;
+  color: #a1a1a2;
+}
+
+
+.butts {
+  color: white;
+  // background: $primary-accent;
+}

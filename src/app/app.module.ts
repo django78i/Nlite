@@ -1,3 +1,4 @@
+import { FreelancerTarifComponent } from './freelancer-tarif/freelancer-tarif.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from './../environments/environment';
@@ -74,10 +75,20 @@ import { MessageViewComponent } from './chat/message-view/message-view.component
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { FolioCarouselComponent } from './users/freelancers/folio-carousel/folio-carousel.component';
 import { FreelancerFolioSlideComponent } from './users/freelancer-folio-slide/freelancer-folio-slide.component';
-import {MatMenuModule} from '@angular/material/menu';
-import{ MessagingService } from './services/messaging.service';
-import { EditRdvComponent } from './users/freelancers/edit-rdv/edit-rdv.component'
-
+import { MatMenuModule } from '@angular/material/menu';
+// import { MessagingService } from './services/messaging.service';
+import { EditRdvComponent } from './users/freelancers/edit-rdv/edit-rdv.component';
+import { GoogleCompenentComponent } from './google-compenent/google-compenent.component';
+import { TarifsComponent } from './users/freelancers/tarifs/tarifs.component';
+// import { NgxGooglePlacesAutocompleteModule } from '@codious/ngx-google-places-autocomplete';
+import { AgmCoreModule } from '@agm/core';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { DevisComponent } from './users/freelancers/devis/devis.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PopUpConnectComponent } from './users/freelancers/pop-up-connect/pop-up-connect.component';
+import { PopUpUserRdvComponent } from './users/user/pop-up-user-rdv/pop-up-user-rdv.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 registerLocaleData(localeFr);
 
@@ -108,6 +119,13 @@ registerLocaleData(localeFr);
 		FolioCarouselComponent,
 		FreelancerFolioSlideComponent,
 		EditRdvComponent,
+		GoogleCompenentComponent,
+		TarifsComponent,
+		FreelancerTarifComponent,
+		DevisComponent,
+		PopUpConnectComponent,
+		PopUpUserRdvComponent,
+
 	],
 	entryComponents: [
 		PopEditFoliosComponent,
@@ -115,7 +133,9 @@ registerLocaleData(localeFr);
 		PopUpCreateFolioComponent,
 		PopUpCalendarComponent,
 		PopUpCalenderClientComponent,
-		FreelancerFolioSlideComponent
+		FreelancerFolioSlideComponent,
+		PopUpConnectComponent,
+		PopUpUserRdvComponent
 	],
 	imports: [
 		BrowserModule,
@@ -150,7 +170,15 @@ registerLocaleData(localeFr);
 		MatChipsModule,
 		MatExpansionModule,
 		MatAutocompleteModule,
-		MatMenuModule
+		MatMenuModule,
+		MatCheckboxModule,
+		MatSnackBarModule,
+		LazyLoadImageModule,
+		AgmCoreModule.forRoot({
+			apiKey: 'AIzaSyDje0NxnKezRv_AwMSdrhaTL3rhQIkFT4o',
+			libraries: ['places']
+		}),
+		GooglePlaceModule
 	],
 	providers: [
 		MatDatepickerModule,
@@ -160,7 +188,7 @@ registerLocaleData(localeFr);
 		MessgesService,
 		PortFolioService,
 		CalendrierService,
-		MessagingService,
+		// MessagingService,
 		{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
 	],
 	bootstrap: [AppComponent]

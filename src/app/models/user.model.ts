@@ -4,7 +4,7 @@ export class User {
         public displayName: string,
         public email: string,
         public password: string,
-        public departement: string,
+        public adresse: string,
         public status: string,
         public categories: [],
         public creneau : any,
@@ -12,6 +12,7 @@ export class User {
         public jourRepos : any,
         public validationAuto : any,
         public modeRdv : any,
-        public description : any
+        public description : any,
+        public prestation : []
     ){}
 }

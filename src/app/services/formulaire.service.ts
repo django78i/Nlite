@@ -17,17 +17,15 @@ export class FormulaireService {
 	freelancerList: Observable<any[]>;
 	filteredList: Observable<any[]>;
 
-	filterSubject: Subject<any>;
+	filterSubject: BehaviorSubject<any>;
 	req: any;
 	constructor(private afs: AngularFirestore, private router: Router) {
 		this.filterSubject = new BehaviorSubject(null);
 		this.freelancerList = this.filterSubject.pipe(
 			tap(data => this.req = data),
 			switchMap(req => this.afs.collection<Freelancer>('users', ref => ref.where('status', '==', 'freelancer')).valueChanges()),
-			map(free => free.filter(free => this.req.location != 'All' ? free.departement === this.req.location : free.status == 'freelancer')),
-			map(free => free.filter(free => this.req.type != 'All' ? free.categories.find(categ => categ === this.req.type) ? true : '' : free.status == 'freelancer')),
-			map(free => free.filter(free => this.req.prix ? free.prixMinimum > this.req.prix : free.status == 'freelancer')),
-			tap(free => console.log(this.req)),
+			map(free => free.filter(free => this.req.allFreelancer == true ? free.status == 'freelancer' : free.adresse.departement == this.req.location)),
+			map(free => free.filter(free => this.req.allFreelancer == true ? free.status == 'freelancer' : free.categories.find(categ => categ == this.req.type))),
 			share()
 		)
 	}

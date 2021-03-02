@@ -1,7 +1,24 @@
-#discussionContent{
-    width: 500px;
-    height: 600px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+#discussionContent {
+  min-height: 400px;
+  height: 445px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.msg {
+  padding: 5px 21px !important;
+  border-radius: 23px;
+  // justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  box-shadow: 10px 5px 5px 0px rgba(184, 175, 184, 1);
+}
+
+.vignette {
+  display: flex;
+  flex-direction: column;
 }

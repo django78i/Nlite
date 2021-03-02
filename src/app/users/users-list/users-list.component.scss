@@ -1,47 +1,62 @@
-.profilEntete {
-  // width: 100vw;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  padding: 10px 10px;
+// @import "../../../styles.scss";
+.miniTitre {
+  font-weight: 500;
 }
 
-.imageProfil {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+.primaire{
+  color : #5337f7;
 }
 
-.profilInfo {
-  display: flex;
-  flex-direction: column;
+mat-accordion {
+  position: absolute;
+  bottom: 0px;
+  left: 62px;
 }
 
-.listItem {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 15px;
+mat-expansion-panel {
+  border-top-right-radius: 32px !important;
+  border-top-left-radius: 30px !important;
+  border-bottom-right-radius: 33px !important;
+  border-bottom-left-radius: 33px !important;
 }
 
-.titre {
-  color: black;
+mat-expansion-panel-header {
+  background: black !important;
 }
 
-.categList {
-  display: flex;
-  gap: 10px;
-  font-family: "Poppins", sans-serif;
+.container {
+  height: 100%;
+  position: relative;
+  padding-top: 30px !important;
 }
 
-.small {
-  font-size: 10px;
+input {
+  border-radius: 40px;
+  box-shadow: 0 14px 12px 4px rgba(0, 0, 0, 0.12);
+  background: white;
 }
+
+mat-label {
+  color: #a9acb9;
+  font-weight: 500;
+}
+
+:host ::ng-deep .mat-form-field-label {
+  top: 37px;
+  left: 52px;
+}
+
+mat-select {
+  border: none;
+  border-radius: 40px;
+  box-shadow: -5px 29px 20px -8px rgb(0 0 0 / 12%);
+}
+
+
+
 ul {
   list-style-type: none;
-  margin-bottom: 5px !important;
+  margin-bottom: -2px !important;
   padding-left: 0px;
 }
 
@@ -55,6 +70,7 @@ ul {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  color: white;
 }
 
 .searchButton {
@@ -64,19 +80,12 @@ ul {
   justify-content: center;
 }
 
-.material-icons.iconFiltre {
-  padding: 10px;
-  color: white;
-  background: black;
-  border-radius: 10px;
-}
-
-.iconFiltre{
-  margin-top: 30px;
-}
-
-.present {
-  height: 84px;
+.iconFiltre {
+  padding: 10px !important;
+  color: white !important;
+  background: #5337f7;
+  border-radius: 10px !important;
+  margin-top: 30px !important;
 }
 
 form {
@@ -87,28 +96,25 @@ mat-form-field {
   width: 100%;
 }
 
-mat-select.localSelect {
-  height: 40px;
-  border-radius: 20px;
+.form-control {
+  padding: 31px 2.75rem;
 }
 
-.form-control.localSelect {
-  padding: 31px 0.75rem;
-}
-
-// :host ::ng-deep .localiteSearch.mat-form-field-label {
-//   top: 40px;
-//   left: 20px;
-// }
-:host ::ng-deep .localiteSearch.mat-form-field-appearance-legacy .mat-form-field-underline,
-:host ::ng-deep .typeFilter.mat-form-field-appearance-legacy .mat-form-field-underline{
-  height: 0px;
+:host ::ng-deep .mat-form-field-underline {
+  display: none;
 }
 
 .example-chip-list {
   width: 100%;
 }
 
-.slider{
-  padding : 10px 0.75rem;
+.slider {
+  padding: 10px 0.75rem;
+}
+
+.content{
+  height: 330px;
+  width: 100%;
+  overflow-y: auto;
+
 }

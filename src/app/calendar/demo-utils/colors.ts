@@ -8,7 +8,7 @@ export const colors: any = {
       secondary: '#D1E8FF',
     },
     yellow: {
-      primary: '#e3bc08',
+      primary: '#FDD000',
       secondary: '#FDF1BA',
     },
   };

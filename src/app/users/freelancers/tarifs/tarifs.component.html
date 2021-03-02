@@ -1,0 +1,57 @@
+<form [formGroup]="servicesForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+        <div formArrayName="services">
+            <div class="form-group formServices" *ngFor="let servicesControl of getServices().controls; let i = index">
+                <div [formGroupName]="i">
+                    <mat-form-field>
+                        <mat-label>titre</mat-label>
+                        <input matInput placeholder="Entrez un titre" class="form-control" formControlName="titre">
+                    </mat-form-field><br>
+                    <p>SousTitre</p>
+                    <div formArrayName="sousSection">
+                        <div class="form-group formSousSection"
+                            *ngFor="let sousServControl of getSousSection(servicesControl).controls; let j = index">
+                            <div [formGroupName]="j">
+                                <mat-form-field style="width: 50%;margin-right: 10px;">
+                                    <mat-label>titre</mat-label>
+                                    <input matInput placeholder="Entrez un titre" class="form-control"
+                                        formControlName="nom">
+                                </mat-form-field>
+                                <mat-form-field style="width: 30%;">
+                                    <mat-label>Prix</mat-label>
+                                    <input matInput placeholder="Entrez un prix" class="form-control"
+                                        formControlName="prix">
+                                </mat-form-field>
+                                <div class="duree">
+                                    <mat-form-field style="width: 30%;">
+                                        <mat-label>valeur créneau</mat-label>
+                                        <input matInput placeholder="Entrez une durée" class="form-control"
+                                            formControlName="valeur">
+                                    </mat-form-field>
+                                    <mat-form-field class="unite" style="width: 30%;">
+                                        <mat-label>unité</mat-label>
+                                        <mat-select name="unite" class="form-control unite" formControlName="unite">
+                                            <mat-option *ngFor="let unite of unite" [value]="unite.value">
+                                                {{unite.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <button type="button" mat-button color="warn"
+                                    (click)="onDeleteSousSection(servicesControl, j)">Supprimer
+                                    la sousSection</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="addSousSection" (click)="onAddSousSection(servicesControl)">Ajouter
+                        une
+                        sousSection</div>
+                    <button type="button" mat-button color="warn" (click)="onDeleteServices(i)"
+                        *ngIf="servicesForm">Supprimer le service</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+        <button type="button" mat-button color="primary" (click)="onAddServices()">Ajouter un services</button>
+    </div>
+</form>

@@ -32,17 +32,20 @@ export class UserService {
     rooms: Observable<any>;
     roomsubject: BehaviorSubject<any>;
     roomSubscription: Subscription;
+    isAuth: boolean = false;
+    conn: any;
 
     constructor(private afs: AngularFirestore, public auth: AngularFireAuth, private router: Router) {
 
         this.contactSubject = new BehaviorSubject(null);
-        this.userSubject = new BehaviorSubject(null);
+        // this.userSubject = new BehaviorSubject(null);
         this.messageSubject = new BehaviorSubject(null);
 
         // recupération user en cours
         this.auth.onAuthStateChanged((user) => {
             if (user) {
-                this.getCurrentUSer(user)
+                this.isAuth = true;
+                this.getCurrentUSer(user);
             }
         })
 
@@ -50,6 +53,7 @@ export class UserService {
 
     getCurrentUSer(user): Observable<User> {
         console.log('get user :', user);
+        this.userSubject = new BehaviorSubject(null);
         this.userSubject.next(user);
         this.user = this.userSubject
             .pipe(
@@ -87,10 +91,22 @@ export class UserService {
     getRooms(user: Observable<User>): Observable<any> {
         return this.rooms = user.pipe(
             switchMap(userUnique => {
-                return this.afs.collection<User>('users').doc(userUnique.uid).collection('rooms').valueChanges()
-            })
+                return userUnique.status == 'freelancer' ? this.afs.collection('rooms', ref => ref.where('freeUid', '==', userUnique.uid)).valueChanges()
+                    : this.afs.collection('rooms', ref => ref.where('clientUid', '==', userUnique.uid)).valueChanges()
+            }),
+            tap(rooms => console.log(rooms))
         )
     }
+
+    // getClientRooms(user: Observable<User>): Observable<any> {
+    //     return this.rooms = user.pipe(
+    //         switchMap(userUnique => {
+    //             return userUnique.status =='freelancer'? this.afs.collection('rooms', ref=>ref.where('freeUid','==',userUnique.uid)).valueChanges()
+    //             : this.afs.collection('rooms', ref=>ref.where('clientUid','==',userUnique.uid)).valueChanges()
+    //         })
+    //     )
+    // }
+
 
     openRoom(contact) {
         console.log('rooms', contact);
@@ -101,32 +117,41 @@ export class UserService {
             this.roomsubject
         ]).pipe(
             switchMap(([user, contact]) => {
-                return this.afs.collection('users').doc(user.uid).collection('rooms').doc(contact.uid).valueChanges();
+                console.log(user);
+                console.log(contact);
+
+                const val = contact.uid + user.uid;
+                return this.afs.collection('rooms').doc(val).valueChanges()
             }),
             tap(room => {
+                console.log(room);
                 if (!room) {
                     this.createRooms(contact)
                 }
             })
         )
-        this.rooms.subscribe((data) => {
-        })
+        this.rooms.subscribe();
 
     }
 
     createRooms(contact) {
         console.log('creation room', contact);
         this.roomSubscription = this.user.subscribe((user) => {
+            const val = contact.uid + user.uid;
             const roomIdUser = {
-                uid: contact.uid,
-                name: contact.displayName
+                uid: val,
+                user: user.displayName,
+                freelancer: contact.displayName,
+                freeUid: contact.uid,
+                clientUid: user.uid
             }
-            const roomIdContact = {
-                uid: user.uid,
-                name: user.displayName
-            }
-            this.afs.collection('users').doc(user.uid).collection('rooms').doc(contact.uid).set(Object.assign({}, roomIdUser));
-            this.afs.collection('users').doc(contact.uid).collection('rooms').doc(user.uid).set(Object.assign({}, roomIdContact));
+            // const roomIdContact = {
+            //     uid: user.uid,
+            //     name: user.displayName
+            // }
+            // const id = this.afs.createId();
+            this.afs.collection('rooms').doc(val).set(Object.assign({}, roomIdUser));
+            // this.afs.collection('users').doc(contact.uid).collection('rooms').doc(user.uid).set(Object.assign({}, roomIdContact));
         })
 
     }
