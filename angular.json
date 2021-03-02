@@ -159,5 +159,8 @@
       }
     }
   },
-  "defaultProject": "testMailing"
+  "defaultProject": "testMailing",
+  "cli": {
+    "analytics": false
+  }
 }
