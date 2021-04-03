@@ -1,4 +1,4 @@
-<section class="contenuList" *ngIf="user |async as user">
+<section class="contenuList" *ngIf="user |async as user else temp">
     <div class="container">
         <h1>Liste des messages</h1>
         <div *ngIf="roomList| async as rooms; else notif" style="margin-top: 10px;">
@@ -6,7 +6,7 @@
                 <div class="profilEntete">
                     <div *ngIf="user.uid != room.freeUid" class="imageProfil"
                         [ngStyle]="{'background-image': 'url(' +room.freeImage+ ')'}"></div>
-                    <button *ngIf="user.uid == room.freeUid"  class="connection">
+                    <button *ngIf="user.uid == room.freeUid" class="connection">
                         {{userFormat[i]}}
                     </button>
                     <p *ngIf="user.uid == room.freeUid">{{room.user}}</p>
@@ -19,3 +19,13 @@
         <p>Il n'y a aucune discussion</p>
     </ng-template>
 </section>
+<ng-template #temp>
+    <div class="content">
+        <div>
+            <h1>Hello,</h1>
+            <p class="subTitle">Inscris-toi pour profiter du chat </p>
+        </div>
+        <img src="../../../assets/Groupe 6566 (1).svg" alt="">
+        <app-sign-in-up></app-sign-in-up>
+    </div>
+</ng-template>

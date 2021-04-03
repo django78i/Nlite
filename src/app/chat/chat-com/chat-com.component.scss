@@ -13,17 +13,15 @@
   bottom: 2px;
 }
 
-.titre{
+.titre {
   display: flex;
   align-items: flex-end;
   gap: 10px;
 }
 
-
-.msgWrapper{
-  padding-top: 20px;
+.msgWrapper {
   height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: column;
 }

@@ -38,7 +38,6 @@ export class SignUpComponent implements OnInit {
 
 	createUser() {
 		const formValue = this.firstFormGroup.value;
-		console.log(formValue);
 		this.signService.userEmailPassword(formValue);
 		this.router.navigate(['/home']);
 	}

@@ -71,7 +71,6 @@ export class PopEditFoliosComponent implements OnInit {
 	}
 
 	deletePhoto(url) {
-		console.log(url);
 		var photo: any[] = [];
 		const index = this.photoss.findIndex(photos => photos == url);
 		this.photoss.splice(index, 1);
@@ -94,7 +93,6 @@ export class PopEditFoliosComponent implements OnInit {
 		let folio;
 		this.photoss.push(this.url);
 		this.photosTemp.push(this.url);
-		console.log(folio);
 		this.InputVar.nativeElement.value = "";
 	}
 
@@ -123,7 +121,6 @@ export class PopEditFoliosComponent implements OnInit {
 			prixMinimum: formVal.prixMinimum,
 			description: formVal.description
 		}
-		console.log(folio);
 		this.portfoflioService.updateFolio(this.data.uid, this.data.folioUid, folio);
 		this.dialogRef.close();
 

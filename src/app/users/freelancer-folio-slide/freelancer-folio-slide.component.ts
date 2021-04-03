@@ -1,3 +1,4 @@
+import { FormulaireService } from './../../services/formulaire.service';
 import { PortFolioService } from './../../services/portfolio.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -24,20 +25,23 @@ export class FreelancerFolioSlideComponent implements OnInit {
 		initialSlide: this.data.uid,
 	};
 
-	constructor(private router : Router, private portfolioService : PortFolioService, public dialogRef: MatDialogRef<FreelancerProfilClientComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData,) { }
+	constructor(private router: Router, private portfolioService: PortFolioService, public formServ: FormulaireService,
+		public dialogRef: MatDialogRef<FreelancerProfilClientComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData,) {
+		this.formServ.menuSub = false;
+	}
 
 	ngOnInit(): void {
-		console.log(this.data);
 	}
 
 
 
 
 	onNoClick(): void {
+		this.formServ.menuSub = true;
 		this.dialogRef.close();
 	}
 
-	valider(){
+	valider() {
 		this.portfolioService.rdvSubject.next(true);
 		this.onNoClick();
 	}

@@ -7,7 +7,7 @@
             [message]="message" [userUid]="users.uid" ></app-message-view>
         <div class="message">
             <input placeholder="Envoyer votre message" type="text" class="form-control" [(ngModel)]="discussion"
-                (keyup)="discusSubject.next(discussion)" (keydown.enter)="envoyer()">
+                (keyup)="discusSubject.next(discussion)" (keydown.enter)="envoyer()" (focus)="hide()" (focusout)="show()">
             <span class="material-icons iconSend" (click)="envoyer()">
                 send
             </span>

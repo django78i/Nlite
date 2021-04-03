@@ -65,7 +65,6 @@ export class UsersListComponent implements OnInit {
 
 	constructor(private route: ActivatedRoute, private formulaireService: FormulaireService, private formBuilder: FormBuilder, private userService: UserService, private auth: AngularFireAuth, private router: Router, private forulaireService: FormulaireService) {
 		this.req = history.state.data ? history.state.data : { location: 'All', type: 'All', allFreelancer: true };
-		console.log(this.req);
 		this.titre = {
 			lieu: this.req.type == "All" ? "France" : this.req.location,
 			type: this.req.type == "All" ? "tous freelancers" : this.req.location
@@ -91,7 +90,6 @@ export class UsersListComponent implements OnInit {
 			prix: [''],
 			type: ''
 		});
-		console.log(this.req);
 		this.req.location = this.req.location == 'All' ? 'France' : this.req.location;
 		this.req ? this.searchForm.patchValue(this.req) : '';
 	}
@@ -105,7 +103,6 @@ export class UsersListComponent implements OnInit {
 			type: value['type']
 
 		}
-		console.log(newForm);
 		this.titre = {
 			lieu: newForm.type == "All" ? "France" : newForm.location,
 			type: newForm.type == "All" ? "tous freelancers" : newForm.type

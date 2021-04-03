@@ -34,7 +34,6 @@ export class MailSendingComponent implements OnInit {
 
   onSubmitForm() {
     const formValue = this.firstFormGroup.value;
-    console.log(formValue);
     const form = new Formulaire(
       formValue['nom'],
       formValue['subscribedToMailingList'],

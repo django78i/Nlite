@@ -53,3 +53,12 @@ li {
   align-items: flex-end;
   gap: 20px;
 }
+
+
+.content{
+  height: 100%;
+  padding: 10px 0px 0px 10px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

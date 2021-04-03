@@ -85,7 +85,6 @@ export class DevisComponent implements OnInit {
 			freeName: this.freelancer.displayName,
 			freeMail: this.freelancer.email
 		}
-		console.log(devis);
 		this.selectedValue = '';
 		this.selectedsousSect = '';
 		this.commentaire = '';

@@ -1,7 +1,7 @@
-<section style="height: 100%;padding-top: 30px;">
+<section style="height: 100%;padding-top: 30px;" *ngIf="user | async as user else temp">
     <h1 class="titrePrincipal">Hello</h1>
     <div class="sub">
-        <h1 class="titrePrincipal">{{(user|async)?.displayName}}</h1>
+        <h1 class="titrePrincipal">{{user.displayName}}</h1>
         <img src="../../../../assets/icones/icons8-pouces-vers-le-haut-48.png" alt="">
     </div>
     <h2 class="sousTitrePrincipal" style="margin-top: 16px !important; color: rgb(187, 187, 187);">Voici ton planning : </h2>
@@ -47,3 +47,13 @@
         </div>
     </div>
 </section>
+<ng-template #temp>
+    <div class="content">
+        <div>
+            <h1>Hello,</h1>
+            <p class="subTitle">Inscris-toi pour profiter de ton espace utilisateur </p>
+        </div>
+        <img src="../../../assets/Groupe 6566.svg" alt="">
+        <app-sign-in-up></app-sign-in-up>
+    </div>
+</ng-template>

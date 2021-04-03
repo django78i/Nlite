@@ -10,3 +10,12 @@ mat-expansion-panel {
   margin-bottom: 12px;
   border-radius: 9px;
 }
+
+#description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  margin-top : 10px;
+}

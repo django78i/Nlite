@@ -1,13 +1,14 @@
+import { SwiperComponent } from 'ngx-useful-swiper';
 import { UserService } from './../services/user.service';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, NgZone, ViewChild, Input } from '@angular/core';
-import { FormulaireService } from '../services/formulaire.service';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import * as _ from 'lodash';
-
+import { AngularFireAuth } from '@angular/fire/auth';
+import { SwiperOptions } from 'swiper';
 
 interface FreelanceType {
 	value: string;
@@ -25,9 +26,41 @@ interface Locations {
 	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+	@ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
 	@ViewChild("placesRef") placesRef: GooglePlaceDirective;
 	@ViewChild('addresstext') addresstext: any;
+
+
+	config: SwiperOptions = {
+		pagination: { el: '.swiper-pagination', clickable: true },
+		// slidesPerView: 1,
+		spaceBetween: 10,
+		autoplay: {
+			delay: 4000,
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
+		},
+	};
+
+	photos: any[] = [
+		{
+			titre: 'La plateforme qui nous rapproche',
+			ssTitre: 'Trouvez les meilleurs indépendants près de chez vous',
+			photo: '../../assets/Groupe6542.svg'
+		},
+		{
+			titre: 'Franchissez de nouveaux paliers',
+			ssTitre: 'Montée en puissance',
+			photo: '../../assets/Groupe6541.svg'
+		},
+		{
+			titre: 'En toute transparence',
+			ssTitre: 'Profitez de toutes nos fonctionnalités sans frais',
+			photo: '../../assets/Groupe6540.svg'
+		},
+	]
 
 
 	selectedValue: string;
@@ -35,7 +68,9 @@ export class HomeComponent implements OnInit {
 	types: FreelanceType[] = [
 		{ value: 'coiffure', viewValue: 'coiffure' },
 		{ value: 'plombier', viewValue: 'plombier' },
-		{ value: 'IT', viewValue: 'IT' },
+		{ value: 'developpeur web', viewValue: 'développeur web' },
+		{ value: 'graphiste', viewValue: 'graphiste' },
+		{ value: 'business developpeur', viewValue: 'business developpeur' },
 		{ value: 'All', viewValue: 'tous les freelancers' }
 	];
 
@@ -67,10 +102,18 @@ export class HomeComponent implements OnInit {
 	disableInput: boolean = false;
 	disableSelect: boolean = false;
 
-	constructor(private formBuilder: FormBuilder, public userService: UserService, private router: Router, public zone: NgZone) { }
+	auths: any;
+
+	constructor(private formBuilder: FormBuilder,
+		public userService: UserService, private router: Router,
+		public zone: NgZone, private auth: AngularFireAuth) { }
 
 	ngOnInit(): void {
 		this.initForm();
+		this.userService.authSub.subscribe(u => {
+			this.auths = u;
+		})
+
 		this.users = this.userService.user;
 	}
 
@@ -91,7 +134,6 @@ export class HomeComponent implements OnInit {
 			location: val ? val.short_name : '',
 			allFreelancer: form.checked
 		}
-		console.log(req);
 		this.router.navigate(['/freelanceList'], {
 			state: {
 				data: {
@@ -104,7 +146,6 @@ export class HomeComponent implements OnInit {
 	}
 
 	callType(value) {
-		console.log(value);
 		if (value == true) {
 			this.disableSelect = true;
 			this.disableInput = true;

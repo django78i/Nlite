@@ -32,6 +32,8 @@ export interface DialogData {
 	event: CalendarEvent
 }
 
+type CalendarPeriod = 'day' | 'week' | 'month';
+
 
 @Component({
 	selector: 'app-calendar',
@@ -64,7 +66,10 @@ export class CalendarComponent implements OnInit {
 
 
 
-	view: CalendarView = CalendarView.Month;
+	// view: CalendarView = CalendarView.Month;
+	// viewDate: Date = new Date();
+
+	view: CalendarView | CalendarPeriod = CalendarView.Week;
 	viewDate: Date = new Date();
 
 	//Clicable
@@ -81,7 +86,7 @@ export class CalendarComponent implements OnInit {
 	freelancer: Observable<any>;
 
 
-	excludeDays: number[] =[];
+	excludeDays: number[] = [];
 	//user
 	user$: Observable<User>;
 	user: any;
@@ -126,7 +131,6 @@ export class CalendarComponent implements OnInit {
 		this.freelancer = this.userService.getCurrentUSer(this.user);
 		this.freelancer.pipe(
 			tap(freelancer => {
-				console.log(freelancer)
 				freelancer.jourRepos.forEach(jour => {
 					switch (jour) {
 						case 'Lundi':
@@ -152,7 +156,6 @@ export class CalendarComponent implements OnInit {
 							break;
 					}
 				})
-				console.log(this.excludeDays);
 				// this.excludeDays = freelancer.jourRepos)
 			})).subscribe();
 
@@ -193,16 +196,6 @@ export class CalendarComponent implements OnInit {
 	}
 
 
-	// ngAfterViewInit() {
-	// 	this.scrollToCurrentView();
-	// }
-
-	// viewChanged() {
-	// 	this.cdr.detectChanges();
-	// 	this.scrollToCurrentView();
-	// }
-
-
 	changeDay(date: Date) {
 		this.viewDate = date;
 		this.view = CalendarView.Week;
@@ -238,17 +231,14 @@ export class CalendarComponent implements OnInit {
 
 	deleteRdv(event) {
 		this.calendrierService.deleteRdv(this.user, event);
-		console.log(this.user);
 	}
 
 	eventClicked({ event }: { event: CalendarEvent }): void {
-		console.log('Event clicked', event);
 		this.openEdit(event, this.contactEvent);
 	}
 
 
 	sendMofication() {
-		console.log(this.user);
 		const formValue = this.dateForm.value;
 		//Decomposition heures
 		var heureDebut = formValue['heureDebut'].split(':');
@@ -272,17 +262,16 @@ export class CalendarComponent implements OnInit {
 		let contact;
 		const userEvent = {
 			// contact: contact = {
-				userUid: this.user.uid,
-				uid: id,
-				adresse: '',
-				ville: '',
-				codePostal: '',
-				nomClient: '',
-				type: 'Indisponible',
+			userUid: this.user.uid,
+			uid: id,
+			adresse: '',
+			ville: '',
+			codePostal: '',
+			nomClient: '',
+			type: 'Indisponible',
 			// },
 			event: newDate
 		}
-		console.log(userEvent);
 		this.calendrierService.createRdv(userEvent);
 	}
 
@@ -309,7 +298,6 @@ export class CalendarComponent implements OnInit {
 	}
 
 	openEdit(event, contact) {
-		console.log('openEdit');
 		const dialogRef = this.dialog.open(PopUpCalendarComponent, {
 			width: '700px',
 			// height: '600px',
@@ -326,10 +314,7 @@ export class CalendarComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
-			//   this.animal = result;
 
-			console.log(result)
 		});
 
 	}

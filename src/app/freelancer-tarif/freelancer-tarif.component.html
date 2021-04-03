@@ -1,9 +1,14 @@
-<p>Tarifs de <span style="color: #3467C9">{{freelancer.displayName}}</span></p>
+<div id="description" *ngIf="freelancer.description">
+    <h3>description</h3>
+    <p style="font-size: 10px; line-height: 12px;font-weight: 400;">{{freelancer.description}}</p>
+</div>
+
+<h3>Tarifs de <span style="color: #3467C9">{{freelancer.displayName}}</span></h3>
 <mat-accordion>
     <mat-expansion-panel *ngFor="let section of freelancer.prestation">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                <h2>{{section.titre}}</h2>
+                <h3>{{section.titre}}</h3>
             </mat-panel-title>
             <mat-panel-description>
                 <!-- This is a summary of the content -->
@@ -11,8 +16,8 @@
         </mat-expansion-panel-header>
         <ul>
             <li *ngFor="let sousSect of section.sousSection">
-                <p>{{sousSect.nom}} : {{sousSect.prix}}€</p>
-                <p class="subTitle">Créneau de {{sousSect.valeur}} {{sousSect.unite}}</p>
+                <p style="font-weight: 400;">{{sousSect.nom}} : {{sousSect.prix}}€</p>
+                <p class="categories">Créneau de {{sousSect.valeur}} {{sousSect.unite}}</p>
             </li>
         </ul>
     </mat-expansion-panel>

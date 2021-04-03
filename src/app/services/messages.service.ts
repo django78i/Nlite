@@ -27,8 +27,7 @@ export class MessgesService {
                 const pair = ''
                 return this.afs.collection('rooms').doc(contact).collection<Message>('messages').valueChanges()
             }),
-            map(msg => _.orderBy(msg, ['timestamp'], ['asc'])),
-            tap(message => console.log(message))
+            map(msg => _.orderBy(msg, ['timestamp'], ['asc']))
         )
         return this.messageList;
     }

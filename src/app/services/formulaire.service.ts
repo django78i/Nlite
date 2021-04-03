@@ -19,6 +19,8 @@ export class FormulaireService {
 
 	filterSubject: BehaviorSubject<any>;
 	req: any;
+	menuSub: Boolean;
+
 	constructor(private afs: AngularFirestore, private router: Router) {
 		this.filterSubject = new BehaviorSubject(null);
 		this.freelancerList = this.filterSubject.pipe(
@@ -28,7 +30,11 @@ export class FormulaireService {
 			map(free => free.filter(free => this.req.allFreelancer == true ? free.status == 'freelancer' : free.categories.find(categ => categ == this.req.type))),
 			share()
 		)
+		this.menuSub = true;
 	}
+
+
+
 
 }
 

@@ -1,31 +1,54 @@
-<div class="titleHeader">
-    <h1 class="titrePrincipal">Rechercher</h1>
-    <h2 style="color: #A9ACB9;" class="sousTitrePrincipal">Un freelancer près de chez vous</h2>
+<div class="stand" *ngIf="auths == true else showTuto">
+    <div class="titleHeader">
+        <h1 class="titrePrincipal">Rechercher</h1>
+        <h2 style="color: #A9ACB9;" class="sousTitrePrincipal">Un freelancer près de chez vous</h2>
+    </div>
+    <div class="form">
+        <form [formGroup]="searchForm" (ngSubmit)="searchResult()"
+            style="display: flex;flex-direction: column;align-items: center;">
+            <mat-form-field>
+                <mat-label>Que cherchez-vous ?</mat-label>
+                <mat-select name="freelancer" class="form-control" formControlName="freelanceType" [disabled]="checked">
+                    <mat-option *ngFor="let type of types" [value]="type.value">
+                        {{type.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Où</mat-label>
+                <input ngx-google-places-autocomplete [options]='options' matInput class="form-control"
+                    [disabled]="checked" #placesRef="ngx-places" formControlName="location"
+                    (onAddressChange)="handleAddressChange($event)" />
+            </mat-form-field>
+            <mat-checkbox formControlName="checked" class="checkBoxes" [(ngModel)]="checked">Tous les freelancers
+            </mat-checkbox>
+            <button mat-raised-button class="buttonPrimaire primary"><span class="material-icons"
+                    style="color: white;margin-right: 10px;font-size: 36px;">search</span>Rechercher</button>
+        </form>
+    </div>
 </div>
-<div class="form">
-    <form [formGroup]="searchForm" (ngSubmit)="searchResult()"
-        style="display: flex;flex-direction: column;align-items: center;">
-        <mat-form-field>
-            <mat-label>Que cherchez-vous ?</mat-label>
-            <mat-select name="freelancer" class="form-control" formControlName="freelanceType" [disabled]="checked">
-                <mat-option *ngFor="let type of types" [value]="type.value">
-                    {{type.viewValue}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Où</mat-label>
-            <input ngx-google-places-autocomplete [options]='options' matInput class="form-control" [disabled]="checked"
-                #placesRef="ngx-places" formControlName="location" (onAddressChange)="handleAddressChange($event)" />
-        </mat-form-field>
-        <mat-checkbox formControlName="checked" class="checkBoxes" [(ngModel)]="checked">Tous les freelancers
-        </mat-checkbox>
-        <button mat-raised-button class="buttonPrimaire primary"><span class="material-icons"
-                style="color: white;margin-right: 10px;font-size: 36px;">search</span>Rechercher</button>
-    </form>
-</div>
-<section style="margin-top: 30px;display: flex;flex-direction: column;align-items: center;"
-    *ngIf="this.userService.isAuth === false">
-    <button mat-raised-button class="buttonPrimaire primary" routerLink="/mail"> Connexion par mail</button>
-    <app-sign-in-up></app-sign-in-up>
-</section>
+<ng-template #showTuto>
+    <div class="contenu">
+        <div class="swiper-container">
+            <swiper [config]="config" #usefulSwiper style="height: 100%;">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let photo of photos; let i = index"
+                        [ngStyle]="{'background-image': 'url(' +photo.photo+ ')'}">
+                        <!-- <div class="photo">
+                            <img [src]="photo.photo" alt="">
+                        </div> -->
+                        <div class="text">
+                            <h1 class="titreSlide" style="text-align: center;">{{photo.titre}}</h1>
+                            <p class="ssTitreSlide" >{{photo.ssTitre}}</p>
+                        </div>
+                    </div>
+                </div>
+            </swiper>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="divButton">
+            <button mat-button class="buttonPrimaire primary" routerLink="/freelanceList"> Rechercher un
+                indépendant</button>
+        </div>
+    </div>
+</ng-template>

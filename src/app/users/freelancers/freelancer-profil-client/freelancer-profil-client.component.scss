@@ -13,17 +13,18 @@ section.profilEntete {
 
 :host ::ng-deep mat-tab-group {
   width: 100%;
-  margin-top: 5px;
-}
-
-#description {
-  position: relative;
-  height: 49px;
-  overflow: hidden;
+  padding-bottom: 40px;
 }
 
 h3 {
   line-height: 12px;
+}
+
+.adTitle {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 :host ::ng-deep .mat-tab-label-active {
@@ -70,19 +71,13 @@ h3 {
 .titre {
   display: flex;
   justify-content: space-between;
-}
-
-.categList {
-  display: flex;
-  gap: 10px;
-  font-family: "Poppins", sans-serif;
-  line-height: 10px;
-}
-
-.categories {
-  display: flex;
   align-items: center;
-  gap: 3px;
+}
+
+.abs {
+  position: absolute;
+  top: 0;
+  width: 250px;
 }
 
 .dot {
@@ -91,6 +86,10 @@ h3 {
   border-radius: 50%;
   background: blue;
 }
+
+// .categList {
+//   margin-bottom: 5px;
+// }
 
 .small {
   font-size: 10px;
@@ -109,4 +108,3 @@ ul {
   justify-content: center;
   align-items: center;
 }
-

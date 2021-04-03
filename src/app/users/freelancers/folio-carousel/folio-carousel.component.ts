@@ -47,11 +47,10 @@ export class FolioCarouselComponent implements OnInit {
 
 
 	openDialog(photos, i): void {
-		console.log('entree :${photos},${i} ');
 		const dialogRef = this.dialog.open(FreelancerFolioSlideComponent, {
 			maxWidth: '100%',
 			width: '100%',
-			height: '100vh',
+			height: '100%',
 			data: { uid: i, photos: photos, titre: this.titre, prix: this.prix },
 			panelClass: 'custom',
 		});

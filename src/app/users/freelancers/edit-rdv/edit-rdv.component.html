@@ -1,21 +1,6 @@
 <h2>Gérez vos paramètres de rendez-vous</h2>
 <form [formGroup]="dateForm" (ngSubmit)="sendMofication()">
     <div class="form-group">
-        <!-- <p>Durée minimum d'un créneau</p>
-        <div class="crenaux">
-            <mat-form-field appearance="legacy" style="width: 10%;">
-                <mat-label>valeur</mat-label>
-                <input matInput placeholder="valeur" class="form-control" formControlName="valeur">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>unité</mat-label>
-                <mat-select name="unite" class="form-control" formControlName="unite">
-                    <mat-option *ngFor="let unite of unite" [value]="unite.value">
-                        {{unite.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div> -->
         <mat-form-field>
             <mat-label>mode de prestation</mat-label>
             <mat-select name="mode" class="form-control" formControlName="mode">
@@ -48,5 +33,5 @@
             </mat-form-field>
         </div>
     </div>
-    <button mat-raised-button>Enregistrer</button>
+    <button mat-button class="buttonSecondaire secondary">Enregistrer</button>
 </form>

@@ -89,7 +89,7 @@ type CalendarPeriod = 'day' | 'week' | 'month';
 		`,
 	],
 })
-export class CalendrierClientComponent implements OnInit, AfterViewInit {
+export class CalendrierClientComponent implements OnInit {
 
 	@ViewChild('scrollContainer') scrollContainer: ElementRef<HTMLElement>;
 	//traduction
@@ -126,7 +126,6 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 		event.start = newStart;
 		event.end = newEnd;
 		this.refresh.next();
-		console.log(this.events);
 	}
 
 	//user
@@ -181,7 +180,6 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.freelancer);
 		this.freelancer.jourRepos.forEach(jour => {
 			switch (jour) {
 				case 'Lundi':
@@ -212,9 +210,7 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 
 		this.events$ = this.calendrierService.getRdv(this.freelancer).pipe(
 			map(event => {
-				console.log(event);
 				this.range = _.sortBy(event, 'event.start');
-				console.log(this.range);
 				return event.map(event => {
 					return {
 						start: event.event.start.toDate(),
@@ -242,18 +238,15 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 	}
 
 	prest(value) {
-		console.log('ici : ' + value);
 		this.valu = this.sousServices.find(pre => pre.value == value);
 	}
 
 	callType(value) {
 		this.stop = false;
-		// this.selectedsousSect = '';
 		this.sousServices = [];
 		let prest: any;
 		prest = this.freelancer.prestation.find((presta: any) => presta.titre == value);
 		this.prestaChoisi = prest;
-		console.log(prest);
 		prest.sousSection.forEach(p => {
 			let val = {
 				value: p.nom,
@@ -267,31 +260,8 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 
 	viewChanged() {
 		this.cdr.detectChanges();
-		// this.scrollToCurrentView();
 	}
 
-
-
-	ngAfterViewInit() {
-		// if (this.events$) {
-		// 	this.scrollToCurrentView();
-		// }
-	}
-
-
-
-	// private scrollToCurrentView() {
-	// 	if (this.view === CalendarView.Week || CalendarView.Day) {
-	// 		// each hour is 60px high, so to get the pixels to scroll it's just the amount of minutes since midnight
-	// 		const minutesSinceStartOfDay = differenceInMinutes(
-	// 			startOfHour(new Date()),
-	// 			startOfDay(new Date())
-	// 		);
-	// 		const headerHeight = this.view === CalendarView.Week ? 60 : 0;
-	// 		this.scrollContainer.nativeElement.scrollTop =
-	// 			minutesSinceStartOfDay + headerHeight;
-	// 	}
-	// }
 
 	setView(view: CalendarView) {
 		this.view = view;
@@ -352,7 +322,6 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 				}
 			});
 		}
-		console.log(boul);
 		if (boul == false) {
 			const dialogRef = this.dialog.open(PopUpCalenderClientComponent, {
 				width: '100%',
@@ -368,7 +337,6 @@ export class CalendrierClientComponent implements OnInit, AfterViewInit {
 				}
 			});
 		}
-		console.log('clicker');
 
 	}
 

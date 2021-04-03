@@ -15,7 +15,6 @@ export class PopUpUserRdvComponent implements OnInit {
 
   ngOnInit(): void {
     moment.locale('fr');
-    console.log(this.data);
   }
 
 

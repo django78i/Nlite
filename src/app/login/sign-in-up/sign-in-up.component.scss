@@ -22,3 +22,13 @@ section{
     height: 67px;
     border-radius: 35px;
 }
+
+.buttonPrimaire {
+  display: flex !important;
+  padding: 1rem 2rem 1rem 2rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 40px !important;
+  margin: 0px !important;
+}
+

@@ -27,15 +27,12 @@ export class SignService {
 
 
     login() {
-        console.log('login ..');
         const popUp = from(this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
         this.user = popUp.pipe(
             switchMap(data => this.afs.collection('users').doc(data.user.uid).valueChanges())
         )
         this.user.subscribe((data) => {
-            console.log(data)
             if (!data) {
-                console.log('trouvé')
                 popUp.subscribe((datas) => {
                     const donnee = new User(
                         datas.user.uid,
@@ -53,7 +50,6 @@ export class SignService {
                         '',
                         []
                     )
-                    console.log('création');
                     this.createUser(donnee);
                 })
 
@@ -64,10 +60,8 @@ export class SignService {
     }
 
     userEmailPassword(user) {
-        // let newUser;
         this.auth.createUserWithEmailAndPassword(user.email, user.password);
         firebase.auth().onAuthStateChanged((users) => {
-            console.log(users);
             const newUser = {
                 displayName: 'johny',
                 email: user.email,
@@ -77,14 +71,6 @@ export class SignService {
             }
             this.createUser(newUser);
         })
-        // val.pipe(
-        //     switchMap(user =>{
-        //         // return newUser = {
-        //         //     displayName : user.displayName
-        //         // }
-        //     })
-        // )
-        // const id = this.afs.createId();
     }
 
     createUser(user) {

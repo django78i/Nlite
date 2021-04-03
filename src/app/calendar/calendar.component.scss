@@ -1,32 +1,31 @@
-
 .calendrier {
   flex: 3;
   margin-top: 20px;
 }
 
-.debut,
-.fin {
-  display: flex;
-  padding: 0 10px;
-  gap: 10px;
+:host ::ng-deep .cal-week-view .cal-time-label-column {
+  width: 43px !important;
+}
+:host ::ng-deep .cal-week-view .cal-time {
+  display: flex !important;
+  font-weight: 500 !important;
+  width: 43px !important;
+  font-size: 12px !important;
+  justify-content: center !important;
 }
 
-.mat-form-field {
-  flex: 1;
-  max-width: 180px;
+:host ::ng-deep b {
+  font-size: 12px !important;
+  font-weight: 500 !important;
 }
 
-.heures {
-  flex: 1;
-  max-width: 200px;
+:host ::ng-deep .cal-hour-segment cal-hour-start {
+  display: flex !important;
+  justify-content: flex-start !important;
 }
-
-  .scroll-container {
-    height: 400px;
-    width: 350px;
+:host ::ng-deep .cal-week-view .cal-day-headers {
+  padding-left: 43px !important;
+  span {
+    display: none !important;
   }
-
-// How to override a non themable property, this was copied from chrome -> inspect element -> styles panel
-.cal-month-view .cal-day-cell.cal-out-month .cal-day-number {
-  opacity: 0.15;
 }

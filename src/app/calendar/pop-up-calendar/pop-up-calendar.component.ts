@@ -40,7 +40,6 @@ export class PopUpCalendarComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		console.log(this.data);
 		this.initForm();
 	}
 
@@ -79,7 +78,6 @@ export class PopUpCalendarComponent implements OnInit {
 
 	sendMofication() {
 		const formValue = this.dateForm.value;
-		console.log(formValue);
 		//Decomposition heures
 		var heureDebut = formValue['heureDebut'].split(':');
 		var heureFin = formValue['heureFin'].split(':');
@@ -99,7 +97,6 @@ export class PopUpCalendarComponent implements OnInit {
 			start: dateDebut.toDate(),
 			end: dateFin.toDate(),
 		}
-		console.log(formValue['type']);
 		switch (formValue['type']) {
 			case 'valide':
 				newDate.color = colors.blue

@@ -24,7 +24,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
 					.pipe(
 						tap(user => {
 							this.userFormat = user.map(user => user.user.split(" ").map(n => n[0]).join(""));
-							console.log(this.userFormat);
 						}),share()
 					);
 			}
@@ -39,7 +38,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
 	}
 
 	discuss(id) {
-		console.log(id);
 		const val = {
 			freeUid: id.freeUid,
 			clientId: id.clientUid,

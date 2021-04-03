@@ -35,7 +35,6 @@ export class PopUpCalenderClientComponent implements OnInit {
 		this.userService.user.subscribe((user) => {
 			this.user = user;
 		})
-		console.log(this.data.event);
 	}
 
 	initForm() {
@@ -50,7 +49,6 @@ export class PopUpCalenderClientComponent implements OnInit {
 
 	initValue() {
 		moment.locale('fr');
-		console.log(this.data);
 		this.jourFin = this.data.creneau.unite == 'm' ? moment(this.data.event.date).add(this.data.creneau.valeur, 'm').toDate() : moment(this.data.event.date).add(this.data.creneau.valeur, 'h').toDate();
 		this.heureFin = moment(this.jourFin).format('LT');
 		this.heureDebut = moment(this.data.event.date).format('LT');
@@ -60,7 +58,6 @@ export class PopUpCalenderClientComponent implements OnInit {
 
 	sendMofication() {
 		const formValue = this.dateForm.value;
-		console.log(formValue);
 		const id = this.afs.createId();
 		const newDate: CalendarEvent = {
 			id: id,
@@ -69,7 +66,6 @@ export class PopUpCalenderClientComponent implements OnInit {
 			start: this.data.event.date,
 			end: this.jourFin,
 		}
-		console.log(formValue['type']);
 		let contact;
 		const userEvent = {
 			// contact: contact = {
@@ -86,7 +82,6 @@ export class PopUpCalenderClientComponent implements OnInit {
 			// },
 			event: newDate
 		}
-		console.log(userEvent);
 		this.calendrierService.createRdvClient(userEvent);
 		this.onNoClick();
 	}

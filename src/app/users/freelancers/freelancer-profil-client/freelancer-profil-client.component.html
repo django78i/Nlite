@@ -1,22 +1,20 @@
-<section *ngIf="freelancer$ | async as freelancer">
+<section *ngIf="freelancer$ | async as freelancer" style="display: flex;flex-direction: column; height: 100%;">
     <section class="profilEntete">
         <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
         <div class="profilInfo">
-            <h2>{{freelancer.displayName}}</h2>
-            <ul class="categList">
+            <div style="height: 20px;position: relative;width: 100%;">
+                <h2 class="titreSecondaire abs">{{freelancer.displayName}}</h2>
+            </div>
+            <ul class="categList ">
                 <li *ngFor="let categorie of freelancer.categories" class="categories ">
                     <div class="dot"></div>
-                    <p class="subTitle ">{{categorie}}</p>
+                    <h3>{{categorie}}</h3>
                 </li>
             </ul>
-            <p class="subTitle">{{freelancer.adresse.rue}}, </p>
-            <p class="subTitle">{{freelancer.adresse.codePostal}}
-                {{freelancer.adresse.ville}}</p>
-            <div id="description" *ngIf="freelancer.description">
-                <p style="font-size: 10px; line-height: 12px;">{{freelancer.description}}</p>
-                <p id="plus"
-                    style="position: absolute;bottom: 0;right: 0;font-size: 10px; line-height: 12px;background: white;"
-                    (click)="vue()">...<span style="color: darkgrey;">Voir la suite</span></p>
+            <div style="display: flex;flex-wrap: wrap;gap: 5px;">
+                <p class="subTitle" style="font-size: 10px;">{{freelancer.adresse.rue}}, </p>
+                <p class="subTitle" style="font-size: 10px;">{{freelancer.adresse.codePostal}}
+                    {{freelancer.adresse.ville}}</p>
             </div>
         </div>
         <button mat-raised-button class="chatter" (click)="openRoom(freelancer)" style="padding: 0;"><img
@@ -27,7 +25,7 @@
             <div *ngIf="(portfolioList| async )?.length ; else folio">
                 <div class="folioContent" *ngFor="let folio of portfolioList | async">
                     <div class="titre">
-                        <h2>{{folio.titre}}</h2>
+                        <h2 style="font-weight: 900;">{{folio.titre}}</h2>
                         <p class="subTitle">A partir de {{folio.prixMinimum}}€</p>
                     </div>
                     <app-folio-carousel [titre]="folio.titre" [photos]="folio.photos" [prix]=folio.prixMinimum>

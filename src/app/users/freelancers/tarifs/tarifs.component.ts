@@ -44,7 +44,6 @@ export class TarifsComponent implements OnInit {
 	setServices(services) {
 		let formArray = new FormArray([]);
 		services.forEach((r) => {
-			console.log(r);
 			formArray.push(this.formBuilder.group({
 				titre: r.titre,
 				sousSection: this.setSousServices(r.sousSection)
@@ -57,7 +56,6 @@ export class TarifsComponent implements OnInit {
 	setSousServices(sousServ) {
 		let formArray = new FormArray([]);
 		sousServ.forEach((s) => {
-			console.log(s);
 			formArray.push(this.formBuilder.group({
 				unite :s.unite, 
 				valeur : s.valeur,
@@ -93,7 +91,6 @@ export class TarifsComponent implements OnInit {
 			valeur :'',
 			unite : ''
 		});
-		console.log(control);
 		this.getSousSection(controls).push(newrowControl);
 	}
 
@@ -111,7 +108,6 @@ export class TarifsComponent implements OnInit {
 			...this.user,
 			prestation: formVal.services
 		};
-		console.log(newUser);
 		this.userService.upDateUser(newUser);
 	}
 

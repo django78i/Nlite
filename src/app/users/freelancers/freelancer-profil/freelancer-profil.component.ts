@@ -64,14 +64,8 @@ export class FreelancerProfilComponent implements OnInit {
 			data: { uid: user.uid, name: user.displayName, photo: user.image ? user.image : '', description: user.description ? user.description : '', categories: user.categories ? user.categories : '' }
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
-			//   this.animal = result;
-
-		});
 	}
 	openFolio(user, folioUid, folio): void {
-		console.log(user);
 		const dialogRef = this.dialog.open(PopEditFoliosComponent, {
 			maxWidth : '99vw',
 			width: '95vw',
@@ -86,7 +80,6 @@ export class FreelancerProfilComponent implements OnInit {
 	createFolio(uid) {
 		const dialogRef = this.dialog.open(PopUpCreateFolioComponent, {
 			width: '550px',
-			// height: '600px',
 			data: { uid: uid }
 		});
 

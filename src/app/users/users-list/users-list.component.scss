@@ -1,23 +1,13 @@
-// @import "../../../styles.scss";
 .miniTitre {
   font-weight: 500;
 }
 
-.primaire{
-  color : #5337f7;
-}
-
-mat-accordion {
-  position: absolute;
-  bottom: 0px;
-  left: 62px;
+.primaire {
+  color: #5337f7;
 }
 
 mat-expansion-panel {
-  border-top-right-radius: 32px !important;
-  border-top-left-radius: 30px !important;
-  border-bottom-right-radius: 33px !important;
-  border-bottom-left-radius: 33px !important;
+  border-radius: 33px !important;
 }
 
 mat-expansion-panel-header {
@@ -27,13 +17,25 @@ mat-expansion-panel-header {
 .container {
   height: 100%;
   position: relative;
-  padding-top: 30px !important;
+  padding-top: 10px !important;
+  display: flex;
+  flex-direction: column;
 }
 
 input {
   border-radius: 40px;
   box-shadow: 0 14px 12px 4px rgba(0, 0, 0, 0.12);
   background: white;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
 }
 
 mat-label {
@@ -51,8 +53,6 @@ mat-select {
   border-radius: 40px;
   box-shadow: -5px 29px 20px -8px rgb(0 0 0 / 12%);
 }
-
-
 
 ul {
   list-style-type: none;
@@ -112,9 +112,9 @@ mat-form-field {
   padding: 10px 0.75rem;
 }
 
-.content{
-  height: 330px;
+.content {
+  // height: 330px;
   width: 100%;
   overflow-y: auto;
-
 }
+

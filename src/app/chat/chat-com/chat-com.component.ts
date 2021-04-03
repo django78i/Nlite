@@ -1,3 +1,4 @@
+import { FormulaireService } from './../../services/formulaire.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MessgesService } from './../../services/messages.service';
 import { User } from './../../models/user.model';
@@ -33,13 +34,12 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 
 	constructor(private route: ActivatedRoute, public auth: AngularFireAuth,
 		public messageService: MessgesService, public userService: UserService, private afs: AngularFirestore,
-		private elem: ElementRef) {
+		private elem: ElementRef, public formServ: FormulaireService) {
 
 		this.auth.onAuthStateChanged((user) => {
 			this.userService.user.subscribe((user) => {
-				console.log(user);
 				this.users = user;
-				
+
 			})
 		});
 
@@ -62,7 +62,6 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 
 	envoyer() {
 		const keyPair = this.users.status == 'freelancer' ? this.users.uid + this.donnee.clientId : this.donnee.freeUid + this.users.uid;
-		console.log(keyPair);
 		const discuss = new Message(
 			this.users.uid,
 			this.users.status == 'freelancer' ? this.donnee.freelance : this.donnee.client,
@@ -73,7 +72,6 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 			keyPair,
 			''
 		)
-		console.log(discuss);
 		this.messageService.saveMessage(discuss, this.params, this.users.uid);
 		this.discussion = '';
 	}
@@ -82,6 +80,16 @@ export class ChatComComponent implements OnInit, AfterViewInit {
 		if (message == this.users.uid) {
 			return 'flex-start';
 		} else return 'flex-end';
+	}
+
+	hide() {
+		this.formServ.menuSub = false;
+
+	}
+
+	show(){
+		this.formServ.menuSub = true;
+
 	}
 
 }

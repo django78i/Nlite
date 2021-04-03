@@ -11,7 +11,7 @@
         </ng-template>
 
         <div *ngIf="events$ | async;else loading; let events">
-            <div [ngSwitch]="view" class="scroll-container" #scrollContainer>
+            <div [ngSwitch]="view">
                 <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
                     [refresh]="refresh" (eventTimesChanged)="eventTimesChanged($event)"
                     (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"

@@ -44,7 +44,7 @@ export class FreelancerProfilClientComponent implements OnInit, OnDestroy {
 		this.route.params.subscribe((params) => {
 			this.params = params.id;
 			this.freelancer$ = this.userService.getSingleContact(params.id);
-			this.portfolioList = this.portfolioService.getFreelancerFolio(params.id).pipe(tap(rdv => console.log(rdv)));
+			this.portfolioList = this.portfolioService.getFreelancerFolio(params.id);
 		}
 		)
 		this.portfolioService.rdvSubject.next(false);
@@ -66,11 +66,9 @@ export class FreelancerProfilClientComponent implements OnInit, OnDestroy {
 
 
 	openRoom(contactUid) {
-		console.log(this.isAuth);
 		if (!this.isAuth) {
 			this.openDialog();
 		} else {
-			console.log(this.user);
 			this.userSub = this.userService.user.subscribe((user) => {
 				this.userService.openRoom(contactUid);
 				const val = {

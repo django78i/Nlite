@@ -34,10 +34,7 @@ export class PortFolioService {
     }
 
     getFreelancerFolio(uid): Observable<any[]> {
-        return this.afs.collection('portfolios').doc<Portfolio>(uid).collection('projets').valueChanges().pipe(
-            tap(rdv => console.log(rdv))
-        );
-
+        return this.afs.collection('portfolios').doc<Portfolio>(uid).collection('projets').valueChanges();
     }
 
     createPortfolio(folio, uid) {
@@ -50,7 +47,6 @@ export class PortFolioService {
         this.photos = this.photosSubject.pipe(
             switchMap(projets => this.afs.collection('portfolios').doc(userUid).collection('projets').doc<Portfolio>(folioUid).valueChanges())
             , map(projet => projet.photos)
-            , tap(data => console.log(data))
         )
         return this.photos;
     }
