@@ -1,4 +1,4 @@
-<div *ngIf="small === true" style="height: 100%;">
+<div *ngIf="(small|async)==true" class="frontSize">
     <mat-toolbar class="menuTop">
         <div class="logo">
         </div>
@@ -20,8 +20,9 @@
             </ng-template>
         </div>
     </mat-toolbar>
-    <div style="width: 100%;padding: 60px 16px 0px 16px;height:calc(100% - 41px)">
-        <router-outlet (activate)="onActivate($event)"></router-outlet>
+    <div style="width: 100%; padding-bottom: 41px;">
+        <router-outlet (activate)=" onActivate($event)">
+        </router-outlet>
     </div>
     <mat-toolbar class="bottom" *ngIf="this.fms.menuSub == true">
         <a routerLink="home">
@@ -72,26 +73,70 @@
         </a>
     </mat-toolbar>
 </div>
-<div *ngIf="small === false" style="height: 100%;">
+<div *ngIf="(small|async)==false" class="frontSize">
     <mat-drawer-container class="example-container" hasBackdrop="true" style="height: 100%;">
-        <mat-drawer #drawer mode="side">
-            <div class="logo" style="margin-bottom: 30px;">
+        <mat-drawer #drawer mode="over">
+            <div class="menuTopTitre">
+                <h2 class="titreSecondaire" style="margin-bottom: 30px;">Menu</h2>
+                <div (click)="!drawer.toggle()" style="cursor: ponter;">
+                    <img src="https://img.icons8.com/material-sharp/24/000000/delete-sign.png" />
+                </div>
             </div>
             <div class="menuTap">
-                <a routerLink="home" class="titreIcon" routerLinkActive="active-link">Acceuil</a>
-                <a routerLink="freelanceList" class="titreIcon" routerLinkActive="active-link">trouver un
-                    indépendant</a>
-                <a routerLink="clientProfil" class="titreIcon" routerLinkActive="active-link">Mes rendez-vous</a>
-                <a routerLink="chat" class="titreIcon" routerLinkActive="active-link">Chat</a>
+                <a routerLink="home">
+                    <svg fill="#a1a1a2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px"
+                        height="24px" routerLinkActive="active-link">
+                        <path
+                            d="M 23.951172 4 A 1.50015 1.50015 0 0 0 23.072266 4.3222656 L 8.859375 15.519531 C 7.0554772 16.941163 6 19.113506 6 21.410156 L 6 40.5 C 6 41.863594 7.1364058 43 8.5 43 L 18.5 43 C 19.863594 43 21 41.863594 21 40.5 L 21 30.5 C 21 30.204955 21.204955 30 21.5 30 L 26.5 30 C 26.795045 30 27 30.204955 27 30.5 L 27 40.5 C 27 41.863594 28.136406 43 29.5 43 L 39.5 43 C 40.863594 43 42 41.863594 42 40.5 L 42 21.410156 C 42 19.113506 40.944523 16.941163 39.140625 15.519531 L 24.927734 4.3222656 A 1.50015 1.50015 0 0 0 23.951172 4 z M 24 7.4101562 L 37.285156 17.876953 C 38.369258 18.731322 39 20.030807 39 21.410156 L 39 40 L 30 40 L 30 30.5 C 30 28.585045 28.414955 27 26.5 27 L 21.5 27 C 19.585045 27 18 28.585045 18 30.5 L 18 40 L 9 40 L 9 21.410156 C 9 20.030807 9.6307412 18.731322 10.714844 17.876953 L 24 7.4101562 z" />
+                    </svg>
+                    <p class="titreIcon" routerLinkActive="active-link">Acceuil</p>
+                </a>
+                <a routerLink="calendar" *ngIf="(user|async)?.status == 'freelancer'; else showFav">
+                    <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px"
+                        height="24px" routerLinkActive="active-link" fill="#a1a1a2">
+                        <path
+                            d="M 25 0 C 23.156406 0 21.659479 1.2936368 21.203125 3 L 17 3 L 10 3 C 8.346 3 7 4.346 7 6 L 7 45 C 7 46.654 8.346 48 10 48 L 31.074219 48 C 30.523219 47.386 30.033187 46.718 29.617188 46 L 10 46 C 9.449 46 9 45.552 9 45 L 9 6 C 9 5.448 9.449 5 10 5 L 16 5 L 16 8 C 16 9.6449698 17.35503 11 19 11 L 31 11 C 32.64497 11 34 9.6449698 34 8 L 34 5 L 40 5 C 40.551 5 41 5.448 41 6 L 41 28.050781 C 41.686 28.107781 42.352 28.225578 43 28.392578 L 43 6 C 43 4.346 41.654 3 40 3 L 33 3 L 28.796875 3 C 28.340521 1.2936368 26.843594 0 25 0 z M 25 2 C 26.116666 2 27 2.8833339 27 4 A 1.0001 1.0001 0 0 0 28 5 L 32 5 L 32 8 C 32 8.5650302 31.56503 9 31 9 L 19 9 C 18.43497 9 18 8.5650302 18 8 L 18 5 L 22 5 A 1.0001 1.0001 0 0 0 23 4 C 23 2.8833339 23.883334 2 25 2 z M 14 18 A 1.0001 1.0001 0 1 0 14 20 L 36 20 A 1.0001 1.0001 0 1 0 36 18 L 14 18 z M 14 24 A 1.0001 1.0001 0 1 0 14 26 L 36 26 A 1.0001 1.0001 0 1 0 36 24 L 14 24 z M 14 30 A 1.0001 1.0001 0 1 0 14 32 L 30 32 A 1.0001 1.0001 0 1 0 30 30 L 14 30 z M 40 30 C 34.5 30 30 34.5 30 40 C 30 45.5 34.5 50 40 50 C 45.5 50 50 45.5 50 40 C 50 34.5 45.5 30 40 30 z M 40 32 C 44.4 32 48 35.6 48 40 C 48 44.4 44.4 48 40 48 C 35.6 48 32 44.4 32 40 C 32 35.6 35.6 32 40 32 z M 39 34 L 39 39.5 L 35.400391 42.199219 L 36.599609 43.800781 L 41 40.5 L 41 34 L 39 34 z M 14 36 A 1.0001 1.0001 0 1 0 14 38 L 27 38 A 1.0001 1.0001 0 1 0 27 36 L 14 36 z" />
+                    </svg>
+
+                    <p class="titreIcon" routerLinkActive="active-link">Planning</p>
+                </a>
+                <ng-template #showFav>
+                    <a routerLink="clientProfil">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"
+                            routerLinkActive="active-link" fill="#a1a1a2">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                        </svg>
+                        <p class="titreIcon" routerLinkActive="active-link">Rendez-vous</p>
+                    </a>
+                </ng-template>
+                <a routerLink="chat">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        fill="#a1a1a2">
+                        <path fill-rule="evenodd" clip-rule="evenodd" routerLinkActive="active-link"
+                            d="M6.97537 9.29846C6.36454 9.29846 5.86908 9.78598 5.86908 10.3877C5.86908 10.9891 6.36454 11.4766 6.97537 11.4766C7.5862 11.4766 8.08167 10.9891 8.08167 10.3877C8.08167 9.78598 7.5862 9.29846 6.97537 9.29846ZM15.7623 9.29846C15.1515 9.29846 14.6563 9.78598 14.6563 10.3877C14.6563 10.9891 15.1515 11.4766 15.7623 11.4766C16.3734 11.4766 16.8686 10.9891 16.8686 10.3877C16.8686 9.78598 16.3734 9.29846 15.7623 9.29846ZM11.369 9.29846C10.7579 9.29846 10.2627 9.78598 10.2627 10.3877C10.2627 10.9891 10.7579 11.4766 11.369 11.4766C11.9798 11.4766 12.475 10.9891 12.475 10.3877C12.475 9.78598 11.9798 9.29846 11.369 9.29846ZM11.3687 0C11.0839 0 10.7946 0.0110596 10.5089 0.0331789C5.29741 0.437902 1.10721 4.61904 0.762021 9.75878C0.588061 12.3515 1.37346 14.8644 2.98068 16.8928C2.83041 17.9145 2.3823 18.9138 1.64457 19.8694L0 22L2.70927 21.7845C2.81492 21.7761 5.17992 21.5753 7.76381 20.3151C8.91716 20.7255 10.127 20.9329 11.3684 20.9329C11.712 20.9329 12.0612 20.9165 12.4061 20.8842C14.8649 20.6537 17.1855 19.56 18.9403 17.8039C20.6942 16.0487 21.7686 13.7468 21.9647 11.3224C22.2046 8.36228 21.2157 5.53729 19.1805 3.36721C17.1731 1.22732 14.3257 0 11.3687 0ZM11.3687 1.19564C16.8246 1.19564 21.1966 5.76386 20.7543 11.2273C20.3951 15.6616 16.7887 19.2725 12.2907 19.6939C11.9804 19.7229 11.6729 19.7373 11.3684 19.7373C10.0641 19.7373 8.82213 19.4757 7.69277 19.0037C5.11313 20.394 2.61151 20.5927 2.61151 20.5927C3.74756 19.1212 4.16561 17.7148 4.23969 16.5186C2.68772 14.7482 1.80213 12.3961 1.97366 9.83769C2.27878 5.29308 5.99294 1.58332 10.6042 1.22523C10.8611 1.2052 11.1161 1.19564 11.3687 1.19564Z"
+                            fill="#9B9B9B" />
+                    </svg>
+                    <p class="titreIcon" routerLinkActive="active-link">Chat</p>
+                </a>
+                <a routerLink="freelanceList">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#a1a1a2"
+                        routerLinkActive="active-link">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                    <p class="titreIcon" routerLinkActive="active-link">Rechercher</p>
+                </a>
             </div>
         </mat-drawer>
         <mat-drawer-content>
             <mat-toolbar class="menuTop">
-                <!-- <div style="display: flex;gap: 5px;"> -->
-                <button mat-button (click)="drawer.toggle()">menu</button>
+                <button mat-button (click)="drawer.toggle()"><img src="../assets/icones/icons8-menu.svg"
+                        alt=""></button>
                 <div class="logo">
                 </div>
-                <!-- </div> -->
                 <div class="userZone">
                     <div class="userProfil" *ngIf="isAuth == true; else connect">
                         <div *ngIf="user | async as user">
@@ -110,7 +155,8 @@
                     </ng-template>
                 </div>
             </mat-toolbar>
-            <div style="height: 100%; padding-top: 65px; margin: auto;max-width: 1300px; width:80%;">
+            <!-- <div style="height: 100%; padding-top: 65px; margin: auto;max-width: 1300px; width:80%;"> -->
+            <div style="height: 100%; padding-top: 65px; width: 100%;">
                 <router-outlet (activate)="onActivate($event)"></router-outlet>
             </div>
 

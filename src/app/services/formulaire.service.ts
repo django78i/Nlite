@@ -26,8 +26,8 @@ export class FormulaireService {
 		this.freelancerList = this.filterSubject.pipe(
 			tap(data => this.req = data),
 			switchMap(req => this.afs.collection<Freelancer>('users', ref => ref.where('status', '==', 'freelancer')).valueChanges()),
-			map(free => free.filter(free => this.req.allFreelancer == true ? free.status == 'freelancer' : free.adresse.departement == this.req.location)),
-			map(free => free.filter(free => this.req.allFreelancer == true ? free.status == 'freelancer' : free.categories.find(categ => categ == this.req.type))),
+			map(free => free.filter(free => this.req.allFreelancer == true ? free.status == 'freelancer' : this.req.location == 'France' ? free.status == 'freelancer' : free.adresse.departement == this.req.location)),
+			map(free => free.filter(free => this.req.allFreelancer == true || this.req.type == 'All' ? free.status == 'freelancer' : free.categories.find(categ => categ == this.req.type))),
 			share()
 		)
 		this.menuSub = true;

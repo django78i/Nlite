@@ -22,3 +22,9 @@
   display: flex;
   flex-direction: column;
 }
+
+@media (min-width: 550px) {
+  #discussionContent {
+    height: 100%;
+  }
+}

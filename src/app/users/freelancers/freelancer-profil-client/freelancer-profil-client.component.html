@@ -1,54 +1,60 @@
-<section *ngIf="freelancer$ | async as freelancer" style="display: flex;flex-direction: column; height: 100%;">
-    <section class="profilEntete">
-        <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
-        <div class="profilInfo">
-            <div style="height: 20px;position: relative;width: 100%;">
-                <h2 class="titreSecondaire abs">{{freelancer.displayName}}</h2>
+<div class="areaLayout ">
+    <section *ngIf="freelancer$ | async as freelancer"
+        style="height: 100%;display: flex;align-items: center;flex-direction: column;">
+        <section class="profilEntete">
+            <div class="banniereProfil">
             </div>
-            <ul class="categList ">
-                <li *ngFor="let categorie of freelancer.categories" class="categories ">
-                    <div class="dot"></div>
-                    <h3>{{categorie}}</h3>
-                </li>
-            </ul>
-            <div style="display: flex;flex-wrap: wrap;gap: 5px;">
-                <p class="subTitle" style="font-size: 10px;">{{freelancer.adresse.rue}}, </p>
-                <p class="subTitle" style="font-size: 10px;">{{freelancer.adresse.codePostal}}
-                    {{freelancer.adresse.ville}}</p>
+            <div class="profilLayout">
+                <div class="infoLayout">
+                    <div class="imageProfil" [ngStyle]="{'background-image': 'url(' + freelancer.image + ')'}"></div>
+                    <div class="profilInfo">
+                        <h2 class="titreSecondaire">{{freelancer.displayName}}</h2>
+                        <ul class="categList ">
+                            <li *ngFor="let categorie of freelancer.categories" class="categories ">
+                                <div class="dot"></div>
+                                <h3 class="sousTitreSecondaire">{{categorie}}</h3>
+                            </li>
+                        </ul>
+                        <p class="subTitle">{{freelancer.adresse.rue}},
+                            {{freelancer.adresse.codePostal}}
+                            {{freelancer.adresse.ville}}</p>
+                    </div>
+                </div>
+                <button mat-raised-button class="chatter" (click)="openRoom(freelancer)"><img
+                        src="../../assets/icones/chat.svg" alt=""></button>
             </div>
-        </div>
-        <button mat-raised-button class="chatter" (click)="openRoom(freelancer)" style="padding: 0;"><img
-                src="../../assets/icones/chat.svg" alt=""></button>
+        </section>
+        <mat-tab-group [dynamicHeight]="true" [(selectedIndex)]="demo1TabIndex" mat-stretch-tabs
+            style="padding: 0px 15px 0px 15px;">
+            <mat-tab label="Portfolio">
+                <div *ngIf="(portfolioList| async )?.length ; else folio">
+                    <div class="folioContent" *ngFor="let folio of portfolioList | async">
+                        <div class="titre">
+                            <h2 style="font-weight: 900;">{{folio.titre}}</h2>
+                            <p class="subTitle">A partir de {{folio.prixMinimum}}€</p>
+                        </div>
+                        <app-folio-carousel [titre]="folio.titre" [photos]="folio.photos" [prix]=folio.prixMinimum>
+                        </app-folio-carousel>
+                    </div>
+                </div>
+                <ng-template #folio>
+                    <div style="width: 100%;height: 200px;display: flex;justify-content: center;align-items: center;">
+                        <div>
+                            <img src="../../assets/icones/folionull.svg" alt="">
+                            <p class="subTitle">Aucun portfolio</p>
+                        </div>
+                    </div>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Calendrier">
+                <app-devis [freelancer]="freelancer" [user]="user" *ngIf="freelancer.modeRdv == 'sur devis'">
+                </app-devis>
+                <app-calendrier-client [freelancer]="freelancer" [freeUid]="params"
+                    *ngIf="freelancer.modeRdv == 'domicile uniquement'"></app-calendrier-client>
+            </mat-tab>
+            <mat-tab label="Prestations">
+                <app-freelancer-tarif [freelancer]="freelancer"></app-freelancer-tarif>
+            </mat-tab>
+        </mat-tab-group>
     </section>
-    <mat-tab-group [dynamicHeight]="true" [(selectedIndex)]="demo1TabIndex" mat-stretch-tabs>
-        <mat-tab label="Portfolio">
-            <div *ngIf="(portfolioList| async )?.length ; else folio">
-                <div class="folioContent" *ngFor="let folio of portfolioList | async">
-                    <div class="titre">
-                        <h2 style="font-weight: 900;">{{folio.titre}}</h2>
-                        <p class="subTitle">A partir de {{folio.prixMinimum}}€</p>
-                    </div>
-                    <app-folio-carousel [titre]="folio.titre" [photos]="folio.photos" [prix]=folio.prixMinimum>
-                    </app-folio-carousel>
-                </div>
-            </div>
-            <ng-template #folio>
-                <div style="width: 100%;height: 200px;display: flex;justify-content: center;align-items: center;">
-                    <div>
-                        <img src="../../assets/icones/folionull.svg" alt="">
-                        <p class="subTitle">Aucun portfolio</p>
-                    </div>
-                </div>
-            </ng-template>
-        </mat-tab>
-        <mat-tab label="Calendrier">
-            <app-devis [freelancer]="freelancer" [user]="user" *ngIf="freelancer.modeRdv == 'sur devis'">
-            </app-devis>
-            <app-calendrier-client [freelancer]="freelancer" [freeUid]="params"
-                *ngIf="freelancer.modeRdv == 'domicile uniquement'"></app-calendrier-client>
-        </mat-tab>
-        <mat-tab label="Prestations">
-            <app-freelancer-tarif [freelancer]="freelancer"></app-freelancer-tarif>
-        </mat-tab>
-    </mat-tab-group>
-</section>
+</div>

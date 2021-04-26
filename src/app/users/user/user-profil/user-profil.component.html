@@ -1,10 +1,11 @@
-<section style="height: 100%;padding-top: 30px;" *ngIf="user | async as user else temp">
+<section class="areaLayout" *ngIf="user | async as user else temp">
     <h1 class="titrePrincipal">Hello</h1>
     <div class="sub">
         <h1 class="titrePrincipal">{{user.displayName}}</h1>
         <img src="../../../../assets/icones/icons8-pouces-vers-le-haut-48.png" alt="">
     </div>
-    <h2 class="sousTitrePrincipal" style="margin-top: 16px !important; color: rgb(187, 187, 187);">Voici ton planning : </h2>
+    <h2 class="sousTitrePrincipal" style="margin-top: 16px !important; color: rgb(187, 187, 187);">Voici ton planning :
+    </h2>
     <div *ngIf="(rdv |async)?.length as rv;else noRdv">
         <div class="rdvCard" (click)="openDialog(lastRdv)">
             <p style="display: flex;justify-content: space-between;" class="infoTitre"><span>Prochain
@@ -48,7 +49,7 @@
     </div>
 </section>
 <ng-template #temp>
-    <div class="content">
+    <div class="areaLayout">
         <div>
             <h1>Hello,</h1>
             <p class="subTitle">Inscris-toi pour profiter de ton espace utilisateur </p>

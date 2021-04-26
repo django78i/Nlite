@@ -1,5 +1,7 @@
 .messageClass {
-  height: 100%;
+  height: calc(100vh - 41px);
+  padding: 55px 15px 0px 15px;
+  position: relative;
 }
 
 .message {
@@ -24,4 +26,15 @@
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+}
+
+@media (min-width: 550px) {
+  .messageClass {
+    height: 100% !important;
+    padding-bottom: 40px;
+  }
+
+  .msgWrapper {
+    justify-content: space-between;
+  }
 }

@@ -12,16 +12,6 @@
   margin-top: 10px;
 }
 
-.contenu {
-  padding: 10px 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  gap: 30px;
-  justify-content: space-evenly;
-}
-
 mat-form-field {
   width: 90%;
 }
@@ -66,25 +56,6 @@ mat-label {
   display: none;
 }
 
-.valider,
-.mail {
-  background: black;
-  color: white;
-  width: 90%;
-  height: 67px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 40px;
-  margin-top: 10px;
-}
-
-.mail {
-  height: 40px;
-  background: #3467c9;
-  width: 80%;
-}
-
 .checkBoxes {
   align-self: flex-start;
   margin-left: 45px !important;
@@ -111,25 +82,11 @@ mat-label {
   background-repeat: no-repeat;
 }
 
-.buttonPrimaire {
-  display: flex !important;
-  padding: 1rem 2rem 1rem 2rem !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 40px !important;
-  margin: 0px !important;
-}
-
 .divButton {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.photo {
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .titreSlide {
@@ -161,4 +118,17 @@ mat-label {
 }
 :host ::ng-deep .swiper-pagination-bullet {
   transition: all 0.3s ease;
+}
+
+@media (min-width: 550px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+  }
+
+  form {
+    width: 80%;
+  }
 }

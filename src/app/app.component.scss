@@ -7,6 +7,23 @@
   background-size: cover;
 }
 
+.menuChoice {
+  height: 100%;
+}
+
+.showSmall {
+  display: block !important;
+  height: 100% !important;
+}
+
+.showBig {
+  display: none !important;
+}
+
+.frontSize {
+  height: 100%;
+}
+
 .active-link {
   fill: #5337f7;
 }
@@ -25,9 +42,11 @@ mat-toolbar.menuTop {
   top: 0;
   display: flex;
   height: 55px;
-  justify-content: space-around;
+  background: white;
+  justify-content: space-between;
   position: absolute;
   left: 0;
+  z-index: 100;
 }
 
 mat-toolbar.bottom {
@@ -57,12 +76,53 @@ p.titreIcon {
 }
 
 mat-drawer {
-  width: 210px;
+  width: 313px;
   padding: 20px 10px 0px 10px;
+  border-top-right-radius: 21px;
+  border-bottom-right-radius: 21px;
 }
 
-.menuTap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+@media (min-width: 550px) {
+  a {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+  }
+
+  p.titreIcon {
+    font-size: 16px;
+    color: #a1a1a2;
+  }
+
+  .menuTap {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 60px;
+  }
+
+  mat-drawer {
+    padding-left: 30px;
+  }
+
+  .menuTopTitre {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    align-items: center;
+  }
+
+  .frontSize {
+    height: 100%;
+  }
+
+  .showSmall {
+    display: none !important;
+  }
+
+  .showBig {
+    display: block !important;
+    height: 100% !important;
+  }
 }

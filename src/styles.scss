@@ -1,8 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~open-iconic/font/css/open-iconic-bootstrap.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+.my-custom-class span {
+  color: #ff3d7f !important;
+}
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
 
 $primary-accent: #5337f7;
 $secondary-title: #a9acb9;
 $warn: rgb(232, 3, 3);
+
+* {
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  font-weight: 800;
+}
+
 // html,
 p,
 h2,
@@ -31,12 +47,14 @@ section {
 
 .subTitle {
   color: $secondary-title;
+  font-size: 10px !important;
 }
 
 .categList {
   display: flex;
   gap: 10px;
   line-height: 23px;
+  margin: 0 !important;
 }
 
 .dot {
@@ -47,11 +65,15 @@ section {
 }
 
 .profilEntete {
-  // width: 100vw;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 10px;
-  padding: 10px 10px;
+}
+
+.profilLayout {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 15px 0px 15px;
 }
 
 .listItem {
@@ -62,12 +84,15 @@ section {
 }
 
 .imageProfil {
-  width: 60px;
-  height: 60px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  border: 4px solid white;
+  position: relative;
+  top: -50px;
 }
 
 .categories {
@@ -81,6 +106,7 @@ section {
 .profilInfo {
   display: flex;
   flex-direction: column;
+  width: 202px;
 }
 
 .custom .mat-dialog-container {
@@ -95,22 +121,6 @@ button:focus {
   border: none;
   border-radius: 40px !important;
   box-shadow: -5px 29px 20px -8px rgb(0 0 0 / 12%);
-}
-
-// @import "../node_modules/angular-calendar/css/angular-calendar.css";
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~open-iconic/font/css/open-iconic-bootstrap.css";
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
-
-.my-custom-class span {
-  color: #ff3d7f !important;
-}
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
-* {
-  font-family: "Poppins", sans-serif;
-  outline: none;
-  font-weight: 800;
 }
 
 html,
@@ -133,21 +143,17 @@ body {
 
 .titreSecondaire {
   font-weight: 800 !important;
-  // font-size: inherit !important;
-  // font-size: 17px !important;
-  line-height: 10px !important;
+  line-height: 30px !important;
 }
 
-// .buttonPrimaire {
-//   // width: 90% !important;
-//   // height: 67px !important;
-//   display: flex !important;
-//   padding: 1rem 2rem 1rem 2rem !important;
-//   align-items: center !important;
-//   justify-content: center !important;
-//   border-radius: 40px !important;
-//   margin: 0px !important;
-// }
+.buttonPrimaire {
+  display: flex !important;
+  padding: 1rem 2rem 1rem 2rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 40px !important;
+  margin: 0px !important;
+}
 
 .buttonSecondaire {
   padding: 0px 24px;
@@ -159,9 +165,13 @@ body {
   font-weight: 800;
 }
 
-.primary {
+.primaryBackground {
   background: $primary-accent;
   color: white;
+}
+
+.primaryColor {
+  color: $primary-accent;
 }
 
 .secondary {
@@ -177,7 +187,7 @@ body {
 .connection {
   padding: 0 !important;
   min-width: 50px !important;
-  height: 45px;
+  height: 50px;
   border-radius: 50% !important;
   background: black;
   color: white;
@@ -185,4 +195,125 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 15px;
+}
+
+.banniereProfil {
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 200px;
+  background-image: url("https://images.musement.com/cover/0002/49/thumb_148242_cover_header.jpeg?lossless=false&auto=format&fit=clip&h=531.296875&w=1008");
+}
+
+.infoLayout {
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: blue;
+}
+
+.chatter {
+  border-radius: 50% !important;
+  height: 65px;
+  width: 65px;
+  padding: 0 !important;
+  display: flex;
+  top: -46px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilListEntete {
+  display: flex;
+  gap: 10px;
+  padding: 10px 10px;
+  align-items: center;
+}
+
+.imageListProfil {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 4px solid white;
+  position: relative;
+}
+
+.areaLayout {
+  padding: 65px 15px 0px !important;
+  height: calc(100vh - 41px);
+  position: relative;
+  // padding-top: 65px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.titreBadge {
+  line-height: 0 !important;
+  font-weight: 900 !important;
+}
+
+@media (min-width: 550px) {
+  .imageProfil {
+    height: 110px;
+    width: 110px;
+  }
+
+  .infoLayout {
+    gap: 10px;
+  }
+
+  .titreSecondaire {
+    line-height: 49px !important;
+    font-size: 30px !important;
+  }
+
+  .areaLayout {
+    height: 100%;
+    width: 80%;
+    max-width: 1300px;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .titreBadge {
+    font-size: 18px !important;
+    line-height: 1 !important;
+  }
+
+  .profilInfo {
+    width: inherit;
+  }
+
+  .subTitle {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+
+  .sousTitreSecondaire {
+    font-size: 16px !important;
+    line-height: 20px !important;
+  }
+
+  .listContent {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 30px;
+  }
+
+  .listItem {
+    min-width: 320px;
+  }
 }

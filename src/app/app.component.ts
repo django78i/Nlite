@@ -4,18 +4,20 @@ import { SignService } from './services/sign.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, AfterViewChecked, OnChanges, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, shareReplay, tap } from 'rxjs/operators';
-import { Observable, ObservedValueOf } from 'rxjs';
+import { Observable, ObservedValueOf, Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewChecked {
 	title = 'testMailing';
+	@ViewChild('pc') pcDisplay: ElementRef<HTMLElement>;;
+	@ViewChild('mobile') mobileDisplay: ElementRef<HTMLElement>;;
 
 
 	isAuth: any;
@@ -24,11 +26,12 @@ export class AppComponent implements AfterViewInit {
 	url: "../../../assets/icones/logo.svg"; private
 	menu$: Observable<Boolean>;
 	smallScreen: any;
-	small: Boolean;
+	small: Subject<Boolean> = new Subject;
 
 
 	constructor(private router: Router, private afs: AngularFirestore, private breakpointObserver: BreakpointObserver
-		, public auth: AngularFireAuth, public signService: SignService, public userService: UserService, public fms: FormulaireService) {
+		, public auth: AngularFireAuth, public signService: SignService, public userService: UserService, public fms: FormulaireService,
+		private cdRef: ChangeDetectorRef) {
 		this.userService.authSub.subscribe(u => {
 			this.isAuth = u;
 			if (u == true) {
@@ -39,15 +42,19 @@ export class AppComponent implements AfterViewInit {
 	}
 
 	ngOnInit(): void {
+		this.smallScreen = this.breakpointObserver.isMatched('(max-width: 550px)');
 	}
-	ngAfterViewInit() {
+
+	ngAfterViewChecked() {
 		this.smallScreen = this.breakpointObserver.isMatched('(max-width: 550px)');
 		if (this.smallScreen === true) {
-			this.small = true;
+			this.small.next(true);
 		} else {
-			this.small = false;
+			this.small.next(false);
 
 		}
+		this.cdRef.detectChanges();
+
 	}
 
 	logout() {

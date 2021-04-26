@@ -1,13 +1,17 @@
 <section *ngIf="params|async as param" class="messageClass">
-    <section *ngIf="users" class="msgWrapper" >
+    <div routerLink="/chat" style="position: absolute;top: -10px;">
+        <img src="https://img.icons8.com/color/48/000000/long-arrow-left.png" />
+    </div>
+    <section *ngIf="users" class="msgWrapper">
         <h2 *ngIf="users.uid == param.data.val.freeUid" style="color: #3467c9;">{{param.data.val.client}}</h2>
         <h2 *ngIf="users.uid == param.data.val.clientId" style="color: #3467c9;">{{param.data.val.freelance}}</h2>
         <app-message-view *ngIf="messages | async as message"
             [contactUid]="users.status =='freelancer? param.data.val.clientId : param.data.val.freeUid'"
-            [message]="message" [userUid]="users.uid" ></app-message-view>
+            [message]="message" [userUid]="users.uid"></app-message-view>
         <div class="message">
             <input placeholder="Envoyer votre message" type="text" class="form-control" [(ngModel)]="discussion"
-                (keyup)="discusSubject.next(discussion)" (keydown.enter)="envoyer()" (focus)="hide()" (focusout)="show()">
+                (keyup)="discusSubject.next(discussion)" (keydown.enter)="envoyer()" (focus)="hide()"
+                (focusout)="show()">
             <span class="material-icons iconSend" (click)="envoyer()">
                 send
             </span>

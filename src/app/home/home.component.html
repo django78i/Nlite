@@ -1,4 +1,4 @@
-<div class="stand" *ngIf="auths == true else showTuto">
+<div class="areaLayout" *ngIf="auths == true else showTuto">
     <div class="titleHeader">
         <h1 class="titrePrincipal">Rechercher</h1>
         <h2 style="color: #A9ACB9;" class="sousTitrePrincipal">Un freelancer près de chez vous</h2>
@@ -22,21 +22,18 @@
             </mat-form-field>
             <mat-checkbox formControlName="checked" class="checkBoxes" [(ngModel)]="checked">Tous les freelancers
             </mat-checkbox>
-            <button mat-raised-button class="buttonPrimaire primary"><span class="material-icons"
+            <button mat-raised-button class="buttonPrimaire primaryBackground"><span class="material-icons"
                     style="color: white;margin-right: 10px;font-size: 36px;">search</span>Rechercher</button>
         </form>
     </div>
 </div>
 <ng-template #showTuto>
-    <div class="contenu">
+    <div class="areaLayout">
         <div class="swiper-container">
             <swiper [config]="config" #usefulSwiper style="height: 100%;">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let photo of photos; let i = index"
                         [ngStyle]="{'background-image': 'url(' +photo.photo+ ')'}">
-                        <!-- <div class="photo">
-                            <img [src]="photo.photo" alt="">
-                        </div> -->
                         <div class="text">
                             <h1 class="titreSlide" style="text-align: center;">{{photo.titre}}</h1>
                             <p class="ssTitreSlide" >{{photo.ssTitre}}</p>
@@ -47,7 +44,7 @@
             <div class="swiper-pagination"></div>
         </div>
         <div class="divButton">
-            <button mat-button class="buttonPrimaire primary" routerLink="/freelanceList"> Rechercher un
+            <button mat-button class="buttonPrimaire primaryBackground" routerLink="/freelanceList"> Rechercher un
                 indépendant</button>
         </div>
     </div>

@@ -1,3 +1,4 @@
+import { MessagingService } from './../../services/messaging.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { FormulaireService } from './../../services/formulaire.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import { User } from 'src/app/models/user.model';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { count, tap } from 'rxjs/operators';
+import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
 
 
 interface Lieu {
@@ -26,6 +28,8 @@ interface Type {
 	styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
+
+	@ViewChild('drawer') sideBar: MatSidenav;
 
 	addresss: any[];
 	formattedaddress = " ";
@@ -52,6 +56,7 @@ export class UsersListComponent implements OnInit {
 	curentUser: Observable<User>;
 	freelancerList: Observable<User[]>;
 	searchForm: FormGroup;
+	filterForm: FormGroup;
 	prixFiltre: Observable<any>;
 	prix: number;
 	types: Type[] = [
@@ -63,11 +68,15 @@ export class UsersListComponent implements OnInit {
 	req: any;
 	titre: any;
 
-	constructor(private route: ActivatedRoute, private formulaireService: FormulaireService, private formBuilder: FormBuilder, private userService: UserService, private auth: AngularFireAuth, private router: Router, private forulaireService: FormulaireService) {
+	constructor(private route: ActivatedRoute, private formulaireService: FormulaireService,
+		private formBuilder: FormBuilder, private userService: UserService, private auth: AngularFireAuth,
+		private router: Router, private forulaireService: FormulaireService) {
+		//lecture historique			
 		this.req = history.state.data ? history.state.data : { location: 'All', type: 'All', allFreelancer: true };
+		console.log(history.state.data);
 		this.titre = {
 			lieu: this.req.type == "All" ? "France" : this.req.location,
-			type: this.req.type == "All" ? "tous freelancers" : this.req.location
+			type: this.req.type == "All" ? "tous freelancers" : this.req.type
 		}
 		this.formulaireService.filterSubject.next(this.req);
 		this.freelancerList = this.formulaireService.freelancerList
@@ -86,29 +95,47 @@ export class UsersListComponent implements OnInit {
 
 	initForm() {
 		this.searchForm = this.formBuilder.group({
-			location: '',
-			prix: [''],
+			// location: '',
+			// prix: [''],
 			type: ''
 		});
+		this.filterForm = this.formBuilder.group({
+			location: ''
+		});
 		this.req.location = this.req.location == 'All' ? 'France' : this.req.location;
-		this.req ? this.searchForm.patchValue(this.req) : '';
+		var sec = {
+			type: this.req.type
+		}
+		var loc = {
+			location: this.req.location
+		}
+		this.req ? this.searchForm.patchValue(sec) : '';
+		this.req ? this.filterForm.patchValue(loc) : '';
 	}
 
 	appear() {
+		console.log('apper');
 		const value = this.searchForm.value;
-		let val = this.addresss.find(ad => ad.types.find(v => v === 'administrative_area_level_2' ? true : ''));
+		let val;
+		if (this.addresss) {
+			val = this.addresss.find(ad => ad.types.find(v => v === 'administrative_area_level_2' ? true : ''));
+		}
+		val = val ? val.short_name : this.req.location;
+
 		const newForm = {
-			location: val.short_name,
+			location: val,
 			allFreelancer: false,
 			type: value['type']
 
 		}
+		console.log(newForm);
 		this.titre = {
-			lieu: newForm.type == "All" ? "France" : newForm.location,
+			lieu: newForm.location == "All" ? "France" : newForm.location,
 			type: newForm.type == "All" ? "tous freelancers" : newForm.type
 		}
 
 		this.formulaireService.filterSubject.next(newForm);
+		this.sideBar.close();
 	}
 
 

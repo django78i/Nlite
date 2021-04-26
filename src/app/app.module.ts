@@ -76,7 +76,7 @@ import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { FolioCarouselComponent } from './users/freelancers/folio-carousel/folio-carousel.component';
 import { FreelancerFolioSlideComponent } from './users/freelancer-folio-slide/freelancer-folio-slide.component';
 import { MatMenuModule } from '@angular/material/menu';
-// import { MessagingService } from './services/messaging.service';
+import { MessagingService } from './services/messaging.service';
 import { EditRdvComponent } from './users/freelancers/edit-rdv/edit-rdv.component';
 import { GoogleCompenentComponent } from './google-compenent/google-compenent.component';
 import { TarifsComponent } from './users/freelancers/tarifs/tarifs.component';
@@ -84,10 +84,10 @@ import { TarifsComponent } from './users/freelancers/tarifs/tarifs.component';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { DevisComponent } from './users/freelancers/devis/devis.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PopUpConnectComponent } from './users/freelancers/pop-up-connect/pop-up-connect.component';
 import { PopUpUserRdvComponent } from './users/user/pop-up-user-rdv/pop-up-user-rdv.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 registerLocaleData(localeFr);
@@ -188,6 +188,7 @@ registerLocaleData(localeFr);
 		MessgesService,
 		PortFolioService,
 		CalendrierService,
+		MessagingService,
 		// MessagingService,
 		{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
 	],
